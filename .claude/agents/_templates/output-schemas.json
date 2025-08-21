@@ -1,0 +1,347 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Discovery Document Output Schemas",
+  "description": "Standardized schemas for Discovery orchestrator agent system outputs",
+  
+  "positioning_statement": {
+    "type": "object",
+    "properties": {
+      "for": {
+        "type": "string",
+        "description": "Avatar description (never use 'ICP')"
+      },
+      "who": {
+        "type": "string", 
+        "description": "Core need or situation"
+      },
+      "our": {
+        "type": "string",
+        "description": "Product/service name"
+      },
+      "is_a": {
+        "type": "string",
+        "description": "Category or solution type"
+      },
+      "that": {
+        "type": "string",
+        "description": "Primary outcome delivered"
+      },
+      "unlike": {
+        "type": "string",
+        "description": "Main alternative or competitor"
+      },
+      "we": {
+        "type": "string",
+        "description": "Key differentiator"
+      }
+    },
+    "required": ["for", "who", "our", "is_a", "that", "unlike", "we"]
+  },
+
+  "offer_card": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string",
+        "description": "Offer name/title"
+      },
+      "price_billing": {
+        "type": "string",
+        "description": "Price and billing cycle"
+      },
+      "promise": {
+        "type": "string",
+        "description": "Outcome × Time promise"
+      },
+      "deliverables": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Core deliverables included"
+      },
+      "bonuses": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Additional value items"
+      },
+      "guarantee": {
+        "type": "string",
+        "description": "Risk reversal guarantee"
+      },
+      "core_proof": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Testimonials, case studies, results"
+      },
+      "primary_cta": {
+        "type": "string",
+        "description": "Main call-to-action text"
+      },
+      "risk_reversal": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Elements that reduce perceived risk"
+      },
+      "urgency": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Time-sensitive or scarcity elements"
+      },
+      "dependencies": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Prerequisites or requirements"
+      },
+      "relations": {
+        "type": "object",
+        "properties": {
+          "upsell": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "cross_sell": {
+            "type": "array", 
+            "items": {"type": "string"}
+          }
+        }
+      },
+      "assets": {
+        "type": "object",
+        "properties": {
+          "sales_pages": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "URLs to sales/landing pages"
+          },
+          "checkout_ids": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Payment processor product/price IDs"
+          },
+          "onboarding_route": {
+            "type": "string",
+            "description": "Customer onboarding process"
+          },
+          "testimonials": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "URLs or references to testimonials"
+          }
+        }
+      }
+    },
+    "required": ["name", "price_billing", "promise", "deliverables", "guarantee", "primary_cta", "assets"]
+  },
+
+  "avatar_block": {
+    "type": "object",
+    "properties": {
+      "identity": {
+        "type": "object",
+        "properties": {
+          "archetype": {"type": "string"},
+          "age_range": {"type": "string"},
+          "role": {"type": "string"},
+          "income": {"type": "string"},
+          "location": {"type": "string"}
+        },
+        "required": ["archetype"]
+      },
+      "context": {
+        "type": "object",
+        "properties": {
+          "day_in_life": {"type": "string"},
+          "constraints": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      },
+      "emotions": {
+        "type": "object",
+        "properties": {
+          "fears": {
+            "type": "array",
+            "items": {"type": "string"},
+            "minItems": 3
+          },
+          "frustrations": {
+            "type": "array", 
+            "items": {"type": "string"},
+            "minItems": 3
+          },
+          "desires": {
+            "type": "array",
+            "items": {"type": "string"}, 
+            "minItems": 3
+          },
+          "anxieties": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "aspirations": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        },
+        "required": ["fears", "frustrations", "desires"]
+      },
+      "jtbd": {
+        "type": "object",
+        "properties": {
+          "functional": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "emotional": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "social": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        },
+        "required": ["functional", "emotional", "social"]
+      },
+      "triggers": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "What activates purchase consideration"
+      },
+      "objections_reframes": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "objection": {"type": "string"},
+            "reframe": {"type": "string"}
+          },
+          "required": ["objection", "reframe"]
+        },
+        "minItems": 5
+      },
+      "info_diet": {
+        "type": "object",
+        "properties": {
+          "people": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "communities": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "search_phrases": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      },
+      "voc_quotes": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "source": {"type": "string"},
+            "quote": {"type": "string"},
+            "mapped_to": {
+              "type": "string",
+              "enum": ["fear", "desire", "objection", "trigger"]
+            }
+          },
+          "required": ["source", "quote", "mapped_to"]
+        },
+        "minItems": 5
+      }
+    },
+    "required": ["identity", "emotions", "jtbd", "objections_reframes", "voc_quotes"]
+  },
+
+  "kpi_measurement_map": {
+    "type": "object",
+    "properties": {
+      "kpi": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$",
+        "description": "KPI name in snake_case"
+      },
+      "definition": {
+        "type": "string",
+        "description": "Mathematical formula or clear calculation method"
+      },
+      "events_sources": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Required events and their sources"
+      },
+      "params": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$"
+        },
+        "description": "Parameters in snake_case"
+      },
+      "destinations": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Where data should be sent"
+      }
+    },
+    "required": ["kpi", "definition", "events_sources", "params", "destinations"]
+  },
+
+  "tech_access_item": {
+    "type": "object", 
+    "properties": {
+      "tool": {
+        "type": "string",
+        "description": "Platform or tool name"
+      },
+      "id": {
+        "type": "string",
+        "description": "Account ID, property ID, or identifier"
+      },
+      "notes": {
+        "type": "string",
+        "description": "Additional context or status"
+      }
+    },
+    "required": ["tool", "id"]
+  },
+
+  "event_naming_convention": {
+    "type": "object",
+    "properties": {
+      "event_name": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$",
+        "description": "Event name following action_object_context pattern"
+      },
+      "description": {
+        "type": "string",
+        "description": "What this event represents"
+      },
+      "parameters": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$"
+            },
+            "type": {
+              "type": "string",
+              "enum": ["string", "number", "boolean", "timestamp"]
+            },
+            "required": {"type": "boolean"},
+            "description": {"type": "string"}
+          },
+          "required": ["name", "type", "required"]
+        }
+      }
+    },
+    "required": ["event_name", "description", "parameters"]
+  }
+}

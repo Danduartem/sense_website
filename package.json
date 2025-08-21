@@ -1,0 +1,60 @@
+{
+  "name": "mentoria-seja-livre-landing",
+  "version": "1.0.0",
+  "description": "Mentoria Seja Livre - Transforme-se de empreendedora exausta em empresária de sucesso",
+  "main": "src/index.njk",
+  "type": "module",
+  "scripts": {
+    "dev": "eleventy --serve --port=8080",
+    "build": "eleventy",
+    "clean": "rm -rf _site dist",
+    "preview": "eleventy && cd _site && python3 -m http.server 8080",
+    "test": "npm run test:lint",
+    "test:lint": "eslint src/**/*.js"
+  },
+  "keywords": [
+    "mentoria",
+    "empreendedorismo feminino",
+    "landing page",
+    "eleventy",
+    "vite",
+    "tailwindcss"
+  ],
+  "author": "Mentoria Seja Livre",
+  "license": "UNLICENSED",
+  "private": true,
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^2.0.1",
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.10",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.5",
+    "vite": "^4.5.0"
+  },
+  "devDependencies": {
+    "@axe-core/cli": "^4.8.2",
+    "@lhci/cli": "^0.12.0",
+    "@vitejs/plugin-legacy": "^4.1.1",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.54.0",
+    "prettier": "^3.1.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "Firefox ESR"
+  ],
+  "eleventy": {
+    "input": "src",
+    "output": "_site",
+    "data": "src/_data",
+    "includes": "src/_includes",
+    "layouts": "src/_includes/layouts"
+  }
+}

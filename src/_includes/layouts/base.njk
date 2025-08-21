@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ description or 'Mentoria Seja Livre - Transforme-se de empreendedora exausta em empresária de sucesso que trabalha menos e fatura mais' }}">
+  <title>{{ title or 'Mentoria Seja Livre - Trabalhe Menos, Fature Mais' }}</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  
+  <!-- Preconnect to GTM and analytics domains -->
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://www.google-analytics.com">
+  
+  <!-- Critical CSS (Tailwind base) -->
+  <style>
+    /* Critical CSS for above-the-fold content */
+    *,::before,::after{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}
+    html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-feature-settings:normal}
+    body{margin:0;line-height:inherit}
+    
+    /* Modal overlay initial state */
+    .modal-overlay.hidden { display: none !important; }
+    
+    /* Loading state */
+    .loading-spinner { display: none; }
+    .loading-spinner.show { display: inline-block; }
+  </style>
+  
+  <!-- DataLayer Initialization - CRITICAL: Must load before GTM -->
+  <script>
+    // Global DataLayer initialization
+    window.dataLayer = window.dataLayer || [];
+    
+    // Environment detection for test_mode
+    function getEnvironment() {
+      const hostname = window.location.hostname;
+      const isProduction = hostname === 'mentoriasejalivre.com.br';
+      return {
+        isProduction: isProduction,
+        testMode: !isProduction,
+        environment: isProduction ? 'production' : 'development'
+      };
+    }
+    
+    // Initial page data push
+    const env = getEnvironment();
+    window.dataLayer.push({
+      // Page information
+      page_title: '{{ title or "Mentoria Seja Livre" | safe }}',
+      page_type: '{{ page_type or "landing_page" }}',
+      page_path: '{{ page.url }}',
+      content_category: '{{ content_category or "conversion" }}',
+      amanda_relevance: {{ amanda_relevance or 8 }},
+      
+      // Environment
+      test_mode: env.testMode,
+      environment: env.environment,
+      hostname: window.location.hostname,
+      
+      // Technical metadata
+      platform: 'eleventy',
+      version: '1.0.0',
+      build_timestamp: '{{ build.timestamp | default("unknown") }}'
+    });
+    
+    // Enhanced page view tracking
+    window.dataLayer.push({
+      event: 'page_view_enhanced',
+      event_timestamp: new Date().toISOString()
+    });
+  </script>
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','{{ site.gtm.containerId or "GTM-XXXXXXX" }}');
+  </script>
+  <!-- End Google Tag Manager -->
+  
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css">
+  
+  <!-- Structured Data for Landing Page -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Mentoria Seja Livre",
+    "description": "Mentoria para transformar empreendedoras exaustas em empresárias de sucesso que trabalham menos e faturam mais",
+    "provider": {
+      "@type": "Organization",
+      "name": "Mentoria Seja Livre"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "Brasil"
+    },
+    "audience": {
+      "@type": "Audience",
+      "audienceType": "Female entrepreneurs earning R$20k/month"
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id={{ site.gtm.containerId or 'GTM-XXXXXXX' }}" 
+            height="0" width="0" style="display:none;visibility:hidden" 
+            title="Google Tag Manager"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <!-- Skip to main content (accessibility) -->
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white p-2 rounded">
+    Pular para o conteúdo principal
+  </a>
+
+  <!-- Main Content -->
+  <main id="main-content" role="main">
+    {{ content | safe }}
+  </main>
+
+  <!-- Lead Capture Modal Component -->
+  <lead-capture-modal id="questionario" aria-label="Formulário de qualificação"></lead-capture-modal>
+
+  <!-- LGPD Cookie Consent Banner -->
+  <div id="lgpd-consent-banner" class="fixed bottom-0 left-0 right-0 bg-gray-900 text-white p-4 z-50 hidden" role="banner" aria-labelledby="consent-title">
+    <div class="container mx-auto max-w-4xl">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex-1">
+          <h3 id="consent-title" class="font-semibold mb-2">Privacidade e Cookies</h3>
+          <p class="text-sm">
+            Utilizamos cookies para melhorar sua experiência, analisar nosso tráfego e personalizar conteúdo. 
+            Você pode gerenciar suas preferências a qualquer momento.
+            <a href="/privacidade" class="underline hover:no-underline">Política de Privacidade</a>
+          </p>
+        </div>
+        <div class="flex gap-3">
+          <button id="consent-essential-only" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded text-sm transition-colors">
+            Apenas Essenciais
+          </button>
+          <button id="consent-customize" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded text-sm transition-colors">
+            Personalizar
+          </button>
+          <button id="consent-accept-all" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors">
+            Aceitar Todos
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Consent Preferences Modal -->
+  <div id="consent-preferences-modal" class="fixed inset-0 bg-black bg-opacity-50 z-60 hidden" role="dialog" aria-labelledby="consent-modal-title" aria-hidden="true">
+    <div class="flex items-center justify-center min-h-screen p-4">
+      <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-screen overflow-y-auto">
+        <div class="p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h2 id="consent-modal-title" class="text-xl font-bold">Preferências de Privacidade</h2>
+            <button id="consent-modal-close" class="text-gray-400 hover:text-gray-600">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
+          
+          <div class="space-y-6">
+            <!-- Essential Cookies -->
+            <div class="border-b pb-4">
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="font-semibold">Cookies Essenciais</h3>
+                <input type="checkbox" id="consent-essential" checked disabled class="rounded">
+              </div>
+              <p class="text-sm text-gray-600">
+                Necessários para o funcionamento básico do site, incluindo navegação e acesso a áreas seguras.
+              </p>
+            </div>
+            
+            <!-- Analytics Cookies -->
+            <div class="border-b pb-4">
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="font-semibold">Cookies de Análise</h3>
+                <input type="checkbox" id="consent-analytics" class="rounded">
+              </div>
+              <p class="text-sm text-gray-600">
+                Nos ajudam a entender como você interage com nosso site para melhorarmos a experiência.
+              </p>
+            </div>
+            
+            <!-- Marketing Cookies -->
+            <div class="border-b pb-4">
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="font-semibold">Cookies de Marketing</h3>
+                <input type="checkbox" id="consent-marketing" class="rounded">
+              </div>
+              <p class="text-sm text-gray-600">
+                Utilizados para personalizar conteúdo e enviar comunicações relevantes sobre nossos serviços.
+              </p>
+            </div>
+            
+            <!-- Personalization -->
+            <div class="pb-4">
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="font-semibold">Personalização</h3>
+                <input type="checkbox" id="consent-personalization" class="rounded">
+              </div>
+              <p class="text-sm text-gray-600">
+                Permitem que lembremos suas preferências para uma experiência mais personalizada.
+              </p>
+            </div>
+          </div>
+          
+          <div class="flex gap-3 mt-6">
+            <button id="consent-save-preferences" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded flex-1 transition-colors">
+              Salvar Preferências
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript: Load tracking foundation -->
+  <script src="/assets/js/data-layer-foundation.js"></script>
+  
+  <!-- JavaScript: Load modal component -->
+  <script src="/assets/js/modal-component.js"></script>
+  
+  <!-- JavaScript: Load main interactions -->
+  <script src="/assets/js/main.js"></script>
+  
+  <!-- JavaScript: LGPD Consent Management -->
+  <script>
+    // LGPD Consent Management
+    class LGPDConsentManager {
+      constructor() {
+        this.consentKey = 'mslu_lgpd_consent';
+        this.consentVersion = '1.0';
+        this.init();
+      }
+      
+      init() {
+        // Check for existing consent
+        const existingConsent = this.getStoredConsent();
+        if (!existingConsent) {
+          this.showConsentBanner();
+        } else {
+          this.applyStoredConsent(existingConsent);
+        }
+        
+        this.attachEventListeners();
+      }
+      
+      showConsentBanner() {
+        const banner = document.getElementById('lgpd-consent-banner');
+        if (banner) {
+          banner.classList.remove('hidden');
+          banner.setAttribute('aria-hidden', 'false');
+        }
+      }
+      
+      hideConsentBanner() {
+        const banner = document.getElementById('lgpd-consent-banner');
+        if (banner) {
+          banner.classList.add('hidden');
+          banner.setAttribute('aria-hidden', 'true');
+        }
+      }
+      
+      showConsentModal() {
+        const modal = document.getElementById('consent-preferences-modal');
+        if (modal) {
+          modal.classList.remove('hidden');
+          modal.setAttribute('aria-hidden', 'false');
+          
+          // Set current preferences
+          const consent = this.getStoredConsent();
+          if (consent) {
+            document.getElementById('consent-analytics').checked = consent.analytics;
+            document.getElementById('consent-marketing').checked = consent.marketing;
+            document.getElementById('consent-personalization').checked = consent.personalization;
+          }
+        }
+      }
+      
+      hideConsentModal() {
+        const modal = document.getElementById('consent-preferences-modal');
+        if (modal) {
+          modal.classList.add('hidden');
+          modal.setAttribute('aria-hidden', 'true');
+        }
+      }
+      
+      saveConsent(preferences) {
+        const consent = {
+          version: this.consentVersion,
+          timestamp: new Date().toISOString(),
+          essential: true, // Always true
+          analytics: preferences.analytics || false,
+          marketing: preferences.marketing || false,
+          personalization: preferences.personalization || false
+        };
+        
+        localStorage.setItem(this.consentKey, JSON.stringify(consent));
+        this.applyConsent(consent);
+        this.hideConsentBanner();
+        this.hideConsentModal();
+        
+        // Track consent decision
+        if (window.dataLayer) {
+          window.dataLayer.push({
+            event: 'consent_update',
+            consent_analytics: consent.analytics,
+            consent_marketing: consent.marketing,
+            consent_personalization: consent.personalization,
+            consent_method: preferences.method || 'manual'
+          });
+        }
+      }
+      
+      getStoredConsent() {
+        try {
+          const stored = localStorage.getItem(this.consentKey);
+          return stored ? JSON.parse(stored) : null;
+        } catch (error) {
+          console.error('Error reading consent preferences:', error);
+          return null;
+        }
+      }
+      
+      applyStoredConsent(consent) {
+        this.applyConsent(consent);
+      }
+      
+      applyConsent(consent) {
+        // Update Google Consent Mode
+        if (window.gtag) {
+          window.gtag('consent', 'update', {
+            'analytics_storage': consent.analytics ? 'granted' : 'denied',
+            'ad_storage': consent.marketing ? 'granted' : 'denied',
+            'ad_personalization': consent.personalization ? 'granted' : 'denied',
+            'functionality_storage': 'granted', // Always granted for essential functionality
+            'security_storage': 'granted' // Always granted for security
+          });
+        }
+        
+        // Update dataLayer for GTM
+        if (window.dataLayer) {
+          window.dataLayer.push({
+            consent_analytics: consent.analytics,
+            consent_marketing: consent.marketing,
+            consent_personalization: consent.personalization
+          });
+        }
+      }
+      
+      attachEventListeners() {
+        // Accept all button
+        const acceptAllBtn = document.getElementById('consent-accept-all');
+        if (acceptAllBtn) {
+          acceptAllBtn.addEventListener('click', () => {
+            this.saveConsent({
+              analytics: true,
+              marketing: true,
+              personalization: true,
+              method: 'accept_all'
+            });
+          });
+        }
+        
+        // Essential only button
+        const essentialOnlyBtn = document.getElementById('consent-essential-only');
+        if (essentialOnlyBtn) {
+          essentialOnlyBtn.addEventListener('click', () => {
+            this.saveConsent({
+              analytics: false,
+              marketing: false,
+              personalization: false,
+              method: 'essential_only'
+            });
+          });
+        }
+        
+        // Customize button
+        const customizeBtn = document.getElementById('consent-customize');
+        if (customizeBtn) {
+          customizeBtn.addEventListener('click', () => {
+            this.showConsentModal();
+          });
+        }
+        
+        // Modal close button
+        const modalCloseBtn = document.getElementById('consent-modal-close');
+        if (modalCloseBtn) {
+          modalCloseBtn.addEventListener('click', () => {
+            this.hideConsentModal();
+          });
+        }
+        
+        // Save preferences button
+        const savePreferencesBtn = document.getElementById('consent-save-preferences');
+        if (savePreferencesBtn) {
+          savePreferencesBtn.addEventListener('click', () => {
+            const preferences = {
+              analytics: document.getElementById('consent-analytics').checked,
+              marketing: document.getElementById('consent-marketing').checked,
+              personalization: document.getElementById('consent-personalization').checked,
+              method: 'custom_preferences'
+            };
+            this.saveConsent(preferences);
+          });
+        }
+      }
+    }
+    
+    // Initialize consent management when DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
+      new LGPDConsentManager();
+    });
+  </script>
+
+  <!-- Performance and error monitoring -->
+  <script>
+    // Basic performance monitoring
+    window.addEventListener('load', () => {
+      // Track page load performance
+      if (window.performance && window.performance.timing) {
+        const timing = window.performance.timing;
+        const loadTime = timing.loadEventEnd - timing.navigationStart;
+        
+        if (window.dataLayer && loadTime > 0) {
+          window.dataLayer.push({
+            event: 'page_performance',
+            page_load_time: loadTime,
+            dom_content_loaded: timing.domContentLoadedEventEnd - timing.navigationStart,
+            first_byte_time: timing.responseStart - timing.navigationStart
+          });
+        }
+      }
+    });
+    
+    // Error tracking
+    window.addEventListener('error', (event) => {
+      if (window.dataLayer) {
+        window.dataLayer.push({
+          event: 'javascript_error',
+          error_message: event.message,
+          error_filename: event.filename,
+          error_line: event.lineno,
+          error_column: event.colno
+        });
+      }
+    });
+  </script>
+</body>
+</html>

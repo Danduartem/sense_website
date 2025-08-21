@@ -1,0 +1,63 @@
+{
+  "asset_id": "nopay.d5.whatsapp.case",
+  "sequence": "NO-PAY",
+  "template_category": "Marketing", 
+  "lang": "pt-PT",
+  "template_name": "transformation_case_study",
+  "header": {
+    "type": "text",
+    "text": "💫 História de Transformação"
+  },
+  "body": "Olá {{1}}! 👋\n\nQuero partilhar uma história que pode inspirar-te...\n\n*A Rita (nome alterado):*\n• Antes: 65h/semana, sentia-se escrava do negócio\n• Transformação: 12 semanas na mentoria\n• Depois: 35h/semana, faturação 60% superior\n\n*O que fez a diferença?*\n✅ Mentalidade sem esforço\n✅ Sistemas de liderança\n✅ Preços premium (40% aumento)\n\nSe a Rita conseguiu, tu também consegues.\n\nJá respondeste ao questionário? É o primeiro passo para a tua transformação.",
+  "footer": {
+    "text": "Mentoria Seja Livre - A tua liberdade espera"
+  },
+  "buttons": [
+    {
+      "type": "URL",
+      "text": "Responder Questionário",
+      "url": "{{2}}"
+    },
+    {
+      "type": "QUICK_REPLY",
+      "text": "Quero saber mais"
+    },
+    {
+      "type": "QUICK_REPLY", 
+      "text": "Não tenho interesse"
+    }
+  ],
+  "variable_map": {
+    "{{1}}": "first_name",
+    "{{2}}": "questionnaire_url_with_utm_whatsapp"
+  },
+  "trigger": {
+    "on": "lead_submit",
+    "offset": "+5 days",
+    "conditions": [
+      "whatsapp_opt_in = true",
+      "NOT questionnaire_complete(5d)",
+      "NOT purchase_success(5d)",
+      "email_engagement_rate < 30%"
+    ]
+  },
+  "suppression": ["questionnaire_complete", "unsubscribe", "purchase_success", "whatsapp_opt_out"],
+  "quiet_hours": {
+    "tz": "Europe/Lisbon",
+    "window": "09:00-18:00",
+    "skip_weekends": true
+  },
+  "measurement": {
+    "expected_events": ["whatsapp_delivered", "button_click", "questionnaire_click_whatsapp", "case_study_engagement"],
+    "conversion_goal": "questionnaire_completion_via_whatsapp"
+  },
+  "compliance": {
+    "template_category": "Marketing",
+    "opt_in_required": true,
+    "business_initiated": false,
+    "promotional_purpose": "Case study social proof for conversion",
+    "approval_status": "pending_review"
+  },
+  "owner": "WTL",
+  "status": "draft"
+}

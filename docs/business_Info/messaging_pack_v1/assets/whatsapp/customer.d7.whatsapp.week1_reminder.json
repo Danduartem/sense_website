@@ -1,0 +1,61 @@
+{
+  "asset_id": "customer.d7.whatsapp.week1_reminder",
+  "sequence": "CUSTOMER", 
+  "template_category": "Utility",
+  "lang": "pt-PT",
+  "template_name": "week1_progress_reminder",
+  "header": {
+    "type": "text",
+    "text": "🗓️ Primeira semana completa!"
+  },
+  "body": "{{1}}, parabéns! 🎉\n\nCompletaste a primeira semana na Mentoria Seja Livre.\n\n*Checkpoint da semana:*\n📚 Module 1.1 concluído: {{2}}\n✍️ Atividades feitas: {{3}}/{{4}}\n🚀 Implementações iniciadas: {{5}}\n\n*Próximos passos:*\n• Module 1.4: Liderança\n• Aplicar frameworks de delegação\n• Reportar primeiros resultados\n\nComo classificas esta primeira semana (1-10)?\n\nVamos para a próxima fase! 💪",
+  "footer": {
+    "text": "Rumo à tua liberdade!"
+  },
+  "buttons": [
+    {
+      "type": "URL",
+      "text": "Continuar Programa",
+      "url": "{{6}}"
+    },
+    {
+      "type": "QUICK_REPLY",
+      "text": "Correu bem! 😊"
+    },
+    {
+      "type": "QUICK_REPLY",
+      "text": "Tive dificuldades"
+    }
+  ],
+  "variable_map": {
+    "{{1}}": "first_name",
+    "{{2}}": "module_1_1_completion_status",
+    "{{3}}": "activities_completed_count",
+    "{{4}}": "total_activities_available",
+    "{{5}}": "implementations_started_count",
+    "{{6}}": "trello_module_1_4_url_with_utm"
+  },
+  "trigger": {
+    "on": "purchase_success",
+    "offset": "+7 days",
+    "conditions": ["whatsapp_opt_in = true", "NOT refund_success(7d)"]
+  },
+  "suppression": ["refund_success", "whatsapp_opt_out", "module_1_4_already_started"],
+  "quiet_hours": {
+    "tz": "Europe/Lisbon",
+    "window": "09:00-18:00", 
+    "skip_weekends": true
+  },
+  "measurement": {
+    "expected_events": ["whatsapp_delivered", "button_click", "module_1_4_access", "week_assessment_response"],
+    "conversion_goal": "module_1_4_activation"
+  },
+  "compliance": {
+    "template_category": "Utility",
+    "opt_in_required": true,
+    "business_initiated": true,
+    "transactional_purpose": "Program milestone and progress tracking"
+  },
+  "owner": "WTL", 
+  "status": "draft"
+}

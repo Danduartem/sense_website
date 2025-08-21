@@ -1,0 +1,203 @@
+{
+  "email_deliverability_requirements": {
+    "description": "Email deliverability optimization and DNS authentication requirements for Mentoria Seja Livre messaging campaigns",
+    "dns_authentication": {
+      "spf_record": {
+        "requirement": "Authorize MailerLite to send emails on behalf of domain",
+        "record_type": "TXT",
+        "hostname": "@",
+        "value": "v=spf1 include:_spf.mailerlite.com ~all",
+        "verification_method": "DNS_propagation_check_via_mailerlite_dashboard",
+        "impact": "Prevents emails from being marked as spam due to unauthorized sending"
+      },
+      "dkim_signature": {
+        "requirement": "Domain-based message authentication",
+        "record_type": "CNAME", 
+        "hostname": "ml._domainkey",
+        "value": "ml._domainkey.mailerlite.com",
+        "verification_method": "MailerLite_automatic_verification",
+        "impact": "Improves email authentication and inbox placement rates"
+      },
+      "dmarc_policy": {
+        "requirement": "Domain-based Message Authentication Reporting and Conformance",
+        "record_type": "TXT",
+        "hostname": "_dmarc",
+        "value": "v=DMARC1; p=quarantine; rua=mailto:dmarc@mentoriasejalivre.com.br",
+        "verification_method": "DMARC_analyzer_tool_or_mailerlite_guidance",
+        "impact": "Provides additional protection against email spoofing"
+      }
+    },
+    "domain_configuration": {
+      "custom_tracking_domain": {
+        "requirement": "Use branded domain for link tracking",
+        "implementation": "links.mentoriasejalivre.com.br",
+        "dns_setup": "CNAME record pointing to MailerLite tracking domain",
+        "benefit": "Improved deliverability and brand consistency in links"
+      },
+      "sender_domain_alignment": {
+        "from_address": "noreply@mentoriasejalivre.com.br",
+        "reply_to_address": "ola@mentoriasejalivre.com.br",
+        "display_name": "Mentoria Seja Livre",
+        "domain_consistency": "All email domains match primary website domain"
+      }
+    },
+    "content_optimization": {
+      "spam_filter_avoidance": [
+        "avoid_excessive_capitalization_in_subject_lines",
+        "limit_exclamation_marks_to_maximum_1_per_email",
+        "avoid_spam_trigger_words_free_urgent_guaranteed",
+        "maintain_text_to_image_ratio_above_60_percent_text",
+        "include_physical_address_in_email_footer"
+      ],
+      "subject_line_best_practices": [
+        "keep_subject_lines_under_50_characters_for_mobile",
+        "personalization_with_first_name_when_appropriate",
+        "avoid_misleading_or_clickbait_language",
+        "test_spam_score_before_sending_campaigns",
+        "include_preview_text_optimization"
+      ],
+      "email_structure_optimization": [
+        "clear_plain_text_version_for_all_html_emails",
+        "proper_html_structure_with_semantic_markup",
+        "alt_text_for_all_images",
+        "unsubscribe_link_prominently_placed_in_footer",
+        "consistent_branding_and_professional_appearance"
+      ]
+    },
+    "sender_reputation_management": {
+      "list_hygiene": [
+        "remove_hard_bounces_immediately",
+        "suppress_soft_bounces_after_3_consecutive_failures",
+        "monitor_spam_complaint_rate_keep_below_0_1_percent",
+        "regular_engagement_based_list_cleaning",
+        "remove_inactive_subscribers_after_6_months_no_engagement"
+      ],
+      "engagement_optimization": [
+        "monitor_open_rates_by_sequence_and_optimize_low_performers",
+        "track_click_through_rates_and_improve_cta_effectiveness",
+        "implement_re_engagement_campaigns_for_inactive_segments",
+        "segment_lists_based_on_engagement_levels",
+        "sunset_policy_for_consistently_unengaged_subscribers"
+      ],
+      "sending_volume_management": [
+        "gradual_volume_increase_for_new_domain_reputation",
+        "consistent_sending_schedule_to_build_recipient_expectations",
+        "avoid_sudden_volume_spikes_that_trigger_filters",
+        "monitor_delivery_rates_and_adjust_volume_accordingly"
+      ]
+    },
+    "mailerlite_specific_configuration": {
+      "account_setup": [
+        "complete_sender_verification_process",
+        "configure_custom_unsubscribe_page_with_branding",
+        "set_up_automation_triggers_aligned_with_sequence_logic",
+        "implement_advanced_segmentation_based_on_amanda_scoring",
+        "configure_webhooks_for_crm_integration"
+      ],
+      "deliverability_features": [
+        "enable_spam_testing_for_all_campaigns_before_sending",
+        "use_send_time_optimization_for_better_engagement",
+        "implement_a_b_testing_for_subject_lines_and_content",
+        "monitor_deliverability_reports_and_act_on_recommendations",
+        "set_up_bounce_and_complaint_notifications"
+      ]
+    },
+    "monitoring_and_maintenance": {
+      "daily_monitoring": [
+        "check_delivery_rates_for_any_unusual_drops",
+        "monitor_bounce_and_complaint_rates",
+        "review_spam_folder_placement_reports",
+        "track_engagement_metrics_for_sequence_optimization"
+      ],
+      "weekly_analysis": [
+        "analyze_open_and_click_rates_by_sequence_step",
+        "review_unsubscribe_patterns_and_reasons",
+        "assess_list_growth_quality_vs_quantity", 
+        "evaluate_segmentation_effectiveness"
+      ],
+      "monthly_optimization": [
+        "comprehensive_deliverability_audit",
+        "sender_reputation_assessment",
+        "content_performance_analysis_and_optimization",
+        "dns_record_verification_and_updates_if_needed"
+      ]
+    },
+    "compliance_integration": {
+      "gdpr_deliverability_alignment": [
+        "ensure_opt_in_process_creates_engaged_subscribers",
+        "implement_easy_unsubscribe_to_reduce_spam_complaints",
+        "maintain_clean_lists_through_consent_management",
+        "document_deliverability_practices_for_audits"
+      ],
+      "portuguese_brazilian_considerations": [
+        "localize_unsubscribe_language_for_portuguese_speakers",
+        "comply_with_local_anti_spam_regulations",
+        "respect_cultural_communication_preferences",
+        "adjust_sending_times_for_lisbon_timezone"
+      ]
+    },
+    "implementation_timeline": {
+      "immediate_requirements": [
+        "dns_records_setup_and_verification",
+        "mailerlite_domain_authentication_completion",
+        "initial_list_cleaning_and_segmentation"
+      ],
+      "pre_launch_requirements": [
+        "spam_testing_for_all_email_templates",
+        "deliverability_monitoring_dashboard_setup",
+        "bounce_and_complaint_handling_automation"
+      ],
+      "ongoing_maintenance": [
+        "regular_deliverability_monitoring_and_optimization",
+        "quarterly_dns_record_verification",
+        "continuous_list_hygiene_and_engagement_optimization"
+      ]
+    },
+    "success_metrics": {
+      "deliverability_kpis": [
+        "inbox_placement_rate_target_above_90_percent",
+        "bounce_rate_target_below_2_percent",
+        "spam_complaint_rate_target_below_0_1_percent",
+        "unsubscribe_rate_target_below_1_percent_per_campaign"
+      ],
+      "engagement_kpis": [
+        "open_rate_target_above_25_percent_for_nopay_sequence",
+        "click_rate_target_above_5_percent_for_nopay_sequence", 
+        "open_rate_target_above_40_percent_for_customer_sequence",
+        "click_rate_target_above_10_percent_for_customer_sequence"
+      ]
+    }
+  },
+  "action_items": [
+    {
+      "task": "Set up DNS authentication records (SPF, DKIM, DMARC)",
+      "priority": "critical",
+      "responsible": "CDS + Technical team",
+      "deadline": "before_messaging_launch",
+      "verification": "MailerLite authentication dashboard green status"
+    },
+    {
+      "task": "Configure custom tracking domain",
+      "priority": "high",
+      "responsible": "CDS + Technical team", 
+      "deadline": "before_messaging_launch",
+      "verification": "Links resolve to branded domain"
+    },
+    {
+      "task": "Spam test all email templates",
+      "priority": "high",
+      "responsible": "CDS",
+      "deadline": "before_sequence_activation",
+      "verification": "Spam score below 5 for all templates"
+    },
+    {
+      "task": "Set up deliverability monitoring dashboard",
+      "priority": "medium",
+      "responsible": "CDS",
+      "deadline": "within_48_hours_of_launch",
+      "verification": "Daily monitoring reports configured"
+    }
+  ],
+  "owner": "CDS",
+  "status": "implementation_ready"
+}

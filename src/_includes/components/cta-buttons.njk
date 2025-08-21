@@ -1,0 +1,175 @@
+{# CTA Button Components - Mentoria Seja Livre #}
+{# Reusable button macros with consistent styling and tracking #}
+
+{#- Primary CTA Button -#}
+{% macro primaryCTA(text, sectionId = 'unknown', ctaId = 'default', classes = '') %}
+<button 
+  type="button" 
+  class="btn btn-primary btn-lg {{ classes }} group"
+  data-modal-trigger="questionario"
+  data-source-section="{{ sectionId }}"
+  data-cta-id="{{ ctaId }}"
+  data-cta-label="{{ text }}"
+  aria-describedby="cta-description-{{ ctaId }}"
+  onclick="window.openLeadModal('{{ sectionId }}', '{{ ctaId }}')">
+  <span class="flex items-center gap-2">
+    {{ text }}
+    <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+    </svg>
+  </span>
+</button>
+{% endmacro %}
+
+{#- Secondary CTA Button -#}
+{% macro secondaryCTA(text, href = '#', sectionId = 'unknown', ctaId = 'default', classes = '', target = '_self') %}
+{% if href.startsWith('#') %}
+  <button 
+    type="button" 
+    class="btn btn-secondary btn-lg {{ classes }} group"
+    data-scroll-to="{{ href }}"
+    data-source-section="{{ sectionId }}"
+    data-cta-id="{{ ctaId }}"
+    data-cta-label="{{ text }}">
+    <span class="flex items-center gap-2">
+      {{ text }}
+      <svg class="w-5 h-5 transition-transform group-hover:translate-y-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
+    </span>
+  </button>
+{% else %}
+  <a 
+    href="{{ href }}"
+    target="{{ target }}"
+    {% if target === '_blank' %}rel="noopener noreferrer"{% endif %}
+    class="btn btn-secondary btn-lg {{ classes }} group inline-flex"
+    data-source-section="{{ sectionId }}"
+    data-cta-id="{{ ctaId }}"
+    data-cta-label="{{ text }}">
+    <span class="flex items-center gap-2">
+      {{ text }}
+      {% if target === '_blank' %}
+        <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+        </svg>
+      {% else %}
+        <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+        </svg>
+      {% endif %}
+    </span>
+  </a>
+{% endif %}
+{% endmacro %}
+
+{#- Ghost CTA Button -#}
+{% macro ghostCTA(text, href = '#', sectionId = 'unknown', ctaId = 'default', classes = '') %}
+{% if href.startsWith('#') %}
+  <button 
+    type="button" 
+    class="btn btn-ghost btn-md {{ classes }}"
+    data-scroll-to="{{ href }}"
+    data-source-section="{{ sectionId }}"
+    data-cta-id="{{ ctaId }}"
+    data-cta-label="{{ text }}">
+    {{ text }}
+  </button>
+{% else %}
+  <a 
+    href="{{ href }}"
+    class="btn btn-ghost btn-md {{ classes }} inline-flex"
+    data-source-section="{{ sectionId }}"
+    data-cta-id="{{ ctaId }}"
+    data-cta-label="{{ text }}">
+    {{ text }}
+  </a>
+{% endif %}
+{% endmacro %}
+
+{#- CTA with Icon -#}
+{% macro iconCTA(text, icon, sectionId = 'unknown', ctaId = 'default', variant = 'primary', classes = '') %}
+<button 
+  type="button" 
+  class="btn btn-{{ variant }} btn-lg {{ classes }} group"
+  data-modal-trigger="questionario"
+  data-source-section="{{ sectionId }}"
+  data-cta-id="{{ ctaId }}"
+  data-cta-label="{{ text }}"
+  onclick="window.openLeadModal('{{ sectionId }}', '{{ ctaId }}')">
+  <span class="flex items-center gap-3">
+    {% if icon === 'transformation' %}
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+      </svg>
+    {% elif icon === 'success' %}
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+    {% elif icon === 'heart' %}
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+      </svg>
+    {% elif icon === 'star' %}
+      <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+      </svg>
+    {% else %}
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+      </svg>
+    {% endif %}
+    {{ text }}
+  </span>
+</button>
+{% endmacro %}
+
+{#- WhatsApp CTA Button -#}
+{% macro whatsappCTA(text, message = 'Olá! Tenho interesse na Mentoria Seja Livre.', sectionId = 'unknown', ctaId = 'whatsapp', classes = '') %}
+<a 
+  href="https://wa.me/5511999999999?text={{ message | urlencode }}"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="btn bg-green-600 hover:bg-green-700 text-white btn-lg {{ classes }} group inline-flex"
+  data-source-section="{{ sectionId }}"
+  data-cta-id="{{ ctaId }}"
+  data-cta-label="{{ text }}">
+  <span class="flex items-center gap-3">
+    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 2.079.549 4.085 1.595 5.906L0 24l6.335-1.652C8.135 23.238 10.043 24 12.017 24c6.624 0 11.99-5.367 11.99-11.987C24.007 5.367 18.641.001 12.017.001zM12.017 21.97c-1.737 0-3.419-.583-4.81-1.66l-.345-.206-3.583.936.956-3.504-.226-.36C2.85 15.72 2.05 13.905 2.05 11.987 2.05 6.48 6.51 2.02 12.017 2.02s9.967 4.46 9.967 9.967c0 5.506-4.46 9.966-9.967 9.966z"/>
+      <path d="M18.118 14.708c-.292-.146-1.728-.852-1.996-.95-.268-.097-.463-.146-.658.147-.195.292-.756.95-.927 1.146-.171.195-.342.22-.634.073-.292-.146-1.233-.454-2.347-1.448-.868-.773-1.454-1.728-1.625-2.02-.171-.292-.018-.45.128-.596.131-.131.292-.342.439-.512.146-.171.195-.292.292-.488.098-.195.049-.366-.024-.512-.073-.146-.658-1.588-.902-2.177-.238-.573-.48-.495-.658-.504a12.8 12.8 0 00-.561-.01c-.195 0-.512.073-.78.366-.268.292-1.024 1.001-1.024 2.442 0 1.441 1.049 2.835 1.195 3.03.146.195 2.059 3.144 4.989 4.408.698.302 1.243.482 1.668.617.701.223 1.34.191 1.843.116.562-.084 1.728-.707 1.972-1.39.244-.683.244-1.268.171-1.39-.073-.122-.268-.195-.561-.342z"/>
+    </svg>
+    {{ text }}
+    <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+    </svg>
+  </span>
+</a>
+{% endmacro %}
+
+{#- Floating Action Button -#}
+{% macro floatingCTA(text, icon = 'transformation', sectionId = 'floating', ctaId = 'fab', classes = '') %}
+<button 
+  type="button" 
+  class="fixed bottom-6 right-6 z-40 btn btn-primary w-14 h-14 rounded-full shadow-strong hover:shadow-xl transition-all duration-300 group {{ classes }}"
+  data-modal-trigger="questionario"
+  data-source-section="{{ sectionId }}"
+  data-cta-id="{{ ctaId }}"
+  data-cta-label="{{ text }}"
+  onclick="window.openLeadModal('{{ sectionId }}', '{{ ctaId }}')"
+  aria-label="{{ text }}">
+  {% if icon === 'transformation' %}
+    <svg class="w-7 h-7 transition-transform group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+    </svg>
+  {% elif icon === 'heart' %}
+    <svg class="w-7 h-7 transition-transform group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+    </svg>
+  {% else %}
+    <svg class="w-7 h-7 transition-transform group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+    </svg>
+  {% endif %}
+</button>
+{% endmacro %}

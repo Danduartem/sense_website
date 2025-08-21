@@ -1,0 +1,208 @@
+{
+  "whatsapp_template_approval_guide": {
+    "description": "WhatsApp Business API template approval requirements and submission guide for Mentoria Seja Livre",
+    "template_categories": {
+      "utility": {
+        "description": "Templates that facilitate an ongoing transaction or update users about an ongoing transaction",
+        "approval_requirements": "automatic_approval_for_compliant_templates",
+        "examples": [
+          "Program access delivery",
+          "Progress check-ins", 
+          "Account notifications",
+          "Support confirmations"
+        ],
+        "compliance_requirements": [
+          "must_be_transactional_in_nature",
+          "no_promotional_content",
+          "clear_business_purpose",
+          "user_initiated_or_expected"
+        ]
+      },
+      "marketing": {
+        "description": "Templates that contain promotional or marketing content",
+        "approval_requirements": "manual_review_required_24_72_hours",
+        "examples": [
+          "Case study sharing",
+          "Final opportunity messages",
+          "Product announcements",
+          "Special offers"
+        ],
+        "compliance_requirements": [
+          "explicit_opt_in_required",
+          "no_misleading_claims",
+          "clear_opt_out_mechanism",
+          "promotional_content_clearly_identified"
+        ]
+      }
+    },
+    "template_submissions": {
+      "customer_sequence_templates": [
+        {
+          "template_name": "mentoria_access_delivery",
+          "category": "Utility",
+          "business_justification": "Deliver program access credentials and initial setup instructions to paying customers",
+          "expected_approval": "automatic",
+          "submission_priority": "high"
+        },
+        {
+          "template_name": "program_progress_checkin", 
+          "category": "Utility",
+          "business_justification": "Check customer progress and provide support during program participation",
+          "expected_approval": "automatic",
+          "submission_priority": "high"
+        },
+        {
+          "template_name": "week1_progress_reminder",
+          "category": "Utility",
+          "business_justification": "Milestone tracking and progress support for program participants",
+          "expected_approval": "automatic",
+          "submission_priority": "medium"
+        }
+      ],
+      "nopay_sequence_templates": [
+        {
+          "template_name": "transformation_case_study",
+          "category": "Marketing",
+          "business_justification": "Share social proof and case studies to prospects who have shown interest",
+          "expected_approval": "manual_review_required",
+          "submission_priority": "medium",
+          "approval_risk_factors": [
+            "promotional_content_about_business_transformation",
+            "case_study_claims_require_substantiation"
+          ]
+        },
+        {
+          "template_name": "final_opportunity_message",
+          "category": "Marketing", 
+          "business_justification": "Final engagement attempt for prospects who have not completed questionnaire",
+          "expected_approval": "manual_review_required",
+          "submission_priority": "low",
+          "approval_risk_factors": [
+            "urgency_language_may_require_review",
+            "promotional_claims_about_transformation"
+          ]
+        }
+      ]
+    },
+    "approval_optimization": {
+      "template_content_guidelines": [
+        "use_factual_language_avoid_superlatives",
+        "include_clear_opt_out_instructions", 
+        "avoid_excessive_urgency_or_pressure",
+        "substantiate_any_claims_with_evidence",
+        "maintain_professional_tone_throughout"
+      ],
+      "variable_usage_best_practices": [
+        "limit_variables_to_necessary_personalization",
+        "avoid_variables_in_critical_compliance_text",
+        "test_all_variable_combinations_before_submission",
+        "document_variable_purposes_in_submission"
+      ],
+      "button_configuration": [
+        "url_buttons_must_lead_to_legitimate_business_pages",
+        "quick_reply_buttons_should_facilitate_user_choice",
+        "avoid_misleading_button_labels",
+        "ensure_button_actions_match_expectations"
+      ]
+    },
+    "submission_process": {
+      "pre_submission_checklist": [
+        "template_content_reviewed_for_compliance",
+        "variables_tested_with_sample_data",
+        "buttons_lead_to_correct_destinations",
+        "category_assignment_justified",
+        "opt_in_mechanism_documented"
+      ],
+      "submission_documentation": [
+        "business_justification_for_each_template",
+        "opt_in_consent_mechanism_description",
+        "variable_usage_documentation",
+        "button_destination_verification",
+        "compliance_review_checklist"
+      ],
+      "post_submission_monitoring": [
+        "track_approval_status_daily",
+        "prepare_revision_responses_if_rejected",
+        "document_approval_decisions_for_future_reference",
+        "update_template_usage_based_on_approval_outcomes"
+      ]
+    },
+    "compliance_requirements": {
+      "opt_in_documentation": {
+        "requirement": "Document opt-in mechanism for marketing templates",
+        "implementation": "Landing page checkbox with explicit WhatsApp consent",
+        "storage": "Timestamp, IP, consent text, consent source",
+        "audit_trail": "Required for WhatsApp BSP and GDPR compliance"
+      },
+      "content_substantiation": {
+        "requirement": "Substantiate transformation and success claims",
+        "implementation": "Client testimonials with permissions, conservative language",
+        "documentation": "Proof library with client consent for usage",
+        "risk_mitigation": "Avoid specific percentage or revenue claims"
+      },
+      "opt_out_mechanisms": {
+        "requirement": "Clear opt-out instructions in marketing messages",
+        "implementation": "STOP/PARAR command support, quick reply buttons",
+        "response_time": "Immediate suppression upon opt-out request",
+        "confirmation": "Opt-out confirmation message sent"
+      }
+    },
+    "approval_timeline": {
+      "utility_templates": {
+        "expected_timeframe": "automatic_approval_or_24_hours",
+        "factors_affecting_timing": "template_complexity_variable_usage",
+        "expedited_process": "available_for_urgent_business_needs"
+      },
+      "marketing_templates": {
+        "expected_timeframe": "24_to_72_hours_manual_review",
+        "factors_affecting_timing": "content_review_compliance_check_claim_verification",
+        "potential_delays": "revision_requests_additional_documentation_needed"
+      }
+    },
+    "contingency_planning": {
+      "approval_delays": [
+        "prepare_alternative_email_only_campaigns",
+        "have_revised_template_versions_ready",
+        "maintain_communication_timeline_flexibility"
+      ],
+      "template_rejections": [
+        "revision_strategy_for_content_changes",
+        "escalation_process_with_whatsapp_bsp",
+        "fallback_to_utility_category_if_appropriate"
+      ],
+      "launch_dependencies": [
+        "identify_critical_path_templates_for_launch",
+        "prioritize_customer_sequence_approvals",
+        "have_manual_messaging_backup_plans"
+      ]
+    }
+  },
+  "action_items": [
+    {
+      "task": "Submit all CUSTOMER sequence utility templates",
+      "priority": "high",
+      "responsible": "CDS",
+      "deadline": "immediate_for_launch_readiness"
+    },
+    {
+      "task": "Prepare marketing template submissions with documentation",
+      "priority": "medium", 
+      "responsible": "CDS + VPC",
+      "deadline": "within_48_hours"
+    },
+    {
+      "task": "Document opt-in mechanism and consent storage",
+      "priority": "high",
+      "responsible": "CDS + Technical team",
+      "deadline": "before_template_submission"
+    },
+    {
+      "task": "Create template approval tracking system",
+      "priority": "medium",
+      "responsible": "CDS",
+      "deadline": "ongoing_monitoring"
+    }
+  ],
+  "owner": "CDS",
+  "status": "ready_for_submission"
+}

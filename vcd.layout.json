@@ -1,0 +1,94 @@
+{
+  "section_id": "hero",
+  "layout_archetype": "asymmetric_content_visual_split",
+  "focal_hierarchy": {
+    "primary": "headline_h1_pain_point",
+    "secondary": "cta_button_transformation",
+    "tertiary": "hero_visual_amanda_card"
+  },
+  "composition_plan": {
+    "grid_structure": "60_40_desktop_split_stacked_mobile",
+    "visual_flow": "z_pattern_with_diagonal_tension",
+    "spacing_rhythm": "8pt_golden_ratio_progression",
+    "asymmetric_balance": "heavy_left_content_light_right_visual"
+  },
+  "content_zones": {
+    "hero_content": {
+      "layout": "content_first_60_percent_desktop_full_mobile",
+      "hierarchy": "h1_dominant_h2_supporting_body_bridge_cta_climax",
+      "spacing": "progressive_vertical_rhythm_24_16_32_spacing"
+    },
+    "hero_visual": {
+      "layout": "floating_card_with_gradient_backdrop_40_percent",
+      "enhancement": "elevated_amanda_persona_with_subtle_animation"
+    }
+  },
+  "responsive_behavior": {
+    "mobile": "single_column_content_first_image_secondary_reduced_spacing",
+    "tablet": "maintain_split_adjust_proportions_65_35",
+    "desktop": "full_60_40_split_with_breathing_room_emphasis"
+  },
+  "accessibility_considerations": [
+    "Logical heading order h1->h2->body->button maintained",
+    "Focus sequence follows visual hierarchy top-to-bottom",
+    "High contrast ratios preserved navy-800 on light backgrounds",
+    "Touch targets minimum 44px on mobile for CTA button"
+  ],
+  "beauty_principles": {
+    "golden_ratio_application": "content_width_follows_1.618_proportion_relative_to_visual",
+    "white_space_strategy": "generous_top_bottom_padding_breathing_room_around_cta",
+    "typography_scale": "6xl_h1_2xl_h2_lg_body_creating_clear_hierarchy"
+  },
+  "detailed_layout_specifications": {
+    "desktop_composition": {
+      "container": "max_width_7xl_centered_px_8_horizontal_padding",
+      "grid_system": "lg_grid_cols_2_gap_12_items_center",
+      "content_zone": {
+        "width_ratio": "60_percent_implicit_through_grid",
+        "vertical_alignment": "center_aligned_with_visual",
+        "internal_spacing": "mb_6_h1_mb_6_h2_mb_8_body_mb_8_trust_strip",
+        "typography_sizing": "h1_text_6xl_h2_text_2xl_body_text_lg"
+      },
+      "visual_zone": {
+        "width_ratio": "40_percent_implicit_through_grid",
+        "positioning": "relative_positioning_for_floating_effect",
+        "background": "gradient_backdrop_burgundy_100_to_peach_100",
+        "card_treatment": "white_bg_rounded_2xl_shadow_strong"
+      }
+    },
+    "tablet_composition": {
+      "adjustments": "reduce_h1_to_5xl_maintain_proportions_gap_8",
+      "grid_behavior": "lg_grid_activates_at_1024px_breakpoint"
+    },
+    "mobile_composition": {
+      "stacking": "single_column_content_first_image_secondary",
+      "spacing_reduction": "py_16_container_px_4_gap_8",
+      "typography_scaling": "h1_text_4xl_h2_text_xl_maintain_readability",
+      "visual_treatment": "reduce_padding_p_6_instead_of_p_8"
+    }
+  },
+  "visual_tension_elements": {
+    "diagonal_gradient": "bg_gradient_to_br_creates_movement",
+    "asymmetric_balance": "heavy_text_left_light_visual_right",
+    "floating_card": "amanda_card_appears_to_hover_over_gradient",
+    "scale_progression": "largest_h1_medium_h2_small_body_prominent_cta"
+  },
+  "conversion_optimization": {
+    "cta_prominence": "burgundy_700_bg_stands_out_against_navy_text",
+    "visual_flow_guidance": "z_pattern_leads_eye_to_cta_naturally",
+    "trust_building": "amanda_persona_card_creates_relatability",
+    "urgency_creation": "pain_point_headline_creates_immediate_resonance"
+  },
+  "brand_coherence": {
+    "color_harmony": "navy_primary_burgundy_accent_peach_softness",
+    "typography_personality": "lora_serif_sophistication_inter_accessibility",
+    "feminine_energy_honor": "soft_gradients_rounded_corners_elegant_spacing",
+    "professional_trustworthiness": "generous_whitespace_clear_hierarchy"
+  },
+  "implementation_notes": {
+    "preserve_data_attributes": "all_gtm_tracking_maintained_exactly",
+    "gradient_performance": "css_gradients_preferred_over_images",
+    "animation_considerations": "hover_scale_105_on_cta_subtle_entrance_animations",
+    "accessibility_compliance": "focus_visible_ring_burgundy_200_screen_reader_friendly"
+  }
+}

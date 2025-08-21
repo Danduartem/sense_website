@@ -1,0 +1,159 @@
+{
+  "utm_conventions": {
+    "description": "UTM parameter conventions for Mentoria Seja Livre messaging campaigns, aligned with Define v1B snake_case specifications",
+    "base_structure": {
+      "utm_source": "Identifies the traffic source (email, whatsapp, etc.)",
+      "utm_medium": "Identifies the marketing medium (automation, broadcast, etc.)",
+      "utm_campaign": "Identifies the campaign (sequence name)",
+      "utm_content": "Identifies the specific asset and context"
+    },
+    "source_values": {
+      "email": "All email communications",
+      "whatsapp": "All WhatsApp messages", 
+      "landing_page": "Internal landing page links",
+      "crm": "Direct CRM-generated links",
+      "manual": "Manually sent links by sales team"
+    },
+    "medium_values": {
+      "automation": "Automated sequence emails",
+      "broadcast": "One-time broadcast emails",
+      "transactional": "Transactional/system emails",
+      "support": "Customer support communications",
+      "reminder": "Reminder/follow-up messages"
+    },
+    "campaign_values": {
+      "nopay": "NO-PAY lead nurture sequence",
+      "customer": "CUSTOMER onboarding sequence",
+      "welcome": "Welcome/onboarding campaigns",
+      "reengagement": "Re-engagement campaigns",
+      "announcement": "Product/program announcements"
+    },
+    "content_format": {
+      "structure": "{sequence}.{step}.{asset_type}.{context}",
+      "examples": [
+        "nopay.d1.email.value",
+        "customer.d0.email.welcome", 
+        "nopay.d5.email.case",
+        "customer.d7.email.checkin"
+      ]
+    }
+  },
+  "utm_examples": {
+    "NO-PAY_sequence": [
+      {
+        "asset": "nopay.d0p20m.email.nudge",
+        "utm_source": "email",
+        "utm_medium": "automation", 
+        "utm_campaign": "nopay",
+        "utm_content": "d0p20m_nudge",
+        "full_url_example": "https://calendly.com/mentoria-seja-livre?utm_source=email&utm_medium=automation&utm_campaign=nopay&utm_content=d0p20m_nudge"
+      },
+      {
+        "asset": "nopay.d1.email.value",
+        "utm_source": "email",
+        "utm_medium": "automation",
+        "utm_campaign": "nopay", 
+        "utm_content": "d1_value",
+        "full_url_example": "https://questionario.mentoriasejalivre.com?utm_source=email&utm_medium=automation&utm_campaign=nopay&utm_content=d1_value"
+      },
+      {
+        "asset": "nopay.d3.email.objections",
+        "utm_source": "email",
+        "utm_medium": "automation",
+        "utm_campaign": "nopay",
+        "utm_content": "d3_objections",
+        "full_url_example": "https://questionario.mentoriasejalivre.com?utm_source=email&utm_medium=automation&utm_campaign=nopay&utm_content=d3_objections"
+      },
+      {
+        "asset": "nopay.d5.email.case",
+        "utm_source": "email", 
+        "utm_medium": "automation",
+        "utm_campaign": "nopay",
+        "utm_content": "d5_case",
+        "full_url_example": "https://questionario.mentoriasejalivre.com?utm_source=email&utm_medium=automation&utm_campaign=nopay&utm_content=d5_case"
+      },
+      {
+        "asset": "nopay.d7.email.last_call",
+        "utm_source": "email",
+        "utm_medium": "automation", 
+        "utm_campaign": "nopay",
+        "utm_content": "d7_last_call",
+        "full_url_example": "https://questionario.mentoriasejalivre.com?utm_source=email&utm_medium=automation&utm_campaign=nopay&utm_content=d7_last_call"
+      }
+    ],
+    "CUSTOMER_sequence": [
+      {
+        "asset": "customer.d0.email.welcome",
+        "utm_source": "email",
+        "utm_medium": "automation",
+        "utm_campaign": "customer",
+        "utm_content": "d0_welcome",
+        "full_url_example": "https://trello.com/b/abc123?utm_source=email&utm_medium=automation&utm_campaign=customer&utm_content=d0_welcome"
+      },
+      {
+        "asset": "customer.d1.email.onboarding",
+        "utm_source": "email", 
+        "utm_medium": "automation",
+        "utm_campaign": "customer",
+        "utm_content": "d1_onboarding",
+        "full_url_example": "https://trello.com/b/abc123?utm_source=email&utm_medium=automation&utm_campaign=customer&utm_content=d1_onboarding"
+      },
+      {
+        "asset": "customer.d7.email.week1_checkin",
+        "utm_source": "email",
+        "utm_medium": "automation",
+        "utm_campaign": "customer", 
+        "utm_content": "d7_checkin",
+        "full_url_example": "https://trello.com/b/abc123?utm_source=email&utm_medium=automation&utm_campaign=customer&utm_content=d7_checkin"
+      }
+    ],
+    "whatsapp_links": [
+      {
+        "context": "NO-PAY support",
+        "utm_source": "whatsapp",
+        "utm_medium": "automation",
+        "utm_campaign": "nopay",
+        "utm_content": "support_link",
+        "whatsapp_url": "https://wa.me/351123456789?text=Olá,%20recebi%20o%20email%20sobre%20a%20mentoria"
+      },
+      {
+        "context": "CUSTOMER onboarding",
+        "utm_source": "whatsapp", 
+        "utm_medium": "automation",
+        "utm_campaign": "customer",
+        "utm_content": "onboarding_connect",
+        "whatsapp_url": "https://wa.me/351123456789?text=Olá!%20Sou%20nova%20participante%20da%20Mentoria%20Seja%20Livre"
+      }
+    ]
+  },
+  "measurement_tracking": {
+    "expected_events_per_utm": {
+      "questionnaire_links": [
+        "questionnaire_click",
+        "questionnaire_start", 
+        "questionnaire_complete"
+      ],
+      "trello_links": [
+        "trello_access",
+        "module_content_access",
+        "activity_completion"
+      ],
+      "whatsapp_links": [
+        "whatsapp_click",
+        "whatsapp_message_sent",
+        "support_conversation_start"
+      ],
+      "calendar_links": [
+        "calendar_booking_attempt",
+        "calendar_booking_complete",
+        "consultation_scheduled"
+      ]
+    },
+    "attribution_model": {
+      "primary": "first_touch_email_campaign",
+      "secondary": "last_touch_before_conversion", 
+      "lookback_window": "90_days",
+      "cross_channel_tracking": "lead_id_and_user_id_mapping"
+    }
+  }
+}

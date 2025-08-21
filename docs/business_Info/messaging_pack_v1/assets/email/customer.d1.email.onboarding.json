@@ -1,0 +1,36 @@
+{
+  "asset_id": "customer.d1.email.onboarding",
+  "sequence": "CUSTOMER",
+  "lang": "pt-PT",
+  "subject": {
+    "A": "{{first_name}}, como foi o primeiro dia na mentoria?",
+    "B": "Check-in: já exploraste o Module 1.1?"
+  },
+  "preheader": "Como te posso ajudar melhor na tua jornada...",
+  "body_md": "Olá {{first_name}},\n\nComo correu o teu primeiro dia na Mentoria Seja Livre?\n\nEspero que já tenhas conseguido explorar o Trello Board e dar uma vista de olhos no Module 1.1: Mentalidade Sem Esforço.\n\n## 🎯 ONDE DEVES ESTAR AGORA\n\nSe seguiste o plano que te enviei ontem, hoje deves ter:\n\n✅ Aceitado o convite do Trello  \n✅ Explorado a estrutura geral do programa  \n✅ Começado o Module 1.1  \n✅ Conectado comigo no WhatsApp\n\nSe ainda não fizeste algum destes passos, **não te preocupes**. Cada pessoa tem o seu ritmo.\n\n## 🧠 FOCO DESTA SEMANA: MENTALIDADE\n\nO Module 1.1 pode parecer \"só teoria\", mas é a **base de tudo**.\n\nSem mudares a tua mentalidade sobre trabalho e esforço, vais continuar a:\n- Sentir culpa quando não estás \"a produzir\"\n- Acreditar que mais horas = mais dinheiro\n- Ter medo de delegar ou subir preços\n\n**As atividades práticas são obrigatórias.** Não as saltes.\n\nSão elas que vão desbloquear as crenças que te estão a limitar.\n\n## ⚠️ AVISO IMPORTANTE\n\nVão surgir **resistências**.\n\n\"Isto não se aplica ao meu negócio...\"  \n\"Eu não posso trabalhar menos...\"  \n\"Os meus clientes não vão aceitar...\"  \n\n**É normal.** Significa que estás a chegar às crenças certas.\n\nQuando isso acontecer, contacta-me no WhatsApp. Vou ajudar-te a ultrapassar.\n\n## 📞 COMO ESTÁS A SENTIR-TE?\n\nQuero saber como estás a viver esta experiência:\n\n- Tens conseguido tempo para fazer as atividades?\n- Alguma coisa te está a confundir?\n- Que resistências estão a surgir?\n- Como te posso apoiar melhor?\n\n[**Responde-me no WhatsApp →**](https://wa.me/{{whatsapp_number}}?text=Olá {{mentor_name}}! Aqui está o meu feedback do primeiro dia na mentoria:)\n\nOu simplesmente responde a este email. Leio e respondo a todos.\n\n## 🔥 PRÓXIMOS PASSOS\n\n**Até ao final da semana:**\n1. Completa TODAS as atividades do Module 1.1\n2. Reporta as tuas descobertas (WhatsApp ou email)\n3. Prepara-te para o Module 1.4: Liderança\n\n**Lembra-te:**\nA velocidade da tua transformação depende da velocidade da tua implementação.\n\nNão quero que passes 6 meses nesta mentoria. Quero que em 12 semanas estejas livre.\n\nPara isso acontecer, precisas de fazer a tua parte.\n\n**Eu acredito em ti. Agora tu precisas de acreditar também.**\n\nVamos a isto!\n\nUm abraço,  \n{{mentor_name}}  \nMentoria Seja Livre\n\nP.S. - Se por algum motivo não estás a conseguir aceder ao Trello ou tens dificuldades técnicas, contacta-me IMEDIATAMENTE. Não percas tempo com isso.",
+  "primary_cta": {
+    "label": "Responde-me no WhatsApp",
+    "url": "https://wa.me/{{whatsapp_number}}?text=Olá {{mentor_name}}! Aqui está o meu feedback do primeiro dia na mentoria:"
+  },
+  "secondary_cta": {
+    "label": "Voltar ao programa",
+    "url": "{{trello_board_url}}?utm_source=email&utm_medium=automation&utm_campaign=customer&utm_content=d1_onboarding"
+  },
+  "merge_fields": ["first_name", "mentor_name", "whatsapp_number", "trello_board_url"],
+  "trigger": {
+    "on": "purchase_success",
+    "offset": "+1 day"
+  },
+  "suppression": ["refund_success"],
+  "quiet_hours": {
+    "tz": "Europe/Lisbon",
+    "window": "09:00-18:00",
+    "skip_weekends": false
+  },
+  "measurement": {
+    "landing_expect": ["whatsapp_feedback", "trello_engagement", "module_progress"],
+    "note": "Track early engagement and support needs"
+  },
+  "owner": "ECL",
+  "status": "draft"
+}

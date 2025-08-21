@@ -1,0 +1,462 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Define Phase Output Schemas",
+  "description": "Standardized schemas for Define Phase orchestrator agent system outputs",
+  
+  "journey_map_step": {
+    "type": "object",
+    "properties": {
+      "step": {
+        "type": "string",
+        "enum": ["landing", "exploration", "lead", "checkout", "activation"],
+        "description": "Journey stage identifier"
+      },
+      "user_goal": {
+        "type": "string",
+        "description": "What the customer wants to achieve in this step"
+      },
+      "brand_goal": {
+        "type": "string", 
+        "description": "What the business wants to achieve in this step"
+      },
+      "emotion": {
+        "type": "string",
+        "description": "Primary emotional state (e.g., hopeful_cautious, excited_committed)"
+      },
+      "friction_evidence": {
+        "type": "string",
+        "description": "Specific friction point with evidence (e.g., info_overload, trust_deficit)"
+      },
+      "hypothesis": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$",
+        "description": "Falsifiable hypothesis in snake_case (e.g., reduce_hero_copy_increases_leads)"
+      },
+      "proof": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Trust elements and social proof needed"
+      },
+      "primary_cta": {
+        "type": "string",
+        "description": "Main call-to-action text"
+      },
+      "measurement": {
+        "type": "object",
+        "properties": {
+          "events": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$"
+            },
+            "description": "Events to track for this step in snake_case"
+          },
+          "params": {
+            "type": "object",
+            "description": "Parameters for event tracking"
+          }
+        },
+        "required": ["events"]
+      },
+      "owner": {
+        "type": "string",
+        "enum": ["ux", "dev", "marketing", "design"],
+        "description": "Team responsible for optimization"
+      },
+      "priority": {
+        "type": "string",
+        "enum": ["P1", "P2", "P3"],
+        "description": "Priority level for optimization"
+      }
+    },
+    "required": ["step", "user_goal", "brand_goal", "emotion", "friction_evidence", "hypothesis", "measurement", "owner", "priority"]
+  },
+
+  "experiment_backlog_item": {
+    "type": "object",
+    "properties": {
+      "idea": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$",
+        "description": "Experiment name in snake_case"
+      },
+      "step": {
+        "type": "string",
+        "enum": ["landing", "exploration", "lead", "checkout", "activation"],
+        "description": "Journey step being optimized"
+      },
+      "metric": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$",
+        "description": "Target metric for improvement"
+      },
+      "impact": {
+        "type": "string",
+        "enum": ["high", "medium", "low"],
+        "description": "Expected impact level (high=3, medium=2, low=1)"
+      },
+      "confidence": {
+        "type": "string",
+        "enum": ["high", "medium", "low"],
+        "description": "Confidence level (high=3, medium=2, low=1)"
+      },
+      "ease": {
+        "type": "string",
+        "enum": ["high", "medium", "low"],
+        "description": "Implementation ease (high=3, medium=2, low=1)"
+      },
+      "ice": {
+        "type": "number",
+        "minimum": 1,
+        "maximum": 27,
+        "description": "ICE score (impact × confidence × ease)"
+      },
+      "notes": {
+        "type": "string",
+        "description": "Implementation notes and considerations"
+      }
+    },
+    "required": ["idea", "step", "metric", "impact", "confidence", "ease", "ice"]
+  },
+
+  "kpi_node": {
+    "type": "object",
+    "properties": {
+      "stage": {
+        "type": "string",
+        "enum": ["visit", "lead", "checkout", "purchase", "activation"],
+        "description": "Funnel stage"
+      },
+      "kpi": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$",
+        "description": "KPI name in snake_case"
+      },
+      "definition": {
+        "type": "string",
+        "description": "Mathematical formula (e.g., 'purchase_success / checkout_start')"
+      },
+      "source": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Data sources (e.g., ['ga4.purchase', 'stripe'])"
+      },
+      "guardrails": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Data inclusion/exclusion rules"
+      },
+      "identity_rule": {
+        "type": "string",
+        "description": "Identity resolution method (e.g., 'unique lead_id counting')"
+      },
+      "inclusion_criteria": {
+        "type": "string",
+        "description": "What data to include"
+      },
+      "exclusion_criteria": {
+        "type": "string",
+        "description": "What data to exclude (e.g., 'test_mode=true')"
+      }
+    },
+    "required": ["stage", "kpi", "definition", "source", "guardrails", "identity_rule"]
+  },
+
+  "event_dictionary_entry": {
+    "type": "object",
+    "properties": {
+      "event": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$",
+        "description": "Event name following action_object_context pattern"
+      },
+      "when": {
+        "type": "string",
+        "description": "When this event fires"
+      },
+      "required_params": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$"
+        },
+        "description": "Required parameters in snake_case"
+      },
+      "optional_params": {
+        "type": "array",
+        "items": {
+          "type": "string", 
+          "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$"
+        },
+        "description": "Optional parameters in snake_case"
+      },
+      "destinations": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["ga4", "crm", "mailerlite", "stripe"]
+        },
+        "description": "Where this event should be sent"
+      },
+      "frequency": {
+        "type": "string",
+        "description": "How often this event can fire per user"
+      },
+      "timing": {
+        "type": "string",
+        "description": "When event fires relative to user action"
+      }
+    },
+    "required": ["event", "when", "required_params", "destinations", "timing"]
+  },
+
+  "parameter_dictionary_entry": {
+    "type": "object",
+    "properties": {
+      "param": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$",
+        "description": "Parameter name in snake_case"
+      },
+      "type": {
+        "type": "string",
+        "enum": ["string", "number", "boolean", "timestamp", "enum"],
+        "description": "Data type"
+      },
+      "allowed": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Allowed values for enum types"
+      },
+      "example": {
+        "type": "string",
+        "description": "Example valid value"
+      },
+      "required": {
+        "type": "string",
+        "enum": ["always", "conditional", "optional"],
+        "description": "When this parameter is required"
+      },
+      "notes": {
+        "type": "string",
+        "description": "Additional context or implementation notes"
+      },
+      "pii": {
+        "type": "boolean",
+        "description": "Whether this parameter contains PII"
+      }
+    },
+    "required": ["param", "type", "example", "required", "pii"]
+  },
+
+  "destinations_map_entry": {
+    "type": "object",
+    "properties": {
+      "event": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$",
+        "description": "Event name"
+      },
+      "ga4": {
+        "type": "boolean",
+        "description": "Send to Google Analytics 4"
+      },
+      "crm": {
+        "type": "boolean",
+        "description": "Send to CRM system"
+      },
+      "mailerlite": {
+        "type": "boolean",
+        "description": "Send to MailerLite"
+      },
+      "stripe": {
+        "type": "boolean",
+        "description": "Send to Stripe"
+      },
+      "notes": {
+        "type": "string",
+        "description": "Implementation notes for destinations"
+      }
+    },
+    "required": ["event", "ga4", "crm", "mailerlite", "stripe"]
+  },
+
+  "gtm_trigger_spec": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string",
+        "description": "GTM trigger name"
+      },
+      "type": {
+        "type": "string",
+        "enum": ["click", "pageview", "custom_event", "element_visibility"],
+        "description": "GTM trigger type"
+      },
+      "conditions": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Trigger conditions (selectors, paths, etc.)"
+      },
+      "fires_event": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$",
+        "description": "Event name to fire"
+      },
+      "data_layer_push": {
+        "type": "object",
+        "description": "DataLayer object to push"
+      }
+    },
+    "required": ["name", "type", "fires_event"]
+  },
+
+  "identity_policy": {
+    "type": "object",
+    "properties": {
+      "lead_id": {
+        "type": "object",
+        "properties": {
+          "generation": {
+            "type": "string",
+            "description": "How lead_id is generated (e.g., 'crypto.randomUUID()')"
+          },
+          "persistence": {
+            "type": "string", 
+            "description": "How lead_id is stored (e.g., 'localStorage 365d')"
+          },
+          "propagation": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Where lead_id propagates to"
+          },
+          "attribution": {
+            "type": "string",
+            "description": "Attribution model (e.g., '30d last-touch')"
+          }
+        },
+        "required": ["generation", "persistence", "propagation", "attribution"]
+      },
+      "user_id": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "type": "string",
+            "description": "Where user_id comes from"
+          },
+          "mapping": {
+            "type": "string", 
+            "description": "When user_id mapping occurs"
+          },
+          "priority": {
+            "type": "string",
+            "description": "Priority relative to lead_id"
+          }
+        },
+        "required": ["source", "mapping"]
+      },
+      "utm": {
+        "type": "object",
+        "properties": {
+          "send_on": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Which events include UTM parameters"
+          },
+          "params": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "UTM parameters to track"
+          }
+        },
+        "required": ["send_on", "params"]
+      },
+      "consent": {
+        "type": "object",
+        "properties": {
+          "param": {
+            "type": "string",
+            "description": "Consent state parameter name"
+          },
+          "behavior": {
+            "type": "string",
+            "description": "How consent affects data sending"
+          }
+        },
+        "required": ["param", "behavior"]
+      },
+      "test_mode": {
+        "type": "object",
+        "properties": {
+          "env": {
+            "type": "array", 
+            "items": {"type": "string"},
+            "description": "Environments where test_mode=true"
+          },
+          "value": {
+            "type": "boolean",
+            "description": "Default test_mode value for staging"
+          }
+        },
+        "required": ["env", "value"]
+      }
+    },
+    "required": ["lead_id", "user_id", "utm", "consent", "test_mode"]
+  },
+
+  "qa_checklist_item": {
+    "type": "object",
+    "properties": {
+      "category": {
+        "type": "string",
+        "enum": ["journey_map", "kpi_tree", "events", "parameters", "technical", "privacy"],
+        "description": "QA category"
+      },
+      "check": {
+        "type": "string",
+        "description": "What to validate"
+      },
+      "status": {
+        "type": "string",
+        "enum": ["pass", "fail", "needs_review", "action_required"],
+        "description": "Validation result"
+      },
+      "notes": {
+        "type": "string",
+        "description": "Additional context or required actions"
+      },
+      "owner": {
+        "type": "string",
+        "enum": ["JS", "KTA", "MP", "GDL", "QAG"],
+        "description": "Agent responsible for resolution"
+      }
+    },
+    "required": ["category", "check", "status"]
+  },
+
+  "red_team_challenge": {
+    "type": "object",
+    "properties": {
+      "challenge": {
+        "type": "string",
+        "description": "Critical question or edge case"
+      },
+      "category": {
+        "type": "string",
+        "enum": ["journey", "kpi", "events", "privacy", "technical"],
+        "description": "Challenge category"
+      },
+      "response": {
+        "type": "string",
+        "description": "How the challenge was addressed"
+      },
+      "status": {
+        "type": "string",
+        "enum": ["resolved", "acknowledged_risk", "future_iteration"],
+        "description": "Resolution status"
+      }
+    },
+    "required": ["challenge", "category", "response", "status"]
+  }
+}

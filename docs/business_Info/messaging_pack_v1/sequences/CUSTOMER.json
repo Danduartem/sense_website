@@ -1,0 +1,83 @@
+{
+  "sequence_id": "CUSTOMER",
+  "description": "Onboarding and early support sequence for paying customers",
+  "target_avatar": "Amanda - The Exhausted Achiever (converted customer)",
+  "sequence_goal": "Successful program onboarding, early engagement, and progress tracking",
+  "entry": {
+    "trigger_event": "purchase_success",
+    "conditions": [
+      "purchase_success.completed = true",
+      "payment_status = confirmed",
+      "NOT refund_initiated(within: 24h)"
+    ],
+    "immediate_actions": [
+      "assign_user_id",
+      "grant_trello_access",
+      "add_to_whatsapp_support"
+    ]
+  },
+  "exit": [
+    "refund_success",
+    "program_completion",
+    "account_suspension",
+    "extended_sequence_completion"
+  ],
+  "steps": [
+    {
+      "step_id": "1",
+      "offset": "immediate",
+      "asset_ref": "customer.d0.email.welcome",
+      "description": "Welcome email with access details and first steps",
+      "conditions": ["purchase_confirmed"],
+      "primary_goal": "access_delivery_and_activation"
+    },
+    {
+      "step_id": "2",
+      "offset": "+1 day",
+      "asset_ref": "customer.d1.email.onboarding", 
+      "description": "Day 1 check-in and Module 1.1 guidance",
+      "conditions": ["NOT refund_success(1d)"],
+      "primary_goal": "early_engagement_support"
+    },
+    {
+      "step_id": "3",
+      "offset": "+7 days",
+      "asset_ref": "customer.d7.email.week1_checkin",
+      "description": "Week 1 progress assessment and Module 1.4 preparation",
+      "conditions": ["NOT refund_success(7d)"],
+      "primary_goal": "progress_assessment_and_course_correction"
+    }
+  ],
+  "ongoing_support": {
+    "whatsapp_integration": "immediate_upon_purchase",
+    "trello_monitoring": "daily_activity_tracking",
+    "progress_milestones": [
+      "module_1_1_completion",
+      "module_1_4_completion", 
+      "first_implementation_success",
+      "week_4_transformation_assessment"
+    ]
+  },
+  "measurement": {
+    "primary_kpi": "program_activation_rate",
+    "secondary_kpis": [
+      "trello_engagement_rate",
+      "whatsapp_support_utilization",
+      "module_completion_velocity",
+      "customer_satisfaction_score"
+    ],
+    "success_threshold": {
+      "trello_access_within_24h": ">95%",
+      "module_1_1_start_within_week": ">80%",
+      "whatsapp_connection_rate": ">60%"
+    }
+  },
+  "escalation_triggers": [
+    "no_trello_activity_within_48h",
+    "no_whatsapp_connection_within_72h",
+    "negative_feedback_in_checkin",
+    "refund_request_indication"
+  ],
+  "owner": "TJM",
+  "status": "configured"
+}

@@ -1,0 +1,465 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Messaging Phase Schemas",
+  "description": "JSON schemas for all messaging system outputs including email assets, WhatsApp templates, sequences, triggers, and compliance documentation",
+  
+  "definitions": {
+    "email_asset": {
+      "type": "object",
+      "properties": {
+        "asset_id": {
+          "type": "string",
+          "pattern": "^(nopay|customer)\\.(d[0-9]+(p[0-9]+[mh])?)\\.email\\.[a-z_]+$",
+          "description": "Unique asset identifier following naming convention"
+        },
+        "sequence": {
+          "type": "string",
+          "enum": ["NO-PAY", "CUSTOMER"],
+          "description": "Which sequence this email belongs to"
+        },
+        "step": {
+          "type": "string",
+          "description": "Human readable step description (e.g., 'Day 1', 'Day 0+20min')"
+        },
+        "subject": {
+          "type": "object",
+          "properties": {
+            "A": {"type": "string", "maxLength": 50},
+            "B": {"type": "string", "maxLength": 50}
+          },
+          "required": ["A", "B"],
+          "description": "A/B test subject line variants"
+        },
+        "preheader": {
+          "type": "string",
+          "maxLength": 90,
+          "description": "Preview text for email clients"
+        },
+        "body_html": {
+          "type": "string",
+          "description": "HTML version of email body"
+        },
+        "body_text": {
+          "type": "string", 
+          "description": "Plain text version of email body"
+        },
+        "primary_cta": {
+          "type": "object",
+          "properties": {
+            "label": {"type": "string", "maxLength": 30},
+            "action": {"type": "string"},
+            "outcome": {"type": "string"},
+            "url": {"type": "string", "format": "uri"},
+            "notes": {"type": "string"}
+          },
+          "required": ["label", "action", "outcome", "url"]
+        },
+        "secondary_cta": {
+          "type": "object",
+          "properties": {
+            "label": {"type": "string", "maxLength": 30},
+            "url": {"type": "string", "format": "uri"}
+          }
+        },
+        "merge_fields": {
+          "type": "object",
+          "patternProperties": {
+            "^[a-z_]+$": {
+              "type": "object",
+              "properties": {
+                "default": {"type": "string"},
+                "required": {"type": "boolean"}
+              },
+              "required": ["default"]
+            }
+          }
+        },
+        "voice_notes": {
+          "type": "string",
+          "description": "Notes about Avatar language and voice alignment"
+        },
+        "proof_requirements": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Claims requiring evidence backing"
+        },
+        "owner": {
+          "type": "string",
+          "enum": ["ECL", "MPL"],
+          "description": "Agent responsible for this asset"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["draft", "review", "approved", "deployed"],
+          "description": "Asset status in workflow"
+        }
+      },
+      "required": ["asset_id", "sequence", "subject", "body_html", "primary_cta", "merge_fields", "owner", "status"]
+    },
+
+    "whatsapp_template": {
+      "type": "object",
+      "properties": {
+        "asset_id": {
+          "type": "string",
+          "pattern": "^(customer|nopay)\\.(d[0-9]+)\\.whatsapp\\.[a-z_]+$"
+        },
+        "template_name": {
+          "type": "string",
+          "pattern": "^[a-z0-9_]+$",
+          "description": "BSP template name following naming convention"
+        },
+        "category": {
+          "type": "string",
+          "enum": ["UTILITY", "MARKETING"],
+          "description": "WhatsApp template category"
+        },
+        "language": {
+          "type": "string",
+          "enum": ["pt-PT", "en-US"],
+          "description": "Template language"
+        },
+        "components": {
+          "type": "object",
+          "properties": {
+            "header": {
+              "type": "object",
+              "properties": {
+                "type": {"enum": ["TEXT", "IMAGE", "VIDEO", "DOCUMENT"]},
+                "text": {"type": "string", "maxLength": 60},
+                "media_url": {"type": "string", "format": "uri"}
+              }
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "text": {"type": "string", "maxLength": 1024}
+              },
+              "required": ["text"]
+            },
+            "footer": {
+              "type": "object",
+              "properties": {
+                "text": {"type": "string", "maxLength": 60}
+              }
+            },
+            "buttons": {
+              "type": "array",
+              "maxItems": 3,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": {"enum": ["URL", "QUICK_REPLY", "PHONE_NUMBER"]},
+                  "text": {"type": "string", "maxLength": 25},
+                  "url": {"type": "string", "format": "uri"},
+                  "phone_number": {"type": "string"},
+                  "payload": {"type": "string"}
+                },
+                "required": ["type", "text"]
+              }
+            }
+          },
+          "required": ["body"]
+        },
+        "variable_map": {
+          "type": "object",
+          "patternProperties": {
+            "^\\{\\{[0-9]+\\}\\}$": {
+              "type": "object",
+              "properties": {
+                "field": {"type": "string"},
+                "fallback": {"type": "string"},
+                "note": {"type": "string"}
+              },
+              "required": ["field", "fallback"]
+            }
+          }
+        },
+        "trigger": {
+          "type": "object",
+          "properties": {
+            "on": {"type": "string"},
+            "offset": {"type": "string"},
+            "conditions": {"type": "array", "items": {"type": "string"}}
+          },
+          "required": ["on", "offset"]
+        },
+        "compliance": {
+          "type": "object",
+          "properties": {
+            "requires_optin": {"type": "boolean"},
+            "category_justification": {"type": "string"},
+            "quiet_hours": {
+              "type": "object",
+              "properties": {
+                "tz": {"type": "string"},
+                "window": {"type": "string", "pattern": "^[0-9]{2}:[0-9]{2}-[0-9]{2}:[0-9]{2}$"}
+              }
+            }
+          }
+        },
+        "approval_status": {
+          "type": "string",
+          "enum": ["pending", "approved", "rejected", "expired"]
+        },
+        "owner": {"type": "string", "enum": ["WTL", "MPL"]}
+      },
+      "required": ["asset_id", "template_name", "category", "language", "components", "variable_map", "compliance", "owner"]
+    },
+
+    "sequence_configuration": {
+      "type": "object",
+      "properties": {
+        "sequence_id": {
+          "type": "string",
+          "enum": ["NO-PAY", "CUSTOMER"]
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+$"
+        },
+        "entry": {
+          "type": "object",
+          "properties": {
+            "primary_trigger": {"type": "string"},
+            "conditions": {"type": "array", "items": {"type": "string"}},
+            "data_requirements": {"type": "array", "items": {"type": "string"}}
+          },
+          "required": ["primary_trigger"]
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "step_id": {"type": "string"},
+              "offset": {"type": "string"},
+              "asset_ref": {"type": "string"},
+              "conditions": {"type": "array", "items": {"type": "string"}},
+              "utm_params": {
+                "type": "object",
+                "properties": {
+                  "source": {"type": "string"},
+                  "medium": {"type": "string"},
+                  "campaign": {"type": "string"},
+                  "content": {"type": "string"}
+                },
+                "required": ["source", "medium", "campaign", "content"]
+              }
+            },
+            "required": ["step_id", "offset", "asset_ref"]
+          }
+        },
+        "exit": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Conditions that exit the sequence"
+        },
+        "suppression": {
+          "type": "array", 
+          "items": {"type": "string"},
+          "description": "Rules that pause/skip messaging"
+        },
+        "scheduling": {
+          "type": "object",
+          "properties": {
+            "timezone": {"type": "string"},
+            "quiet_hours": {
+              "type": "object",
+              "properties": {
+                "start": {"type": "string", "pattern": "^[0-9]{2}:[0-9]{2}$"},
+                "end": {"type": "string", "pattern": "^[0-9]{2}:[0-9]{2}$"}
+              }
+            },
+            "skip_weekends": {"type": "boolean"}
+          }
+        },
+        "owner": {"type": "string", "enum": ["TJM", "MPL"]},
+        "status": {"type": "string", "enum": ["draft", "testing", "ready", "deployed"]}
+      },
+      "required": ["sequence_id", "version", "entry", "steps", "exit", "owner", "status"]
+    },
+
+    "utm_builder": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "string",
+          "enum": ["email", "whatsapp"]
+        },
+        "medium": {
+          "type": "string",
+          "enum": ["automation"]
+        },
+        "campaign": {
+          "type": "string",
+          "enum": ["nopay", "customer", "reactivation"]
+        },
+        "content": {
+          "type": "string",
+          "description": "Should match asset_id"
+        },
+        "term": {
+          "type": "string",
+          "description": "Optional for A/B testing"
+        }
+      },
+      "required": ["source", "medium", "campaign", "content"]
+    },
+
+    "suppression_rule": {
+      "type": "object",
+      "properties": {
+        "rule_id": {
+          "type": "string",
+          "pattern": "^[a-z_]+$"
+        },
+        "condition": {
+          "type": "string",
+          "description": "Boolean logic condition"
+        },
+        "scope": {
+          "type": "string",
+          "enum": ["all_sequences", "nopay_sequence", "customer_sequence", "email_only", "whatsapp_only", "all_marketing"]
+        },
+        "action": {
+          "type": "string",
+          "enum": ["pause_sequence", "exit_sequence", "skip_step", "suppress_channel"]
+        },
+        "note": {
+          "type": "string",
+          "description": "Business justification for rule"
+        }
+      },
+      "required": ["rule_id", "condition", "scope", "action"]
+    },
+
+    "proof_library_entry": {
+      "type": "object",
+      "properties": {
+        "proof_id": {
+          "type": "string",
+          "pattern": "^[a-z_]+_[0-9]+$"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["testimonial", "case_study", "social_proof", "credential", "media_mention"]
+        },
+        "client": {
+          "type": "object",
+          "properties": {
+            "name": {"type": "string"},
+            "company": {"type": "string"},
+            "industry": {"type": "string"},
+            "consent_status": {"type": "string", "enum": ["active", "expired", "withdrawn"]},
+            "consent_expiry": {"type": "string", "format": "date"}
+          }
+        },
+        "content": {
+          "type": "object",
+          "properties": {
+            "full_testimonial": {"type": "string"},
+            "short_version": {"type": "string", "maxLength": 160},
+            "key_metrics": {"type": "array", "items": {"type": "string"}},
+            "proof_points": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "usage_contexts": {
+          "type": "array",
+          "items": {"enum": ["email", "whatsapp", "website", "case_studies", "social_media"]}
+        },
+        "verification": {
+          "type": "object",
+          "properties": {
+            "proof_type": {"type": "string"},
+            "verification_date": {"type": "string", "format": "date"},
+            "methodology": {"type": "string"}
+          }
+        },
+        "owner": {"type": "string", "enum": ["VPC", "MPL"]},
+        "status": {"type": "string", "enum": ["pending", "verified", "expired"]}
+      },
+      "required": ["proof_id", "type", "content", "usage_contexts", "owner", "status"]
+    },
+
+    "compliance_checklist": {
+      "type": "object",
+      "properties": {
+        "checklist_type": {
+          "type": "string",
+          "enum": ["gdpr_compliance", "email_deliverability", "whatsapp_compliance", "general_legal"]
+        },
+        "checks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "check_id": {"type": "string"},
+              "description": {"type": "string"},
+              "status": {"type": "string", "enum": ["pending", "passed", "failed", "not_applicable"]},
+              "evidence": {"type": "string"},
+              "responsible_agent": {"type": "string", "enum": ["CDS", "MPL", "ECL", "WTL", "TJM", "VPC"]},
+              "due_date": {"type": "string", "format": "date"},
+              "notes": {"type": "string"}
+            },
+            "required": ["check_id", "description", "status", "responsible_agent"]
+          }
+        },
+        "overall_status": {
+          "type": "string",
+          "enum": ["compliant", "minor_issues", "major_issues", "non_compliant"]
+        },
+        "last_audit_date": {"type": "string", "format": "date"},
+        "next_audit_date": {"type": "string", "format": "date"},
+        "auditor": {"type": "string"}
+      },
+      "required": ["checklist_type", "checks", "overall_status", "last_audit_date"]
+    },
+
+    "messaging_pack": {
+      "type": "object", 
+      "properties": {
+        "pack_id": {"type": "string", "pattern": "^messaging_pack_v[0-9]+_[0-9]+$"},
+        "version": {"type": "string"},
+        "created_date": {"type": "string", "format": "date"},
+        "sequences": {
+          "type": "object",
+          "properties": {
+            "nopay": {"$ref": "#/definitions/sequence_configuration"},
+            "customer": {"$ref": "#/definitions/sequence_configuration"}
+          },
+          "required": ["nopay", "customer"]
+        },
+        "assets": {
+          "type": "object",
+          "properties": {
+            "emails": {"type": "array", "items": {"$ref": "#/definitions/email_asset"}},
+            "whatsapp_templates": {"type": "array", "items": {"$ref": "#/definitions/whatsapp_template"}}
+          }
+        },
+        "proof_library": {
+          "type": "array",
+          "items": {"$ref": "#/definitions/proof_library_entry"}
+        },
+        "compliance_status": {"$ref": "#/definitions/compliance_checklist"},
+        "utm_conventions": {"$ref": "#/definitions/utm_builder"},
+        "suppression_rules": {
+          "type": "array",
+          "items": {"$ref": "#/definitions/suppression_rule"}
+        },
+        "deployment_ready": {"type": "boolean"},
+        "sign_off": {
+          "type": "object",
+          "properties": {
+            "mpl_approved": {"type": "boolean"},
+            "legal_reviewed": {"type": "boolean"},
+            "compliance_verified": {"type": "boolean"},
+            "final_approval_date": {"type": "string", "format": "date"},
+            "approved_by": {"type": "string"}
+          }
+        }
+      },
+      "required": ["pack_id", "version", "sequences", "assets", "compliance_status", "deployment_ready"]
+    }
+  }
+}

@@ -1,0 +1,570 @@
+/**
+ * Main Stylesheet - Mentoria Seja Livre
+ * Tailwind CSS imports with custom styles and accessibility enhancements
+ */
+
+/* Tailwind CSS Imports */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Font Imports */
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Base Layer - Foundational styles */
+@layer base {
+  /* Root CSS Custom Properties */
+  :root {
+    /* Brand Colors */
+    --color-navy-primary: #191F3A;
+    --color-burgundy-primary: #81171F;
+    --color-neutral-primary: #ECECEC;
+    --color-gold-primary: #C89A3A;
+    --color-peach-primary: #F1C6B4;
+    
+    /* Typography Scale */
+    --font-scale-ratio: 1.25;
+    --font-size-base: 1rem;
+    
+    /* Spacing Scale */
+    --spacing-unit: 0.25rem; /* 4px */
+    
+    /* Animation Durations */
+    --duration-fast: 150ms;
+    --duration-normal: 250ms;
+    --duration-slow: 350ms;
+    
+    /* Border Radius */
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    
+    /* Shadows */
+    --shadow-soft: 0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04);
+    --shadow-medium: 0 4px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  /* HTML and Body Reset */
+  html {
+    scroll-behavior: smooth;
+    font-feature-settings: "kern" 1, "liga" 1, "case" 1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Respect user's motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  
+  body {
+    @apply font-body text-navy-800 bg-white;
+    font-feature-settings: "kern" 1;
+    line-height: 1.6;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+  }
+  
+  /* Improved focus styles for accessibility */
+  *:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+  
+  *:focus-visible {
+    @apply ring-4 ring-burgundy-200 ring-offset-2;
+    outline: none;
+  }
+  
+  /* Typography Base Styles */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display text-navy-800 leading-tight;
+    font-feature-settings: "kern" 1, "liga" 1, "case" 1;
+  }
+  
+  h1 {
+    @apply text-4xl font-bold mb-6;
+    line-height: 1.1;
+  }
+  
+  h2 {
+    @apply text-3xl font-semibold mb-5;
+    line-height: 1.2;
+  }
+  
+  h3 {
+    @apply text-2xl font-semibold mb-4;
+    line-height: 1.3;
+  }
+  
+  h4 {
+    @apply text-xl font-medium mb-3;
+    line-height: 1.4;
+  }
+  
+  p {
+    @apply mb-4 leading-relaxed;
+  }
+  
+  /* Link styles */
+  a {
+    @apply text-burgundy-700 transition-colors duration-200;
+    text-decoration-skip-ink: auto;
+  }
+  
+  a:hover {
+    @apply text-burgundy-800 underline;
+  }
+  
+  /* List styles */
+  ul, ol {
+    @apply mb-4 pl-6;
+  }
+  
+  li {
+    @apply mb-2;
+  }
+  
+  /* Form element base styles */
+  input, select, textarea {
+    @apply transition-all duration-200;
+  }
+  
+  input:focus, select:focus, textarea:focus {
+    @apply ring-2 ring-burgundy-200 border-burgundy-500;
+  }
+  
+  /* Improved contrast for placeholders */
+  ::placeholder {
+    @apply text-neutral-500;
+    opacity: 1;
+  }
+  
+  /* Selection color */
+  ::selection {
+    @apply bg-peach-200 text-navy-800;
+  }
+}
+
+/* Components Layer - Custom component styles */
+@layer components {
+  /* Container styles with responsive padding */
+  .container {
+    @apply mx-auto px-4;
+  }
+  
+  @screen sm {
+    .container {
+      @apply px-6;
+    }
+  }
+  
+  @screen lg {
+    .container {
+      @apply px-8 max-w-7xl;
+    }
+  }
+  
+  /* Button Component Styles */
+  .btn {
+    @apply inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-200 focus:outline-none focus:ring-4 disabled:opacity-50 disabled:cursor-not-allowed;
+    min-height: 44px; /* Accessibility requirement for touch targets */
+  }
+  
+  .btn-primary {
+    @apply btn bg-burgundy-700 text-white hover:bg-burgundy-800 active:bg-burgundy-900 focus:ring-burgundy-200;
+    box-shadow: 0 1px 3px rgba(129, 23, 31, 0.12), 0 1px 2px rgba(129, 23, 31, 0.24);
+  }
+  
+  .btn-primary:hover {
+    box-shadow: 0 4px 14px rgba(129, 23, 31, 0.25), 0 2px 4px rgba(129, 23, 31, 0.22);
+    transform: translateY(-1px);
+  }
+  
+  .btn-secondary {
+    @apply btn border-2 border-navy-800 text-navy-800 hover:bg-navy-50 active:bg-navy-100 focus:ring-navy-200;
+  }
+  
+  .btn-ghost {
+    @apply btn text-navy-800 hover:bg-navy-50 active:bg-navy-100 focus:ring-navy-200;
+  }
+  
+  /* Button size variants */
+  .btn-sm {
+    @apply px-4 py-2 text-sm;
+    min-height: 36px;
+  }
+  
+  .btn-md {
+    @apply px-6 py-3 text-base;
+    min-height: 44px;
+  }
+  
+  .btn-lg {
+    @apply px-8 py-4 text-lg;
+    min-height: 52px;
+  }
+  
+  /* Form Component Styles */
+  .form-field {
+    @apply mb-6;
+  }
+  
+  .form-label {
+    @apply block text-sm font-medium text-navy-800 mb-2;
+  }
+  
+  .form-input {
+    @apply w-full px-4 py-3 border border-neutral-300 rounded-lg bg-white text-navy-800 placeholder-neutral-500 transition-all duration-200;
+    min-height: 44px; /* Touch target requirement */
+  }
+  
+  .form-input:focus {
+    @apply border-burgundy-500 ring-2 ring-burgundy-200 outline-none;
+  }
+  
+  .form-input.error {
+    @apply border-error-500 ring-2 ring-error-200;
+  }
+  
+  .form-error {
+    @apply text-error-600 text-sm mt-1;
+  }
+  
+  .form-help {
+    @apply text-neutral-600 text-sm mt-1;
+  }
+  
+  /* Modal Component Styles */
+  .modal-overlay {
+    @apply fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4;
+    backdrop-filter: blur(4px);
+  }
+  
+  .modal-content {
+    @apply bg-white rounded-2xl shadow-strong max-w-md w-full max-h-screen overflow-y-auto;
+    animation: scaleIn 0.2s ease-out;
+  }
+  
+  @keyframes scaleIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* Card Component Styles */
+  .card {
+    @apply bg-white rounded-xl shadow-soft border border-neutral-200 overflow-hidden;
+  }
+  
+  .card-body {
+    @apply p-6;
+  }
+  
+  .card-header {
+    @apply px-6 py-4 border-b border-neutral-200;
+  }
+  
+  .card-footer {
+    @apply px-6 py-4 border-t border-neutral-200 bg-neutral-50;
+  }
+  
+  /* Testimonial Component Styles */
+  .testimonial {
+    @apply card;
+  }
+  
+  .testimonial-content {
+    @apply text-navy-700 leading-relaxed mb-4 italic;
+  }
+  
+  .testimonial-author {
+    @apply text-neutral-600 text-sm font-medium;
+  }
+  
+  .testimonial-role {
+    @apply text-neutral-500 text-sm;
+  }
+  
+  /* Hero Section Styles */
+  .hero-gradient {
+    background: linear-gradient(
+      135deg,
+      theme('colors.peach.50') 0%,
+      theme('colors.neutral.100') 50%,
+      theme('colors.peach.100') 100%
+    );
+  }
+  
+  /* Section spacing utilities */
+  .section-padding {
+    @apply py-16;
+  }
+  
+  @screen lg {
+    .section-padding {
+      @apply py-20;
+    }
+  }
+  
+  /* Typography utilities */
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  
+  /* Loading states */
+  .loading-spinner {
+    @apply inline-block w-5 h-5 border-2 border-current border-r-transparent rounded-full;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+/* Utilities Layer - Custom utility classes */
+@layer utilities {
+  /* Accessibility utilities */
+  .sr-only-focusable {
+    @apply sr-only;
+  }
+  
+  .sr-only-focusable:focus {
+    @apply not-sr-only absolute z-50 p-2 bg-white border-2 border-burgundy-700 rounded;
+  }
+  
+  /* Skip link styles */
+  .skip-link {
+    @apply sr-only-focusable bg-burgundy-700 text-white px-4 py-2 rounded-md font-medium;
+    top: 1rem;
+    left: 1rem;
+  }
+  
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .high-contrast-border {
+      border-width: 2px !important;
+    }
+    
+    .high-contrast-text {
+      font-weight: 600 !important;
+    }
+  }
+  
+  /* Custom scrollbar styles */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.burgundy.300') theme('colors.neutral.100');
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: theme('colors.neutral.100');
+    border-radius: 4px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: theme('colors.burgundy.300');
+    border-radius: 4px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: theme('colors.burgundy.400');
+  }
+  
+  /* Gradient text utility */
+  .text-gradient {
+    background: linear-gradient(
+      135deg,
+      theme('colors.burgundy.700') 0%,
+      theme('colors.burgundy.500') 50%,
+      theme('colors.gold.500') 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Aspect ratio utilities (for older browser support) */
+  .aspect-square {
+    aspect-ratio: 1 / 1;
+  }
+  
+  .aspect-video {
+    aspect-ratio: 16 / 9;
+  }
+  
+  .aspect-photo {
+    aspect-ratio: 4 / 3;
+  }
+  
+  /* Animation utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out;
+  }
+  
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  /* Enhanced hero section animations */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-breathe {
+    animation: breathe 4s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  /* Staggered animation support */
+  [data-animate="fade-in"] {
+    opacity: 0;
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  [data-animate="scale-in"] {
+    opacity: 0;
+    transform: scale(0.95);
+    animation: scaleInBounce 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  @keyframes scaleInBounce {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes breathe {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.02);
+    }
+  }
+
+  @keyframes glow {
+    from {
+      opacity: 0.6;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Print styles */
+  @media print {
+    .print-hidden {
+      display: none !important;
+    }
+    
+    .print-visible {
+      display: block !important;
+    }
+    
+    * {
+      color: black !important;
+      background: white !important;
+      box-shadow: none !important;
+    }
+  }
+}
+
+/* Critical CSS - Above the fold styles loaded immediately */
+.critical-hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.critical-cta {
+  @apply btn-primary btn-lg;
+}
+
+/* Ensure images don't break layout */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Ensure videos are responsive */
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Dark mode styles (future enhancement) */
+@media (prefers-color-scheme: dark) {
+  .dark-mode-auto {
+    /* Styles for automatic dark mode when user prefers it */
+    /* Implementation would go here for future dark mode support */
+  }
+}

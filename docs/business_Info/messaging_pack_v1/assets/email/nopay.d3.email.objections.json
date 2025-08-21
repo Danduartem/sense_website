@@ -1,0 +1,37 @@
+{
+  "asset_id": "nopay.d3.email.objections",
+  "sequence": "NO-PAY",
+  "lang": "pt-PT",
+  "subject": {
+    "A": "\"Não tenho tempo para mais uma mentoria...\"",
+    "B": "{{first_name}}, sei exatamente o que estás a pensar"
+  },
+  "preheader": "As 3 objeções que mais ouço (e as respostas)",
+  "body_md": "Olá {{first_name}},\n\nNos últimos dias enviei-te alguns emails sobre como transformar a forma como trabalhas.\n\nSe ainda não respondeste, imagino que estejas a pensar uma destas coisas:\n\n**Objeção #1: \"Não tenho tempo para outro programa\"**\n\nPercebo perfeitamente. Trabalhas mais de 10 horas por dia, certo?\n\nMas aqui está a realidade: se não tens tempo para aprender a trabalhar melhor, vais continuar sem tempo para sempre.\n\nEste programa ensina-te a **criar** tempo trabalhando de forma mais inteligente. Cada módulo é projetado para empreendedoras ocupadas como tu.\n\n**Objeção #2: \"Já tentei outras mentorias e não funcionaram\"**\n\nTambém compreendo. O mercado está cheio de conselhos genéricos.\n\nMas isto não é conselho genérico. É especificamente projetado para mulheres empreendedoras que honram a energia feminina, não a cultura do \"hustle\" masculino.\n\nFalamos a tua língua. Entendemos a tua luta.\n\n**Objeção #3: \"E se não conseguir implementar?\"**\n\nEsta é a que mais ouço. O medo de falhar novamente.\n\nA verdade? O programa foi criado exatamente para isso. Não são teorias complicadas - são sistemas passo a passo que podes implementar gradualmente, mesmo com a tua agenda corrida.\n\n**E se em vez de perguntares \"E se não funcionar?\", perguntasses \"E se funcionar?\"**\n\nE se conseguisses:\n→ Trabalhar 40h por semana (ou menos)  \n→ Faturar mais que agora  \n→ Ter tempo para viajar 3x por ano  \n→ Comprar roupas sem olhar o preço  \n→ Sentir-te verdadeiramente livre?\n\nVale a pena descobrir, não achas?\n\nO primeiro passo é simples:\n\n[**Responder ao questionário (3 minutos) →**]({{questionnaire_url}}?utm_source=email&utm_medium=automation&utm_campaign=nopay&utm_content=d3_objections)\n\nDepois, falamos.\n\nUm abraço,  \n{{mentor_name}}  \nMentoria Seja Livre\n\nP.S. - O maior risco não é investir numa mentoria. É continuar a fazer o mesmo e obter os mesmos resultados daqui a 2 anos.",
+  "primary_cta": {
+    "label": "Responder ao questionário (3 minutos)",
+    "url": "{{questionnaire_url}}?utm_source=email&utm_medium=automation&utm_campaign=nopay&utm_content=d3_objections"
+  },
+  "secondary_cta": {
+    "label": "Quero esclarecer dúvidas",
+    "url": "https://wa.me/{{whatsapp_number}}?text=Olá, li o email sobre as objeções e tenho algumas dúvidas"
+  },
+  "merge_fields": ["first_name", "questionnaire_url", "mentor_name", "whatsapp_number"],
+  "trigger": {
+    "on": "lead_submit",
+    "offset": "+3 days",
+    "conditions": ["NOT questionnaire_complete(3d)", "NOT purchase_success(3d)"]
+  },
+  "suppression": ["questionnaire_complete", "unsubscribe", "purchase_success"],
+  "quiet_hours": {
+    "tz": "Europe/Lisbon",
+    "window": "09:00-18:00",
+    "skip_weekends": false
+  },
+  "measurement": {
+    "landing_expect": ["email_click", "questionnaire_click", "objection_resolution"],
+    "note": "Track effectiveness of objection handling"
+  },
+  "owner": "ECL",
+  "status": "draft"
+}

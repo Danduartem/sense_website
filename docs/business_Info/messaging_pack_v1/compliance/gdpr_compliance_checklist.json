@@ -1,0 +1,200 @@
+{
+  "gdpr_compliance_framework": {
+    "description": "GDPR compliance validation for Mentoria Seja Livre messaging operations in Portuguese/Brazilian markets",
+    "applicable_regulations": [
+      "GDPR (EU General Data Protection Regulation)",
+      "LGPD (Lei Geral de Proteção de Dados - Brazil)",
+      "Portuguese Data Protection Law"
+    ],
+    "consent_management": {
+      "email_marketing": {
+        "consent_required": true,
+        "consent_method": "explicit_opt_in_via_landing_page_form",
+        "consent_storage": {
+          "fields_required": [
+            "consent_timestamp",
+            "consent_ip_address", 
+            "consent_source_page",
+            "consent_method",
+            "consent_text_shown"
+          ],
+          "retention_period": "consent_active_plus_3_years",
+          "proof_documentation": "required_for_audit"
+        },
+        "opt_out_mechanism": {
+          "unsubscribe_link": "required_in_every_email",
+          "unsubscribe_process": "one_click_maximum",
+          "confirmation": "immediate_without_additional_consent",
+          "suppression_timing": "immediate_upon_request"
+        }
+      },
+      "whatsapp_marketing": {
+        "consent_required": true,
+        "consent_method": "explicit_checkbox_separate_from_email",
+        "opt_in_language": "Aceito receber mensagens de WhatsApp da Mentoria Seja Livre com conteúdos educacionais e ofertas relacionadas",
+        "opt_out_mechanism": {
+          "stop_command": "STOP or PARAR",
+          "immediate_suppression": true,
+          "confirmation_message": "Foi removido da nossa lista de WhatsApp. Para voltar a receber mensagens, contacte-nos diretamente."
+        }
+      },
+      "data_processing": {
+        "lawful_basis": [
+          "consent_for_marketing",
+          "legitimate_interest_for_customer_service",
+          "contract_performance_for_program_delivery"
+        ],
+        "data_minimization": "collect_only_necessary_for_service_delivery",
+        "purpose_limitation": "use_only_for_stated_purposes_in_privacy_policy"
+      }
+    },
+    "data_retention": {
+      "lead_data": {
+        "retention_period": "24_months_from_last_interaction",
+        "deletion_triggers": [
+          "retention_period_expired",
+          "explicit_deletion_request",
+          "business_relationship_terminated"
+        ],
+        "archived_data": "anonymized_analytics_data_retained_indefinitely"
+      },
+      "customer_data": {
+        "retention_period": "60_months_after_program_completion",
+        "deletion_triggers": [
+          "retention_period_expired", 
+          "explicit_deletion_request",
+          "account_closure_requested"
+        ],
+        "exceptions": "financial_records_retained_per_tax_law_requirements"
+      },
+      "transactional_data": {
+        "retention_period": "84_months_for_tax_compliance",
+        "deletion_triggers": "legal_retention_period_expired",
+        "protected_data": "payment_records_invoice_data_tax_documentation"
+      }
+    },
+    "data_subject_rights": {
+      "right_of_access": {
+        "response_time": "30_days_maximum",
+        "data_included": "all_personal_data_processing_purposes_retention_periods",
+        "format": "structured_commonly_used_machine_readable"
+      },
+      "right_of_rectification": {
+        "response_time": "immediate_for_obvious_errors_30_days_for_complex",
+        "scope": "inaccurate_or_incomplete_personal_data",
+        "third_party_notification": "required_if_data_shared"
+      },
+      "right_of_erasure": {
+        "response_time": "30_days_maximum",
+        "exceptions": [
+          "legal_obligation_to_retain",
+          "legitimate_interest_override",
+          "contract_performance_requirement"
+        ],
+        "implementation": "complete_deletion_plus_backup_anonymization"
+      },
+      "right_of_portability": {
+        "response_time": "30_days_maximum",
+        "format": "csv_json_or_requested_machine_readable_format",
+        "scope": "data_provided_by_data_subject_or_observed_behavior"
+      }
+    },
+    "cross_border_transfers": {
+      "portugal_to_brazil": {
+        "adequacy_decision": "brazil_has_adequacy_decision_from_eu",
+        "safeguards_required": false,
+        "documentation": "privacy_policy_disclosure_of_transfer"
+      },
+      "third_party_processors": {
+        "mailerlite": {
+          "location": "EU_based_processor",
+          "adequacy": "within_eu_no_additional_safeguards_required",
+          "dpa_required": true
+        },
+        "whatsapp_bsp": {
+          "location": "verify_processor_location",
+          "safeguards": "standard_contractual_clauses_if_outside_eu",
+          "dpa_required": true
+        },
+        "analytics_providers": {
+          "google_analytics": "standard_contractual_clauses_required",
+          "segment_cdp": "verify_data_residency_options"
+        }
+      }
+    }
+  },
+  "implementation_requirements": {
+    "privacy_policy_updates": [
+      "explicit_mention_of_whatsapp_processing",
+      "email_automation_and_segmentation_disclosure",
+      "third_party_processor_list_with_purposes",
+      "data_retention_periods_by_category",
+      "contact_details_for_data_protection_officer"
+    ],
+    "consent_mechanism_implementation": [
+      "landing_page_form_with_explicit_checkboxes",
+      "separate_consent_for_email_and_whatsapp",
+      "consent_logging_system_with_timestamps",
+      "consent_withdrawal_mechanisms_easily_accessible"
+    ],
+    "technical_safeguards": [
+      "data_encryption_in_transit_and_at_rest",
+      "access_controls_for_personal_data",
+      "audit_logging_of_data_access_and_changes",
+      "backup_and_disaster_recovery_procedures"
+    ]
+  },
+  "compliance_checklist": [
+    {
+      "requirement": "Privacy policy updated with messaging disclosure",
+      "status": "required",
+      "responsible": "CDS + Legal team",
+      "deadline": "before_messaging_launch"
+    },
+    {
+      "requirement": "Consent mechanism implemented on landing page",
+      "status": "required", 
+      "responsible": "CDS + Technical team",
+      "deadline": "before_messaging_launch"
+    },
+    {
+      "requirement": "Data retention policies configured in all systems",
+      "status": "required",
+      "responsible": "CDS + Technical team", 
+      "deadline": "before_messaging_launch"
+    },
+    {
+      "requirement": "DPA agreements signed with all processors",
+      "status": "required",
+      "responsible": "CDS + Legal team",
+      "deadline": "before_messaging_launch"
+    },
+    {
+      "requirement": "Data subject rights request procedures documented",
+      "status": "required",
+      "responsible": "CDS + Support team",
+      "deadline": "before_messaging_launch"
+    },
+    {
+      "requirement": "Audit logging implemented for data access",
+      "status": "recommended",
+      "responsible": "Technical team",
+      "deadline": "within_30_days_of_launch"
+    }
+  ],
+  "risk_assessment": {
+    "high_risk_areas": [
+      "whatsapp_marketing_messages_without_proper_consent",
+      "data_retention_beyond_legal_limits",
+      "cross_border_transfers_without_safeguards"
+    ],
+    "mitigation_strategies": [
+      "explicit_opt_in_for_whatsapp_with_clear_language",
+      "automated_data_deletion_after_retention_periods",
+      "standard_contractual_clauses_for_all_non_eu_processors"
+    ]
+  },
+  "owner": "CDS",
+  "last_updated": "2025-08-20",
+  "next_review": "2025-11-20"
+}

@@ -1,0 +1,137 @@
+{
+  "suppression_rules": {
+    "global_suppressions": {
+      "description": "Rules that apply across all sequences and channels",
+      "rules": [
+        {
+          "rule_id": "unsubscribe_global",
+          "condition": "unsubscribe = true",
+          "action": "suppress_all_marketing",
+          "exceptions": ["transactional_emails_for_customers"],
+          "priority": "highest"
+        },
+        {
+          "rule_id": "hard_bounce_global",
+          "condition": "email_bounce_hard = true",
+          "action": "suppress_all_email",
+          "exceptions": [],
+          "priority": "highest"
+        },
+        {
+          "rule_id": "spam_complaint_global",
+          "condition": "spam_complaint = true",
+          "action": "suppress_all_communication",
+          "exceptions": [],
+          "priority": "highest"
+        },
+        {
+          "rule_id": "test_mode_global",
+          "condition": "test_mode = true",
+          "action": "suppress_production_sends",
+          "exceptions": ["development_testing"],
+          "priority": "highest"
+        }
+      ]
+    },
+    "sequence_specific_suppressions": {
+      "NO-PAY": [
+        {
+          "rule_id": "purchase_conversion",
+          "condition": "purchase_success = true",
+          "action": "immediate_exit_to_customer",
+          "note": "Primary conversion - exit NO-PAY, enter CUSTOMER"
+        },
+        {
+          "rule_id": "questionnaire_completed",
+          "condition": "questionnaire_complete = true",
+          "action": "pause_sequence_sales_handoff",
+          "note": "Manual sales process takes over"
+        },
+        {
+          "rule_id": "active_sales_conversation",
+          "condition": "active_sales_thread = true",
+          "action": "suppress_automation_during_sales",
+          "note": "Don't interrupt human sales conversations"
+        },
+        {
+          "rule_id": "low_engagement_threshold",
+          "condition": "email_open_rate < 10% AND emails_sent >= 3",
+          "action": "move_to_re_engagement",
+          "note": "Identify disengaged leads for different approach"
+        }
+      ],
+      "CUSTOMER": [
+        {
+          "rule_id": "refund_processed",
+          "condition": "refund_success = true",
+          "action": "immediate_exit_to_refund_sequence",
+          "note": "Handle refunded customers separately"
+        },
+        {
+          "rule_id": "program_pause_requested",
+          "condition": "program_pause_requested = true",
+          "action": "pause_all_automation",
+          "note": "Respect customer pause requests"
+        },
+        {
+          "rule_id": "extended_absence",
+          "condition": "last_activity > 14_days",
+          "action": "trigger_re_engagement_sequence",
+          "note": "Check in with inactive customers"
+        },
+        {
+          "rule_id": "support_ticket_active",
+          "condition": "support_ticket_status = open",
+          "action": "suppress_marketing_keep_support",
+          "note": "Focus on support resolution"
+        }
+      ]
+    },
+    "timing_suppressions": {
+      "quiet_hours": {
+        "timezone": "Europe/Lisbon",
+        "weekday_window": "09:00-18:00",
+        "weekend_window": "10:00-17:00",
+        "holidays": "suppress_all",
+        "dst_handling": "automatic_adjustment"
+      },
+      "frequency_caps": {
+        "NO-PAY": {
+          "max_emails_per_day": 1,
+          "max_emails_per_week": 5,
+          "min_interval_between_emails": "22 hours"
+        },
+        "CUSTOMER": {
+          "max_emails_per_day": 2,
+          "max_emails_per_week": 7,
+          "min_interval_between_emails": "4 hours"
+        }
+      },
+      "weekend_rules": {
+        "NO-PAY": "allow_weekends",
+        "CUSTOMER": "allow_weekends",
+        "WhatsApp": "skip_weekends",
+        "note": "Email allowed weekends, WhatsApp business hours only"
+      }
+    },
+    "compliance_suppressions": {
+      "gdpr_consent": {
+        "rule_id": "consent_required",
+        "condition": "gdpr_consent = false OR consent_expired = true",
+        "action": "suppress_until_consent_renewed",
+        "applicable_regions": ["EU", "Portugal", "Brazil"],
+        "grace_period": "30_days_for_existing_contacts"
+      },
+      "data_retention": {
+        "rule_id": "retention_limit_reached",
+        "condition": "contact_age > data_retention_limit",
+        "action": "archive_and_suppress",
+        "retention_periods": {
+          "NO-PAY_leads": "24_months",
+          "CUSTOMER_data": "60_months_post_completion",
+          "transactional_data": "84_months"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "title": "Mentoria Seja Livre",
+  "description": "Transforme-se de empreendedora exausta em empresária de sucesso que trabalha menos e fatura mais",
+  "url": "https://mentoriasejalivre.com.br",
+  "author": "Juçanã - Mentoria Seja Livre",
+  "language": "pt-BR",
+  "locale": "pt_BR",
+  "timezone": "America/Sao_Paulo",
+  
+  "meta": {
+    "title": "Mentoria Seja Livre - Trabalhe Menos, Fature Mais",
+    "description": "Mentoria específica para mulheres empreendedoras que honram a energia feminina e constroem negócios lucrativos e escaláveis. Pare de trabalhar 12+ horas por dia sem ver resultado.",
+    "keywords": [
+      "mentoria empreendedorismo",
+      "empreendedorismo feminino",
+      "mulheres empreendedoras",
+      "energia feminina negócios",
+      "trabalhar menos faturar mais",
+      "liderança feminina",
+      "delegação empresarial",
+      "escalabilidade negócios"
+    ],
+    "robots": "index,follow",
+    "googleSiteVerification": "",
+    "facebookDomainVerification": ""
+  },
+  
+  "social": {
+    "instagram": "https://instagram.com/mentoriasejalivre",
+    "whatsapp": "https://wa.me/5511999999999",
+    "email": "ola@mentoriasejalivre.com.br"
+  },
+  
+  "gtm": {
+    "containerId": "GTM-XXXXXXX",
+    "enabled": true
+  },
+  
+  "analytics": {
+    "ga4": {
+      "measurementId": "G-XXXXXXXXXX",
+      "enabled": true
+    },
+    "fbPixel": {
+      "pixelId": "123456789012345",
+      "enabled": false
+    }
+  },
+  
+  "features": {
+    "darkMode": false,
+    "animations": true,
+    "criticalCSS": true,
+    "lazyLoading": true,
+    "serviceWorker": false
+  },
+  
+  "performance": {
+    "minifyHTML": true,
+    "inlineCSS": false,
+    "preloadFonts": true,
+    "optimizeImages": true
+  },
+  
+  "build": {
+    "environment": "development",
+    "version": "1.0.0",
+    "buildDate": "2025-08-21"
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "sequence_exit_conditions": {
+    "NO-PAY": {
+      "description": "Conditions that remove leads from nurture sequence",
+      "exit_events": [
+        {
+          "event": "purchase_success",
+          "action": "immediate_exit",
+          "transition": "move_to_CUSTOMER_sequence",
+          "note": "Primary conversion - lead becomes customer"
+        },
+        {
+          "event": "questionnaire_complete",
+          "action": "pause_sequence",
+          "transition": "manual_sales_process",
+          "note": "Hand-off to sales team for consultation booking"
+        },
+        {
+          "event": "unsubscribe",
+          "action": "immediate_exit",
+          "transition": "remove_from_all_automation",
+          "note": "Respect unsubscribe request immediately"
+        },
+        {
+          "event": "email_bounce_hard",
+          "action": "immediate_exit",
+          "transition": "mark_as_invalid_email",
+          "note": "Remove bounced emails to protect sender reputation"
+        },
+        {
+          "event": "spam_complaint",
+          "action": "immediate_exit",
+          "transition": "blacklist_contact",
+          "note": "Respect spam complaints and blacklist contact"
+        },
+        {
+          "event": "sequence_complete",
+          "action": "graduated_exit",
+          "transition": "move_to_general_newsletter",
+          "note": "After Day 7 last call, move to educational content"
+        }
+      ],
+      "suppression_rules": [
+        "active_sales_thread = true",
+        "calendar_booking_pending = true",
+        "amanda_match_score < 60 (after re-qualification)"
+      ]
+    },
+    "CUSTOMER": {
+      "description": "Conditions that remove customers from onboarding sequence",
+      "exit_events": [
+        {
+          "event": "refund_success",
+          "action": "immediate_exit",
+          "transition": "move_to_refund_sequence",
+          "note": "Handle refunded customers with separate communication"
+        },
+        {
+          "event": "program_completion",
+          "action": "graduated_exit",
+          "transition": "move_to_alumni_sequence",
+          "note": "Successful completion moves to advocacy/referral sequence"
+        },
+        {
+          "event": "unsubscribe",
+          "action": "partial_exit",
+          "transition": "remove_marketing_keep_transactional",
+          "note": "Keep essential program communications, remove marketing"
+        },
+        {
+          "event": "account_suspension",
+          "action": "immediate_exit",
+          "transition": "move_to_suspended_sequence",
+          "note": "Policy violations or payment issues"
+        }
+      ],
+      "suppression_rules": [
+        "program_pause_requested = true",
+        "extended_absence = true (>14 days)",
+        "payment_dispute_active = true"
+      ]
+    }
+  }
+}

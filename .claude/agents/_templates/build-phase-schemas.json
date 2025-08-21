@@ -1,0 +1,646 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Build Phase Output Schemas",
+  "description": "Standardized schemas for Build Phase orchestrator agent system outputs",
+
+  "gate_validation": {
+    "type": "object",
+    "properties": {
+      "gate": {
+        "type": "string",
+        "enum": ["beauty_ok", "responsive_ok", "integrations_ok", "quality_ok", "release_ok"],
+        "description": "Gate name being validated"
+      },
+      "status": {
+        "type": "string",
+        "enum": ["pass", "fail", "blocked"],
+        "description": "Gate validation result"
+      },
+      "owner": {
+        "type": "string",
+        "enum": ["VDL", "RDSE", "FEI", "IDE", "QRR"],
+        "description": "Agent responsible for gate validation"
+      },
+      "criteria": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "requirement": {
+              "type": "string",
+              "description": "Specific requirement being validated"
+            },
+            "status": {
+              "type": "string",
+              "enum": ["pass", "fail", "needs_review"],
+              "description": "Individual requirement status"
+            },
+            "evidence": {
+              "type": "string",
+              "description": "Evidence supporting the validation (screenshot, test result, etc.)"
+            }
+          },
+          "required": ["requirement", "status"]
+        }
+      },
+      "evidence_urls": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Links to evidence supporting gate validation"
+      },
+      "blocking_issues": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Issues preventing gate progression"
+      },
+      "validated_at": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Timestamp of validation"
+      }
+    },
+    "required": ["gate", "status", "owner", "criteria"]
+  },
+
+  "visual_redline": {
+    "type": "object",
+    "properties": {
+      "component_id": {
+        "type": "string",
+        "pattern": "^[A-Z]+/[A-Za-z]+/[A-Za-z-]+$",
+        "description": "Component ID following PAGE/SECTION/COMP pattern (e.g., LP/Hero/CTA-Primary)"
+      },
+      "issue": {
+        "type": "string",
+        "description": "Specific visual deviation from design"
+      },
+      "current_implementation": {
+        "type": "string",
+        "description": "Current CSS/styling implementation"
+      },
+      "required_fix": {
+        "type": "string",
+        "description": "Required CSS/token correction"
+      },
+      "design_token": {
+        "type": "string",
+        "description": "Design token to use (if applicable)"
+      },
+      "priority": {
+        "type": "string",
+        "enum": ["high", "medium", "low"],
+        "description": "Fix priority level"
+      },
+      "css_selector": {
+        "type": "string",
+        "description": "CSS selector for targeted fix"
+      },
+      "before_screenshot": {
+        "type": "string",
+        "description": "URL to before screenshot"
+      },
+      "after_screenshot": {
+        "type": "string",
+        "description": "URL to expected after screenshot"
+      }
+    },
+    "required": ["component_id", "issue", "required_fix", "priority", "css_selector"]
+  },
+
+  "responsive_map": {
+    "type": "object",
+    "properties": {
+      "page_id": {
+        "type": "string",
+        "pattern": "^[A-Z]+$",
+        "description": "Page identifier (e.g., LP, Services, Contact)"
+      },
+      "breakpoints": {
+        "type": "object",
+        "properties": {
+          "mobile": {
+            "type": "object",
+            "properties": {
+              "min_width": {"type": "string"},
+              "max_width": {"type": "string"},
+              "layout": {"type": "string"},
+              "typography_scale": {"type": "string"},
+              "spacing_adjustments": {"type": "array", "items": {"type": "string"}},
+              "hidden_elements": {"type": "array", "items": {"type": "string"}},
+              "stacked_elements": {"type": "array", "items": {"type": "string"}}
+            }
+          },
+          "tablet": {
+            "type": "object",
+            "properties": {
+              "min_width": {"type": "string"},
+              "max_width": {"type": "string"},
+              "layout": {"type": "string"},
+              "typography_scale": {"type": "string"},
+              "spacing_adjustments": {"type": "array", "items": {"type": "string"}},
+              "grid_columns": {"type": "number"}
+            }
+          },
+          "desktop": {
+            "type": "object",
+            "properties": {
+              "min_width": {"type": "string"},
+              "layout": {"type": "string"},
+              "typography_scale": {"type": "string"},
+              "grid_columns": {"type": "number"},
+              "max_content_width": {"type": "string"}
+            }
+          }
+        },
+        "required": ["mobile", "tablet", "desktop"]
+      },
+      "container_queries": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "component": {"type": "string"},
+            "breakpoint": {"type": "string"},
+            "behavior": {"type": "string"}
+          },
+          "required": ["component", "breakpoint", "behavior"]
+        }
+      },
+      "cls_prevention": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "element": {"type": "string"},
+            "strategy": {"type": "string"},
+            "implementation": {"type": "string"}
+          },
+          "required": ["element", "strategy"]
+        }
+      }
+    },
+    "required": ["page_id", "breakpoints"]
+  },
+
+  "component_implementation": {
+    "type": "object",
+    "properties": {
+      "component_id": {
+        "type": "string",
+        "pattern": "^[A-Z]+/[A-Za-z]+/[A-Za-z-]+$",
+        "description": "Component ID following PAGE/SECTION/COMP pattern"
+      },
+      "component_name": {
+        "type": "string",
+        "description": "React/Vue component name"
+      },
+      "file_path": {
+        "type": "string",
+        "description": "Relative path to component file"
+      },
+      "props_interface": {
+        "type": "string",
+        "description": "TypeScript interface for component props"
+      },
+      "accessibility": {
+        "type": "object",
+        "properties": {
+          "landmarks": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "ARIA landmarks used"
+          },
+          "roles": {
+            "type": "array", 
+            "items": {"type": "string"},
+            "description": "ARIA roles implemented"
+          },
+          "keyboard_navigation": {
+            "type": "boolean",
+            "description": "Supports keyboard navigation"
+          },
+          "screen_reader_support": {
+            "type": "boolean",
+            "description": "Screen reader compatible"
+          }
+        }
+      },
+      "states": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["default", "hover", "focus", "active", "disabled", "loading", "error", "empty", "success"]
+        },
+        "description": "Component states implemented"
+      },
+      "analytics_hooks": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "event_name": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$"
+            },
+            "trigger": {"type": "string"},
+            "data_attributes": {"type": "array", "items": {"type": "string"}}
+          },
+          "required": ["event_name", "trigger"]
+        }
+      },
+      "performance": {
+        "type": "object",
+        "properties": {
+          "bundle_size": {"type": "string"},
+          "lazy_loaded": {"type": "boolean"},
+          "code_split": {"type": "boolean"}
+        }
+      }
+    },
+    "required": ["component_id", "component_name", "file_path", "accessibility", "states"]
+  },
+
+  "integration_specification": {
+    "type": "object",
+    "properties": {
+      "integration_type": {
+        "type": "string",
+        "enum": ["payment", "webhook", "analytics", "esp", "crm"],
+        "description": "Type of integration"
+      },
+      "service_name": {
+        "type": "string",
+        "description": "Third-party service name (e.g., Stripe, MailerLite)"
+      },
+      "endpoints": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "method": {"type": "string", "enum": ["GET", "POST", "PUT", "DELETE"]},
+            "url": {"type": "string"},
+            "purpose": {"type": "string"},
+            "payload_schema": {"type": "object"},
+            "response_schema": {"type": "object"},
+            "error_handling": {"type": "string"}
+          },
+          "required": ["method", "url", "purpose"]
+        }
+      },
+      "webhook_config": {
+        "type": "object",
+        "properties": {
+          "endpoint_url": {"type": "string"},
+          "signature_validation": {"type": "string"},
+          "idempotency_strategy": {"type": "string"},
+          "retry_config": {
+            "type": "object",
+            "properties": {
+              "max_attempts": {"type": "number"},
+              "backoff_strategy": {"type": "string"},
+              "timeout": {"type": "number"}
+            }
+          },
+          "dead_letter_queue": {"type": "string"}
+        }
+      },
+      "error_scenarios": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "scenario": {"type": "string"},
+            "expected_behavior": {"type": "string"},
+            "user_experience": {"type": "string"}
+          },
+          "required": ["scenario", "expected_behavior", "user_experience"]
+        }
+      },
+      "testing_requirements": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Specific testing requirements for this integration"
+      }
+    },
+    "required": ["integration_type", "service_name", "endpoints", "error_scenarios"]
+  },
+
+  "analytics_event": {
+    "type": "object",
+    "properties": {
+      "event": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$",
+        "description": "Event name in snake_case"
+      },
+      "trigger": {
+        "type": "string",
+        "description": "What triggers this event"
+      },
+      "component_id": {
+        "type": "string",
+        "pattern": "^[A-Z]+/[A-Za-z]+/[A-Za-z-]+$",
+        "description": "Component where event is tracked"
+      },
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "required": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$"
+            }
+          },
+          "optional": {
+            "type": "array", 
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$"
+            }
+          }
+        },
+        "required": ["required"]
+      },
+      "destinations": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["ga4", "gtm", "segment", "crm", "esp"]
+        }
+      },
+      "consent_required": {
+        "type": "boolean",
+        "description": "Whether user consent is required for this event"
+      },
+      "pii_risk": {
+        "type": "string",
+        "enum": ["none", "low", "medium", "high"],
+        "description": "PII exposure risk level"
+      }
+    },
+    "required": ["event", "trigger", "component_id", "parameters", "destinations", "consent_required", "pii_risk"]
+  },
+
+  "performance_metric": {
+    "type": "object",
+    "properties": {
+      "metric_name": {
+        "type": "string",
+        "enum": ["LCP", "FID", "INP", "CLS", "FCP", "TTFB"],
+        "description": "Web Vitals metric name"
+      },
+      "target_value": {
+        "type": "number",
+        "description": "Target value for this metric"
+      },
+      "measured_value": {
+        "type": "number",
+        "description": "Actual measured value"
+      },
+      "status": {
+        "type": "string",
+        "enum": ["good", "needs-improvement", "poor"],
+        "description": "Performance status based on Web Vitals thresholds"
+      },
+      "page_tested": {
+        "type": "string",
+        "description": "Page where metric was measured"
+      },
+      "device_category": {
+        "type": "string",
+        "enum": ["mobile", "tablet", "desktop"],
+        "description": "Device category for testing"
+      },
+      "network_conditions": {
+        "type": "string",
+        "description": "Network throttling conditions used"
+      },
+      "optimization_notes": {
+        "type": "string",
+        "description": "Optimization techniques applied or recommended"
+      }
+    },
+    "required": ["metric_name", "target_value", "measured_value", "status", "page_tested", "device_category"]
+  },
+
+  "test_coverage": {
+    "type": "object",
+    "properties": {
+      "test_type": {
+        "type": "string",
+        "enum": ["unit", "integration", "e2e", "visual", "accessibility", "performance"],
+        "description": "Type of test coverage"
+      },
+      "coverage_percentage": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 100,
+        "description": "Test coverage percentage"
+      },
+      "target_percentage": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 100,
+        "description": "Target coverage percentage"
+      },
+      "files_covered": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Files included in coverage"
+      },
+      "uncovered_areas": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Areas lacking coverage"
+      },
+      "critical_paths": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "path": {"type": "string"},
+            "coverage": {"type": "number"},
+            "priority": {"type": "string", "enum": ["high", "medium", "low"]}
+          },
+          "required": ["path", "coverage", "priority"]
+        }
+      }
+    },
+    "required": ["test_type", "coverage_percentage", "target_percentage"]
+  },
+
+  "deployment_config": {
+    "type": "object",
+    "properties": {
+      "environment": {
+        "type": "string",
+        "enum": ["development", "staging", "production"],
+        "description": "Deployment environment"
+      },
+      "deployment_strategy": {
+        "type": "string",
+        "enum": ["blue-green", "canary", "rolling", "direct"],
+        "description": "Deployment strategy used"
+      },
+      "health_checks": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "check_name": {"type": "string"},
+            "endpoint": {"type": "string"},
+            "expected_status": {"type": "number"},
+            "timeout": {"type": "number"}
+          },
+          "required": ["check_name", "endpoint", "expected_status"]
+        }
+      },
+      "rollback_triggers": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "metric": {"type": "string"},
+            "threshold": {"type": "number"},
+            "action": {"type": "string"}
+          },
+          "required": ["metric", "threshold", "action"]
+        }
+      },
+      "monitoring_config": {
+        "type": "object",
+        "properties": {
+          "error_tracking": {"type": "boolean"},
+          "performance_monitoring": {"type": "boolean"},
+          "uptime_monitoring": {"type": "boolean"},
+          "alert_thresholds": {
+            "type": "object",
+            "properties": {
+              "error_rate": {"type": "number"},
+              "response_time": {"type": "number"},
+              "uptime": {"type": "number"}
+            }
+          }
+        }
+      }
+    },
+    "required": ["environment", "deployment_strategy", "health_checks"]
+  },
+
+  "build_execution_pack": {
+    "type": "object",
+    "properties": {
+      "version": {
+        "type": "string",
+        "pattern": "^v\\d+\\.\\d+$",
+        "description": "BEP version (e.g., v1.0)"
+      },
+      "scope": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "^[A-Z]+/[A-Za-z]+/[A-Za-z-]+$"
+        },
+        "description": "PAGE/SECTION/COMP IDs included in this build"
+      },
+      "gates_passed": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["beauty_ok", "responsive_ok", "integrations_ok", "quality_ok", "release_ok"]
+        },
+        "minItems": 5,
+        "maxItems": 5,
+        "description": "All gates must be passed"
+      },
+      "risk_assessment": {
+        "type": "object",
+        "properties": {
+          "high_risk_items": {"type": "array", "items": {"type": "string"}},
+          "medium_risk_items": {"type": "array", "items": {"type": "string"}},
+          "mitigation_strategies": {"type": "array", "items": {"type": "string"}}
+        }
+      },
+      "production_readiness": {
+        "type": "boolean",
+        "description": "Whether system is ready for production deployment"
+      },
+      "performance_summary": {
+        "type": "object",
+        "properties": {
+          "core_web_vitals_passing": {"type": "boolean"},
+          "bundle_sizes_within_budget": {"type": "boolean"},
+          "accessibility_compliant": {"type": "boolean"}
+        }
+      },
+      "documentation_links": {
+        "type": "object",
+        "properties": {
+          "storybook": {"type": "string"},
+          "monitoring_dashboard": {"type": "string"},
+          "deployment_runbook": {"type": "string"},
+          "rollback_procedures": {"type": "string"}
+        }
+      }
+    },
+    "required": ["version", "scope", "gates_passed", "production_readiness"]
+  },
+
+  "quality_issue": {
+    "type": "object",
+    "properties": {
+      "issue_id": {
+        "type": "string",
+        "description": "Unique identifier for the issue"
+      },
+      "severity": {
+        "type": "string",
+        "enum": ["critical", "high", "medium", "low"],
+        "description": "Issue severity level"
+      },
+      "category": {
+        "type": "string",
+        "enum": ["visual", "responsive", "integration", "performance", "accessibility", "security"],
+        "description": "Issue category"
+      },
+      "description": {
+        "type": "string",
+        "description": "Detailed issue description"
+      },
+      "component_affected": {
+        "type": "string",
+        "pattern": "^[A-Z]+/[A-Za-z]+/[A-Za-z-]+$",
+        "description": "Component ID affected by this issue"
+      },
+      "steps_to_reproduce": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Steps to reproduce the issue"
+      },
+      "expected_behavior": {
+        "type": "string",
+        "description": "What should happen"
+      },
+      "actual_behavior": {
+        "type": "string",
+        "description": "What actually happens"
+      },
+      "fix_required": {
+        "type": "string",
+        "description": "Required fix or action"
+      },
+      "owner": {
+        "type": "string",
+        "enum": ["VDL", "RDSE", "FEI", "IDE", "QRR"],
+        "description": "Agent responsible for fixing"
+      },
+      "status": {
+        "type": "string",
+        "enum": ["open", "in_progress", "resolved", "verified"],
+        "description": "Current issue status"
+      }
+    },
+    "required": ["issue_id", "severity", "category", "description", "component_affected", "fix_required", "owner", "status"]
+  }
+}

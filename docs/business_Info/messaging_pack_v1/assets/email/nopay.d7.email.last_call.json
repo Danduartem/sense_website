@@ -1,0 +1,37 @@
+{
+  "asset_id": "nopay.d7.email.last_call",
+  "sequence": "NO-PAY",
+  "lang": "pt-PT",
+  "subject": {
+    "A": "{{first_name}}, é agora ou nunca...",
+    "B": "A minha última tentativa de te ajudar"
+  },
+  "preheader": "Depois deste email, vou assumir que não estás interessada",
+  "body_md": "Olá {{first_name}},\n\nEste é o meu último email.\n\nNos últimos dias, tentei mostrar-te:\n\n✓ Como é possível trabalhar menos e faturar mais  \n✓ Por que a mentalidade do esforço te está a prejudicar  \n✓ Como outras empreendedoras conseguiram a liberdade que tu queres  \n✓ Por que os teus medos sobre \"mais uma mentoria\" são compreensíveis mas não precisam de te paralizar\n\nMas ainda não completaste o questionário.\n\nE está tudo bem.\n\n**Talvez não seja o momento certo.**\n\nTalvez estejas satisfeita a trabalhar 12+ horas por dia.\n\nTalvez não queiras mesmo viajar 3x por ano ou comprar roupas sem olhar o preço.\n\nTalvez a ideia de trabalhar 40 horas e ganhar mais não te apele.\n\n**Ou talvez... tenhas medo.**\n\nMedo de investir e não dar resultado.  \nMedo de falhar novamente.  \nMedo de descobrir que é possível e que perdeste tempo até agora.\n\nSe é medo, entendo. Também já passei por isso.\n\nMas aqui está a verdade dura:\n\n**O tempo vai passar de qualquer forma.**\n\nDaqui a 1 ano vais estar exatamente onde estás hoje... ou vais estar livre.\n\nA escolha é tua.\n\nSe quiseres dar uma oportunidade à tua transformação, este é o momento:\n\n[**SIM, quero a minha liberdade →**]({{questionnaire_url}}?utm_source=email&utm_medium=automation&utm_campaign=nopay&utm_content=d7_last_call)\n\nSe não clicares neste link, vou assumir que não estás interessada e vou remover-te desta sequência.\n\nNenhum drama. Nenhum julgamento.\n\nMas por favor, não deixes o medo decidir por ti.\n\nTu mereces mais.\n\nMereces trabalhar menos.  \nMereces ganhar mais.  \nMereces sentir-te livre.\n\n**A pergunta é: acreditas nisso?**\n\nSe sim, clica no link.\n\nSe não, ignora este email e continuarás a receber apenas os meus conteúdos educativos.\n\nA decisão é tua.\n\nUm abraço (e espero falar contigo em breve),  \n{{mentor_name}}  \nMentoria Seja Livre\n\nP.S. - Lembra-te: o arrependimento de não ter tentado dói muito mais que o \"risco\" de tentar.",
+  "primary_cta": {
+    "label": "SIM, quero a minha liberdade",
+    "url": "{{questionnaire_url}}?utm_source=email&utm_medium=automation&utm_campaign=nopay&utm_content=d7_last_call"
+  },
+  "secondary_cta": {
+    "label": "Tenho dúvidas - vamos falar",
+    "url": "https://wa.me/{{whatsapp_number}}?text=Olá, recebi o último email da sequência e tenho algumas dúvidas antes de decidir"
+  },
+  "merge_fields": ["first_name", "questionnaire_url", "mentor_name", "whatsapp_number"],
+  "trigger": {
+    "on": "lead_submit",
+    "offset": "+7 days",
+    "conditions": ["NOT questionnaire_complete(7d)", "NOT purchase_success(7d)"]
+  },
+  "suppression": ["questionnaire_complete", "unsubscribe", "purchase_success"],
+  "quiet_hours": {
+    "tz": "Europe/Lisbon",
+    "window": "09:00-18:00",
+    "skip_weekends": false
+  },
+  "measurement": {
+    "landing_expect": ["email_click", "questionnaire_click", "last_call_conversion"],
+    "note": "Final conversion attempt - track urgency effectiveness"
+  },
+  "owner": "ECL",
+  "status": "draft"
+}

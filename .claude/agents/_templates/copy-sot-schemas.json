@@ -1,0 +1,545 @@
+{
+  "copy_block": {
+    "type": "object",
+    "required": ["block_id", "text", "type", "length_constraint"],
+    "properties": {
+      "block_id": {
+        "type": "string",
+        "pattern": "^[a-z_]+\\.[a-z_]+\\.[a-z_]+.*$",
+        "description": "Hierarchical block identifier following template structure (e.g., 'home.hero.h1', 'service.{{slug}}.hero.cta')"
+      },
+      "text": {
+        "type": "string",
+        "description": "The actual copy text for this block"
+      },
+      "type": {
+        "type": "string",
+        "enum": ["headline", "subheadline", "body_copy", "cta_label", "microcopy", "form_label", "error_message", "success_message", "helper_text"],
+        "description": "Type of copy element for appropriate formatting and treatment"
+      },
+      "length_constraint": {
+        "type": "string",
+        "description": "Character or word limit for this copy element (e.g., '≤ 60 chars', '≤ 12 words')"
+      },
+      "voice_notes": {
+        "type": "string",
+        "description": "Notes on Avatar language patterns, tone, or voice considerations"
+      },
+      "proof_requirement": {
+        "type": "string",
+        "description": "Evidence backing needed for this copy element or VPC guidance"
+      },
+      "measurement_tag": {
+        "type": "string",
+        "pattern": "^\\[E:[a-z_]+\\|.*\\]$",
+        "description": "Event overlay annotation for interactive elements using [E:event|params] syntax"
+      },
+      "seo_considerations": {
+        "type": "string",
+        "description": "SEO optimization notes for titles, headers, or keyword integration"
+      },
+      "compliance_notes": {
+        "type": "string",
+        "description": "Legal or compliance considerations for this copy element"
+      }
+    }
+  },
+
+  "cta_block": {
+    "type": "object",
+    "required": ["block_id", "label", "action", "outcome", "event"],
+    "properties": {
+      "block_id": {
+        "type": "string",
+        "pattern": "^[a-z_]+\\.[a-z_]+\\.[a-z_]+.*\\.cta$",
+        "description": "CTA-specific block identifier ending in '.cta'"
+      },
+      "label": {
+        "type": "string",
+        "maxLength": 30,
+        "description": "CTA button/link text visible to users"
+      },
+      "action": {
+        "type": "string",
+        "description": "Action word used in CTA (Get, Book, Download, Start, etc.)"
+      },
+      "outcome": {
+        "type": "string",
+        "description": "Clear outcome/benefit user receives (Custom Strategy, Free Audit, etc.)"
+      },
+      "enhancement": {
+        "type": "string",
+        "enum": ["urgency", "value", "social_proof", "risk_reversal"],
+        "description": "Enhancement element added to increase conversion impact"
+      },
+      "priority": {
+        "type": "string",
+        "enum": ["primary", "secondary", "tertiary"],
+        "description": "CTA priority level on the page (only one primary per page)"
+      },
+      "event": {
+        "type": "object",
+        "required": ["name", "params", "destinations"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[a-z_]+$",
+            "description": "Event name in snake_case format"
+          },
+          "params": {
+            "type": "object",
+            "description": "Event parameters with snake_case keys and no PII"
+          },
+          "destinations": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Analytics platforms this event should fire to"
+          }
+        }
+      },
+      "conversion_context": {
+        "type": "string",
+        "description": "Where this CTA fits in the conversion funnel"
+      }
+    }
+  },
+
+  "proof_map_entry": {
+    "type": "object",
+    "required": ["claim", "evidence", "strength", "block_ids"],
+    "properties": {
+      "claim": {
+        "type": "string",
+        "description": "Specific claim made in copy that requires evidence backing"
+      },
+      "evidence": {
+        "type": "object",
+        "required": ["type", "source"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["case_study_metric", "client_testimonial", "third_party_review", "company_achievement", "process_documentation", "industry_research"],
+            "description": "Category of evidence supporting the claim"
+          },
+          "source": {
+            "type": "string",
+            "description": "Specific source identifier or reference for the evidence"
+          },
+          "artifact": {
+            "type": "string",
+            "description": "Screenshot, document, or file proving the evidence"
+          },
+          "verification": {
+            "type": "string",
+            "description": "Method or documentation of evidence verification"
+          }
+        }
+      },
+      "strength": {
+        "type": "string",
+        "enum": ["tier_1", "tier_2", "tier_3"],
+        "description": "Evidence strength assessment (tier_1 = strongest)"
+      },
+      "avatar_relevance": {
+        "type": "string",
+        "enum": ["high", "medium", "low"],
+        "description": "How well this proof resonates with target Avatar"
+      },
+      "emotional_trigger": {
+        "type": "string",
+        "description": "Avatar psychological trigger this proof addresses"
+      },
+      "block_ids": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Copy blocks where this claim appears"
+      },
+      "expiration": {
+        "type": "string",
+        "format": "date",
+        "description": "Date when evidence should be refreshed or verified"
+      },
+      "reframe_alternative": {
+        "type": "string",
+        "description": "Conservative alternative copy if evidence is insufficient"
+      }
+    }
+  },
+
+  "seo_block": {
+    "type": "object",
+    "required": ["block_id", "title", "meta_description", "canonical_url"],
+    "properties": {
+      "block_id": {
+        "type": "string",
+        "pattern": "^[a-z_]+\\.[a-z_]+\\.seo$",
+        "description": "SEO block identifier ending in '.seo'"
+      },
+      "title": {
+        "type": "string",
+        "maxLength": 60,
+        "description": "Page title optimized for search results display"
+      },
+      "meta_description": {
+        "type": "string",
+        "maxLength": 155,
+        "description": "Meta description with compelling CTA for search snippets"
+      },
+      "canonical_url": {
+        "type": "string",
+        "format": "uri",
+        "description": "Canonical URL for this page to prevent duplicate content"
+      },
+      "primary_keyword": {
+        "type": "string",
+        "description": "Primary keyword target for this page"
+      },
+      "og_tags": {
+        "type": "object",
+        "properties": {
+          "og_title": {
+            "type": "string",
+            "maxLength": 60,
+            "description": "Open Graph title optimized for social sharing"
+          },
+          "og_description": {
+            "type": "string",
+            "maxLength": 300,
+            "description": "Open Graph description for social platforms"
+          },
+          "og_image_alt": {
+            "type": "string",
+            "description": "Alt text for Open Graph image"
+          }
+        }
+      },
+      "twitter_tags": {
+        "type": "object",
+        "properties": {
+          "twitter_title": {
+            "type": "string",
+            "maxLength": 60,
+            "description": "Twitter-optimized title"
+          },
+          "twitter_description": {
+            "type": "string",
+            "maxLength": 200,
+            "description": "Twitter card description"
+          }
+        }
+      },
+      "url_slug": {
+        "type": "string",
+        "pattern": "^[a-z0-9-]+$",
+        "description": "URL slug in lowercase with hyphens"
+      },
+      "schema_markup": {
+        "type": "string",
+        "description": "Recommended schema markup type for this page"
+      }
+    }
+  },
+
+  "localization_variant": {
+    "type": "object",
+    "required": ["block_id", "lang", "text"],
+    "properties": {
+      "block_id": {
+        "type": "string",
+        "description": "Original block identifier being localized"
+      },
+      "lang": {
+        "type": "string",
+        "enum": ["pt-PT", "en-US"],
+        "description": "Language code for this variant"
+      },
+      "text": {
+        "type": "string",
+        "description": "Localized copy text maintaining emotional impact"
+      },
+      "cultural_adaptations": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Cultural context changes made for target market"
+      },
+      "local_proof_priority": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Local testimonials, case studies, or proof elements to prioritize"
+      }
+    }
+  },
+
+  "microcopy_bundle": {
+    "type": "object",
+    "required": ["namespace", "items"],
+    "properties": {
+      "namespace": {
+        "type": "string",
+        "pattern": "^[a-z_]+\\.[a-z_]+$",
+        "description": "Namespace for grouping related microcopy (e.g., 'forms.contact', 'errors.validation')"
+      },
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["key", "text"],
+          "properties": {
+            "key": {
+              "type": "string",
+              "pattern": "^[a-z_]+$",
+              "description": "Microcopy identifier key in snake_case"
+            },
+            "text": {
+              "type": "string",
+              "description": "Microcopy text content"
+            },
+            "context": {
+              "type": "string",
+              "description": "Usage context or trigger for this microcopy"
+            },
+            "tone": {
+              "type": "string",
+              "enum": ["helpful", "encouraging", "error", "success", "warning"],
+              "description": "Emotional tone for this microcopy element"
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "event_map_entry": {
+    "type": "object",
+    "required": ["block_id", "event_name", "parameters", "destinations"],
+    "properties": {
+      "block_id": {
+        "type": "string",
+        "description": "Copy block this event annotation belongs to"
+      },
+      "element_type": {
+        "type": "string",
+        "enum": ["cta_button", "form_submit", "link_click", "video_play", "download_link", "accordion_expand"],
+        "description": "Type of interactive element being measured"
+      },
+      "event_name": {
+        "type": "string",
+        "pattern": "^[a-z_]+$",
+        "description": "Event name in snake_case following v1B specifications"
+      },
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "source_section": {"type": "string"},
+          "cta_id": {"type": "string"},
+          "destination": {"type": "string"},
+          "lead_stage": {"type": "string"},
+          "form_type": {"type": "string"},
+          "source_page": {"type": "string"}
+        },
+        "description": "Event parameters in snake_case with no PII"
+      },
+      "destinations": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Analytics platforms this event fires to (ga4, facebook_pixel, etc.)"
+      },
+      "v1b_alignment": {
+        "type": "string",
+        "enum": ["confirmed", "pending", "new_event"],
+        "description": "Alignment status with v1B tracking specifications"
+      },
+      "consent_requirements": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Consent types required for this event (analytics, marketing, etc.)"
+      },
+      "test_mode_handling": {
+        "type": "string",
+        "description": "How test traffic is excluded for this event"
+      }
+    }
+  },
+
+  "compliance_assessment": {
+    "type": "object",
+    "required": ["block_id", "risk_level", "issue", "recommendation"],
+    "properties": {
+      "block_id": {
+        "type": "string",
+        "description": "Copy block being assessed for compliance"
+      },
+      "claim_text": {
+        "type": "string",
+        "description": "Specific claim or copy text being reviewed"
+      },
+      "risk_level": {
+        "type": "string",
+        "enum": ["high", "medium", "low", "compliant"],
+        "description": "Assessed legal/compliance risk level"
+      },
+      "issue": {
+        "type": "string",
+        "description": "Specific compliance issue or legal risk identified"
+      },
+      "regulation": {
+        "type": "string",
+        "enum": ["FTC", "GDPR", "CCPA", "advertising_standards", "professional_liability"],
+        "description": "Applicable regulation or legal standard"
+      },
+      "recommendation": {
+        "type": "string",
+        "description": "Recommended action or alternative copy"
+      },
+      "reframe_alternatives": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Conservative copy alternatives that maintain impact"
+      },
+      "legal_review_required": {
+        "type": "boolean",
+        "description": "Whether professional legal review is recommended"
+      },
+      "rationale": {
+        "type": "string",
+        "description": "Explanation of compliance concern and recommendation rationale"
+      }
+    }
+  },
+
+  "copy_sot_package": {
+    "type": "object",
+    "required": ["version", "pages", "proof_map", "event_map", "seo_package", "compliance_status"],
+    "properties": {
+      "version": {
+        "type": "string",
+        "pattern": "^v\\d+\\.\\d+$",
+        "description": "Version identifier (e.g., 'v1.0')"
+      },
+      "creation_date": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Package creation timestamp"
+      },
+      "pages": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["page_id", "copy_blocks"],
+          "properties": {
+            "page_id": {"type": "string"},
+            "page_type": {"type": "string"},
+            "copy_blocks": {
+              "type": "array",
+              "items": {"$ref": "#/copy_block"}
+            },
+            "cta_blocks": {
+              "type": "array", 
+              "items": {"$ref": "#/cta_block"}
+            },
+            "seo_block": {"$ref": "#/seo_block"},
+            "primary_cta": {"type": "string"}
+          }
+        }
+      },
+      "proof_map": {
+        "type": "array",
+        "items": {"$ref": "#/proof_map_entry"}
+      },
+      "event_map": {
+        "type": "array",
+        "items": {"$ref": "#/event_map_entry"}
+      },
+      "seo_package": {
+        "type": "array",
+        "items": {"$ref": "#/seo_block"}
+      },
+      "microcopy_library": {
+        "type": "array",
+        "items": {"$ref": "#/microcopy_bundle"}
+      },
+      "localization_variants": {
+        "type": "array",
+        "items": {"$ref": "#/localization_variant"}
+      },
+      "compliance_status": {
+        "type": "object",
+        "properties": {
+          "high_risk_items": {"type": "integer"},
+          "medium_risk_items": {"type": "integer"},
+          "legal_review_required": {"type": "boolean"},
+          "overall_status": {
+            "type": "string",
+            "enum": ["compliant", "needs_review", "high_risk"]
+          }
+        }
+      },
+      "changelog": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "date": {"type": "string", "format": "date"},
+            "agent": {"type": "string"},
+            "change_type": {"type": "string"},
+            "description": {"type": "string"},
+            "blocks_affected": {"type": "array", "items": {"type": "string"}}
+          }
+        }
+      }
+    }
+  },
+
+  "voice_profile": {
+    "type": "object",
+    "required": ["personality", "expertise_level", "emotional_tone", "language_style"],
+    "properties": {
+      "personality": {
+        "type": "string",
+        "description": "Brand personality characteristics (e.g., 'Professional yet approachable')"
+      },
+      "expertise_level": {
+        "type": "string", 
+        "description": "How expertise is communicated (e.g., 'Expert without intimidation')"
+      },
+      "emotional_tone": {
+        "type": "string",
+        "description": "Emotional positioning (e.g., 'Confident and reassuring')"
+      },
+      "language_style": {
+        "type": "string",
+        "description": "Communication style (e.g., 'Clear, direct, benefit-focused')"
+      },
+      "customer_language": {
+        "type": "object",
+        "properties": {
+          "pain_words": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "How Avatar describes their problems"
+          },
+          "solution_words": {
+            "type": "array", 
+            "items": {"type": "string"},
+            "description": "How Avatar describes desired outcomes"
+          },
+          "objection_phrases": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Common hesitation language patterns"
+          },
+          "success_language": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "How Avatar describes wins and achievements"
+          }
+        }
+      },
+      "avoid_language": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Marketing jargon and phrases to avoid"
+      }
+    }
+  }
+}

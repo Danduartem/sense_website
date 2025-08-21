@@ -1,0 +1,105 @@
+{
+  "evidence_library": {
+    "description": "Proof library and conservative claim guidelines for Mentoria Seja Livre messaging, compiled by VoC & Proof Curator",
+    "available_evidence": {
+      "program_structure": {
+        "verified_modules": [
+          "Module 1.1: Mentalidade Sem Esforço",
+          "Module 1.4: Liderança"
+        ],
+        "delivery_system": "Trello Board 'MENTORIA SEJA LIVRE - BOARD ALUNOS'",
+        "board_id": "6705349ff4ddf2aebfb12072",
+        "resource_types": ["Video content", "Templates", "Frameworks", "Book recommendations"]
+      },
+      "positioning_tagline": {
+        "verified": "Não é trabalhar mais, é trabalhar melhor!",
+        "source": "Discovery document confirmation",
+        "usage": "Safe for all messaging contexts"
+      },
+      "avatar_voice_quotes": [
+        "Acredita que para ter resultados precisa trabalhar muito. Sente que não merece sucesso se não estiver sempre ocupada.",
+        "Se esforça muito, mas tem poucos resultados financeiros. Se sente escrava do próprio negócio.",
+        "Trabalhar menos e faturar mais. Ter liberdade financeira e de tempo.",
+        "Vê outras pessoas faturando muito sem entender como elas fazem isso."
+      ],
+      "business_type_diversity": [
+        "Clínica",
+        "Loja de roupas", 
+        "Maquiadora",
+        "Nutricionista",
+        "Arquiteta",
+        "Advogada",
+        "Academia"
+      ]
+    },
+    "conservative_language_approved": [
+      "Melhoria substancial na eficiência do trabalho",
+      "Resultados significativamente melhores com sistemas inteligentes",
+      "Transformação de empreendedora exausta em empresária de sucesso",
+      "Trabalha menos e fatura mais (aspirational from avatar desires)",
+      "Sistemas escaláveis e lucrativos",
+      "Liberdade financeira e de tempo"
+    ],
+    "claims_to_avoid": [
+      "Specific percentage improvements (until client case studies secured)",
+      "Exact revenue multiples or amounts",
+      "Timeframe guarantees for transformation",
+      "Comparison claims without verified evidence",
+      "Superlative claims (fastest, best, only, etc.)"
+    ],
+    "testimonial_collection_framework": {
+      "template_structure": "Antes: [situation] → Durante: [breakthrough] → Depois: [results] → Hoje: [current state]",
+      "required_permissions": "Written consent for usage in marketing materials",
+      "verification_requirements": "Specific metrics with timeframes and methodology",
+      "privacy_options": "Name alteration permitted, business type and results required"
+    },
+    "proof_mapping_by_asset": {
+      "value_delivery_emails": {
+        "proof_required": "Program module existence, transformation methodology",
+        "evidence_available": "Module 1.1 and 1.4 verified, Trello board structure",
+        "claims_supported": "Comprehensive system, step-by-step approach, proven frameworks"
+      },
+      "case_study_emails": {
+        "proof_required": "Client transformation stories with metrics",
+        "evidence_available": "Avatar profile and desires (Rita case study framework)",
+        "claims_supported": "Business type alignment, transformation possibility, methodology effectiveness"
+      },
+      "objection_handling": {
+        "proof_required": "Understanding of avatar-specific concerns",
+        "evidence_available": "Top 5 objections from Discovery research",
+        "claims_supported": "Deep avatar understanding, feminine energy vs hustle culture"
+      }
+    },
+    "social_proof_elements": {
+      "business_diversity": "Multiple business types served (verified list available)",
+      "program_comprehensiveness": "Verified module structure and resource library",
+      "methodology_differentiation": "Feminine energy approach vs masculine hustle culture",
+      "cultural_alignment": "Portuguese/Brazilian context and language",
+      "avatar_specificity": "Deep understanding of exhausted female entrepreneur psychology"
+    },
+    "evidence_gaps_identified": [
+      "Specific client transformation metrics (percentage improvements)",
+      "Timeframe data for typical transformation results", 
+      "Revenue increase examples with verification",
+      "Before/after work hour comparisons",
+      "Client retention and satisfaction scores"
+    ],
+    "mitigation_strategies": {
+      "conservative_language": "Use 'melhoria substancial' instead of specific percentages",
+      "aspirational_framing": "Focus on avatar desires rather than guaranteed outcomes",
+      "methodology_emphasis": "Highlight proven frameworks and systems over results",
+      "cultural_proof": "Emphasize Portuguese/Brazilian context and feminine energy approach",
+      "program_proof": "Leverage verified module structure and comprehensive resources"
+    }
+  },
+  "usage_guidelines": {
+    "email_copy": "Use conservative language for all claims, support with avatar psychology proof",
+    "whatsapp_templates": "Focus on verified program elements and cultural alignment",
+    "case_studies": "Use framework template until real client stories available",
+    "social_proof": "Emphasize business type diversity and program comprehensiveness",
+    "objection_handling": "Base responses on verified avatar research and psychology"
+  },
+  "owner": "VPC",
+  "last_updated": "2025-08-20",
+  "next_review": "Upon client testimonial collection completion"
+}

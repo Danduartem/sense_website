@@ -1,0 +1,36 @@
+{
+  "asset_id": "customer.d0.email.welcome",
+  "sequence": "CUSTOMER",
+  "lang": "pt-PT",
+  "subject": {
+    "A": "{{first_name}}, bem-vinda à Mentoria Seja Livre! 🎉",
+    "B": "O teu acesso está pronto (e um presente especial)"
+  },
+  "preheader": "A tua jornada de transformação começa agora...",
+  "body_md": "Olá {{first_name}},\n\n**Bem-vinda à família Mentoria Seja Livre!** 🎉\n\nEstou genuinamente entusiasmada por teres decidido investir na tua transformação. Sei que não foi uma decisão fácil - entre o tempo limitado e os investimentos que já fizeste noutros programas.\n\nMas escolheste bem. E vou fazer tudo para que esta seja a última mentoria de que precisas.\n\n## 🔑 OS TEUS ACESSOS\n\n**Trello Board da Mentoria:**  \n[**Aceder ao programa completo →**]({{trello_board_url}}?utm_source=email&utm_medium=automation&utm_campaign=customer&utm_content=d0_welcome)\n\n**Credenciais:**\n- Email: {{customer_email}}\n- Vais receber o convite do Trello nos próximos minutos\n\n**WhatsApp Direto (apoio prioritário):**  \n[**Conectar no WhatsApp →**](https://wa.me/{{whatsapp_number}}?text=Olá! Sou a {{first_name}}, acabei de me inscrever na Mentoria Seja Livre)\n\n## 📋 OS PRIMEIROS PASSOS\n\n**Hoje (próximas 2 horas):**\n1. Aceita o convite do Trello\n2. Explora o Board e familiariza-te com a estrutura\n3. Conecta-te comigo no WhatsApp para apoio prioritário\n\n**Esta semana:**\n1. Completa o Module 1.1: Mentalidade Sem Esforço\n2. Faz as atividades práticas (fundamentais!)\n3. Reporta as tuas primeiras descobertas no WhatsApp\n\n## 🎁 PRESENTE DE BOAS-VINDAS\n\nComo presente de boas-vindas, preparei para ti um **Planner de Transição** exclusivo para participantes da mentoria.\n\n[**Descarregar o Planner →**]({{bonus_planner_url}}?utm_source=email&utm_medium=automation&utm_campaign=customer&utm_content=d0_welcome_bonus)\n\nVai ajudar-te a organizar a implementação das estratégias que vais aprender.\n\n## ⚡ LEMBRA-TE\n\n**Esta mentoria funciona se tu trabalhares.**\n\nNão sou uma fada madrinha. Não posso mudar a tua vida enquanto dormes.\n\nMas se te comprometeres com o processo, se fizeres as atividades e aplicares o que ensino, vais ter a liberdade que sempre sonhaste.\n\n**E eu vou estar contigo em cada passo.**\n\n## 📞 PRECISA DE AJUDA?\n\nSe tiveres qualquer dúvida ou dificuldade:\n\n1. **WhatsApp direto:** Resposta prioritária\n2. **Email:** Respondo em 24h\n3. **Trello:** Deixa comentários nos cards\n\nLembra-te: não há perguntas estúpidas. Só há perguntas não feitas.\n\nEstou ansiosa para acompanhar a tua transformação!\n\nUm abraço,  \n{{mentor_name}}  \nMentoria Seja Livre\n\nP.S. - Já ajudei dezenas de empreendedoras a sair da roda de hamster. Agora é a tua vez. Vamos começar?",
+  "primary_cta": {
+    "label": "Aceder ao programa completo",
+    "url": "{{trello_board_url}}?utm_source=email&utm_medium=automation&utm_campaign=customer&utm_content=d0_welcome"
+  },
+  "secondary_cta": {
+    "label": "Conectar no WhatsApp",
+    "url": "https://wa.me/{{whatsapp_number}}?text=Olá! Sou a {{first_name}}, acabei de me inscrever na Mentoria Seja Livre"
+  },
+  "merge_fields": ["first_name", "customer_email", "trello_board_url", "whatsapp_number", "mentor_name", "bonus_planner_url"],
+  "trigger": {
+    "on": "purchase_success",
+    "offset": "immediate"
+  },
+  "suppression": ["refund_success"],
+  "quiet_hours": {
+    "tz": "Europe/Lisbon",
+    "window": "09:00-18:00",
+    "skip_weekends": false
+  },
+  "measurement": {
+    "landing_expect": ["trello_access", "whatsapp_connect", "bonus_download"],
+    "note": "Track onboarding engagement and activation"
+  },
+  "owner": "ECL",
+  "status": "draft"
+}

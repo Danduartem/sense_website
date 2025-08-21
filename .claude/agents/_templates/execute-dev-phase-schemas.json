@@ -1,0 +1,942 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Execute Dev Phase Output Schemas",
+  "description": "Standardized schemas for Execute Dev Phase orchestrator agent system outputs with Eleventy + Vite + Tailwind architecture",
+
+  "dev_gate_validation": {
+    "type": "object",
+    "properties": {
+      "gate": {
+        "type": "string",
+        "enum": ["ui_ok", "integrations_ok", "analytics_ok", "backend_ok", "release_ok"],
+        "description": "Dev gate name being validated"
+      },
+      "status": {
+        "type": "string",
+        "enum": ["pass", "fail", "blocked"],
+        "description": "Gate validation result"
+      },
+      "owner": {
+        "type": "string",
+        "enum": ["FE-UI", "FCI", "ATE", "BWE", "DQE"],
+        "description": "Agent responsible for gate validation"
+      },
+      "criteria": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "requirement": {
+              "type": "string",
+              "description": "Specific technical requirement being validated"
+            },
+            "status": {
+              "type": "string",
+              "enum": ["pass", "fail", "needs_review"],
+              "description": "Individual requirement status"
+            },
+            "evidence": {
+              "type": "string",
+              "description": "Evidence supporting validation (test results, screenshots, logs)"
+            },
+            "test_command": {
+              "type": "string",
+              "description": "Command to reproduce the test/validation"
+            }
+          },
+          "required": ["requirement", "status"]
+        }
+      },
+      "performance_metrics": {
+        "type": "object",
+        "properties": {
+          "lcp": {"type": "number", "description": "Largest Contentful Paint in ms"},
+          "cls": {"type": "number", "description": "Cumulative Layout Shift score"},
+          "inp": {"type": "number", "description": "Interaction to Next Paint in ms"},
+          "bundle_size_js": {"type": "number", "description": "JavaScript bundle size in bytes"},
+          "bundle_size_css": {"type": "number", "description": "CSS bundle size in bytes"}
+        }
+      },
+      "validated_at": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Timestamp of validation"
+      }
+    },
+    "required": ["gate", "status", "owner", "criteria"]
+  },
+
+  "eleventy_site_config": {
+    "type": "object",
+    "properties": {
+      "eleventy_version": {
+        "type": "string",
+        "description": "Eleventy version used"
+      },
+      "template_formats": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["md", "njk", "html", "11ty.js"]
+        },
+        "description": "Template formats supported"
+      },
+      "directories": {
+        "type": "object",
+        "properties": {
+          "input": {"type": "string", "default": "src"},
+          "output": {"type": "string", "default": "dist"},
+          "includes": {"type": "string", "default": "_includes"},
+          "data": {"type": "string", "default": "_data"}
+        },
+        "required": ["input", "output", "includes", "data"]
+      },
+      "collections": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {"type": "string"},
+            "glob": {"type": "string"},
+            "sort_by": {"type": "string"},
+            "reverse": {"type": "boolean"}
+          },
+          "required": ["name", "glob"]
+        }
+      },
+      "filters": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {"type": "string"},
+            "description": {"type": "string"},
+            "implementation": {"type": "string"}
+          },
+          "required": ["name", "description"]
+        }
+      }
+    },
+    "required": ["eleventy_version", "template_formats", "directories"]
+  },
+
+  "vite_build_config": {
+    "type": "object",
+    "properties": {
+      "vite_version": {"type": "string"},
+      "build_command": {"type": "string"},
+      "dev_command": {"type": "string"},
+      "build_output": {"type": "string"},
+      "entry_points": {
+        "type": "object",
+        "properties": {
+          "main_js": {"type": "string"},
+          "main_css": {"type": "string"}
+        },
+        "required": ["main_js", "main_css"]
+      },
+      "optimization": {
+        "type": "object",
+        "properties": {
+          "minification": {"type": "boolean"},
+          "tree_shaking": {"type": "boolean"},
+          "code_splitting": {"type": "boolean"},
+          "asset_inlining_threshold": {"type": "number"}
+        }
+      },
+      "performance_budgets": {
+        "type": "object",
+        "properties": {
+          "max_js_size": {"type": "number", "description": "Max JS bundle size in bytes"},
+          "max_css_size": {"type": "number", "description": "Max CSS bundle size in bytes"},
+          "max_asset_size": {"type": "number", "description": "Max individual asset size in bytes"}
+        }
+      }
+    },
+    "required": ["vite_version", "build_command", "dev_command", "entry_points"]
+  },
+
+  "tailwind_design_system": {
+    "type": "object",
+    "properties": {
+      "tailwind_version": {"type": "string"},
+      "config_file": {"type": "string"},
+      "content_paths": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Paths to scan for Tailwind classes"
+      },
+      "design_tokens": {
+        "type": "object",
+        "properties": {
+          "colors": {
+            "type": "object",
+            "properties": {
+              "primary": {"type": "object"},
+              "secondary": {"type": "object"},
+              "accent": {"type": "object"},
+              "neutral": {"type": "object"},
+              "semantic": {
+                "type": "object",
+                "properties": {
+                  "success": {"type": "string"},
+                  "warning": {"type": "string"},
+                  "error": {"type": "string"},
+                  "info": {"type": "string"}
+                }
+              }
+            }
+          },
+          "typography": {
+            "type": "object",
+            "properties": {
+              "font_families": {"type": "object"},
+              "font_sizes": {"type": "object"},
+              "font_weights": {"type": "object"},
+              "line_heights": {"type": "object"}
+            }
+          },
+          "spacing": {"type": "object"},
+          "breakpoints": {"type": "object"},
+          "border_radius": {"type": "object"},
+          "shadows": {"type": "object"}
+        }
+      },
+      "plugins": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Tailwind plugins used"
+      },
+      "purge_config": {
+        "type": "object",
+        "properties": {
+          "enabled": {"type": "boolean"},
+          "safelist": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      }
+    },
+    "required": ["tailwind_version", "config_file", "content_paths", "design_tokens"]
+  },
+
+  "form_specification": {
+    "type": "object",
+    "properties": {
+      "form_id": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_-]*$",
+        "description": "Form identifier (e.g., contact-form, newsletter-signup)"
+      },
+      "form_type": {
+        "type": "string",
+        "enum": ["contact", "newsletter", "consultation", "booking"],
+        "description": "Type of form"
+      },
+      "submission_endpoint": {
+        "type": "string",
+        "description": "API endpoint for form submission"
+      },
+      "fields": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {"type": "string"},
+            "type": {
+              "type": "string",
+              "enum": ["text", "email", "tel", "textarea", "select", "checkbox", "radio", "hidden"]
+            },
+            "required": {"type": "boolean"},
+            "validation": {
+              "type": "object",
+              "properties": {
+                "pattern": {"type": "string"},
+                "minLength": {"type": "number"},
+                "maxLength": {"type": "number"},
+                "custom_validator": {"type": "string"}
+              }
+            },
+            "accessibility": {
+              "type": "object",
+              "properties": {
+                "label": {"type": "string"},
+                "aria_describedby": {"type": "string"},
+                "autocomplete": {"type": "string"}
+              }
+            }
+          },
+          "required": ["name", "type", "required"]
+        }
+      },
+      "tracking": {
+        "type": "object",
+        "properties": {
+          "lead_id_capture": {"type": "boolean"},
+          "utm_parameter_capture": {"type": "boolean"},
+          "analytics_events": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "event": {"type": "string"},
+                "trigger": {"type": "string"},
+                "parameters": {"type": "array", "items": {"type": "string"}}
+              },
+              "required": ["event", "trigger"]
+            }
+          }
+        }
+      },
+      "success_flow": {
+        "type": "object",
+        "properties": {
+          "message": {"type": "string"},
+          "redirect_url": {"type": "string"},
+          "follow_up_automation": {"type": "string"}
+        }
+      },
+      "error_handling": {
+        "type": "object",
+        "properties": {
+          "validation_messages": {"type": "object"},
+          "submission_failure_message": {"type": "string"},
+          "retry_logic": {"type": "boolean"}
+        }
+      }
+    },
+    "required": ["form_id", "form_type", "submission_endpoint", "fields", "tracking"]
+  },
+
+  "stripe_integration": {
+    "type": "object",
+    "properties": {
+      "stripe_version": {"type": "string"},
+      "implementation_type": {
+        "type": "string",
+        "enum": ["payment_element", "card_element", "payment_request"],
+        "description": "Stripe integration method"
+      },
+      "payment_intent_creation": {
+        "type": "object",
+        "properties": {
+          "endpoint": {"type": "string"},
+          "metadata_fields": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Metadata fields to attach to PaymentIntent"
+          },
+          "lead_id_attachment": {"type": "boolean"}
+        }
+      },
+      "webhook_handling": {
+        "type": "object",
+        "properties": {
+          "endpoint": {"type": "string"},
+          "events_handled": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["payment_intent.succeeded", "payment_intent.payment_failed", "charge.dispute.created"]
+            }
+          },
+          "signature_verification": {"type": "boolean"},
+          "idempotency_strategy": {
+            "type": "string",
+            "enum": ["payment_intent_id", "custom_key", "timestamp_based"]
+          }
+        }
+      },
+      "supported_payment_methods": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["card", "sepa_debit", "giropay", "sofort", "bancontact", "ideal", "mb_way"]
+        }
+      },
+      "error_scenarios": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "error_type": {"type": "string"},
+            "user_message": {"type": "string"},
+            "retry_allowed": {"type": "boolean"}
+          },
+          "required": ["error_type", "user_message"]
+        }
+      }
+    },
+    "required": ["stripe_version", "implementation_type", "payment_intent_creation", "webhook_handling"]
+  },
+
+  "gtm_analytics_config": {
+    "type": "object",
+    "properties": {
+      "gtm_container_id": {"type": "string"},
+      "ga4_measurement_id": {"type": "string"},
+      "data_layer_structure": {
+        "type": "object",
+        "properties": {
+          "standard_parameters": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Parameters included in all events"
+          },
+          "custom_dimensions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {"type": "string"},
+                "scope": {"type": "string", "enum": ["event", "user", "session"]},
+                "parameter_name": {"type": "string"}
+              },
+              "required": ["name", "scope", "parameter_name"]
+            }
+          }
+        }
+      },
+      "event_specifications": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "event_name": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$"
+            },
+            "trigger_type": {
+              "type": "string",
+              "enum": ["page_view", "click", "form_submit", "custom", "timer", "scroll"]
+            },
+            "required_parameters": {
+              "type": "array",
+              "items": {"type": "string"}
+            },
+            "optional_parameters": {
+              "type": "array",
+              "items": {"type": "string"}
+            },
+            "destinations": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["ga4", "facebook", "google_ads", "server_side"]
+              }
+            }
+          },
+          "required": ["event_name", "trigger_type", "required_parameters", "destinations"]
+        }
+      },
+      "consent_mode": {
+        "type": "object",
+        "properties": {
+          "implementation_version": {"type": "string", "enum": ["v1", "v2"]},
+          "default_consent": {
+            "type": "object",
+            "properties": {
+              "analytics_storage": {"type": "string", "enum": ["granted", "denied"]},
+              "ad_storage": {"type": "string", "enum": ["granted", "denied"]},
+              "ad_user_data": {"type": "string", "enum": ["granted", "denied"]},
+              "ad_personalization": {"type": "string", "enum": ["granted", "denied"]}
+            }
+          },
+          "consent_banner": {
+            "type": "object",
+            "properties": {
+              "implementation": {"type": "string"},
+              "granular_controls": {"type": "boolean"},
+              "cookie_policy_link": {"type": "string"}
+            }
+          }
+        },
+        "required": ["implementation_version", "default_consent"]
+      }
+    },
+    "required": ["gtm_container_id", "ga4_measurement_id", "event_specifications", "consent_mode"]
+  },
+
+  "serverless_function": {
+    "type": "object",
+    "properties": {
+      "function_name": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9-]*$"
+      },
+      "runtime": {
+        "type": "string",
+        "enum": ["nodejs18.x", "nodejs16.x", "nodejs14.x"]
+      },
+      "handler": {"type": "string"},
+      "timeout": {"type": "number", "maximum": 900},
+      "memory_size": {"type": "number", "enum": [128, 256, 512, 1024, 2048, 3008]},
+      "environment_variables": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {"type": "string"},
+            "source": {"type": "string", "enum": ["env", "vault", "parameter_store"]},
+            "required": {"type": "boolean"}
+          },
+          "required": ["name", "source"]
+        }
+      },
+      "triggers": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "type": {"type": "string", "enum": ["http", "webhook", "schedule"]},
+            "method": {"type": "string", "enum": ["GET", "POST", "PUT", "DELETE"]},
+            "path": {"type": "string"},
+            "cors_enabled": {"type": "boolean"}
+          },
+          "required": ["type"]
+        }
+      },
+      "integration_dependencies": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["stripe", "mailerlite", "ga4", "crm"]
+        }
+      },
+      "error_handling": {
+        "type": "object",
+        "properties": {
+          "retry_policy": {
+            "type": "object",
+            "properties": {
+              "max_attempts": {"type": "number"},
+              "backoff_strategy": {"type": "string", "enum": ["fixed", "exponential"]},
+              "delay_ms": {"type": "number"}
+            }
+          },
+          "dead_letter_queue": {"type": "boolean"},
+          "error_alerting": {"type": "boolean"}
+        }
+      },
+      "monitoring": {
+        "type": "object",
+        "properties": {
+          "logging_level": {"type": "string", "enum": ["error", "warn", "info", "debug"]},
+          "metrics_enabled": {"type": "boolean"},
+          "tracing_enabled": {"type": "boolean"}
+        }
+      }
+    },
+    "required": ["function_name", "runtime", "handler", "triggers"]
+  },
+
+  "accessibility_validation": {
+    "type": "object",
+    "properties": {
+      "validation_tool": {
+        "type": "string",
+        "enum": ["axe-core", "pa11y", "lighthouse", "manual"]
+      },
+      "wcag_level": {
+        "type": "string",
+        "enum": ["A", "AA", "AAA"]
+      },
+      "pages_tested": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "URLs tested for accessibility"
+      },
+      "test_results": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "page": {"type": "string"},
+            "violations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "rule": {"type": "string"},
+                  "impact": {"type": "string", "enum": ["minor", "moderate", "serious", "critical"]},
+                  "description": {"type": "string"},
+                  "help_url": {"type": "string"},
+                  "elements": {"type": "array", "items": {"type": "string"}},
+                  "fix_suggestion": {"type": "string"}
+                },
+                "required": ["rule", "impact", "description"]
+              }
+            },
+            "passes": {"type": "number"},
+            "inapplicable": {"type": "number"}
+          },
+          "required": ["page", "violations"]
+        }
+      },
+      "manual_tests": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "test_name": {"type": "string"},
+            "description": {"type": "string"},
+            "result": {"type": "string", "enum": ["pass", "fail", "partial"]},
+            "notes": {"type": "string"}
+          },
+          "required": ["test_name", "result"]
+        }
+      },
+      "keyboard_navigation": {
+        "type": "object",
+        "properties": {
+          "tab_order_logical": {"type": "boolean"},
+          "focus_visible": {"type": "boolean"},
+          "keyboard_traps_avoided": {"type": "boolean"},
+          "skip_links_present": {"type": "boolean"}
+        }
+      },
+      "screen_reader_compatibility": {
+        "type": "object",
+        "properties": {
+          "semantic_markup": {"type": "boolean"},
+          "aria_labels_present": {"type": "boolean"},
+          "landmarks_defined": {"type": "boolean"},
+          "heading_structure_logical": {"type": "boolean"}
+        }
+      }
+    },
+    "required": ["validation_tool", "wcag_level", "pages_tested", "test_results"]
+  },
+
+  "performance_validation": {
+    "type": "object",
+    "properties": {
+      "testing_tool": {
+        "type": "string",
+        "enum": ["lighthouse", "webpagetest", "chrome_devtools", "custom"]
+      },
+      "test_conditions": {
+        "type": "object",
+        "properties": {
+          "device": {"type": "string", "enum": ["mobile", "desktop", "tablet"]},
+          "network": {"type": "string", "enum": ["slow-3g", "fast-3g", "4g", "wifi"]},
+          "cpu_throttling": {"type": "string"},
+          "location": {"type": "string"}
+        }
+      },
+      "core_web_vitals": {
+        "type": "object",
+        "properties": {
+          "lcp": {
+            "type": "object",
+            "properties": {
+              "value": {"type": "number"},
+              "target": {"type": "number", "maximum": 2500},
+              "status": {"type": "string", "enum": ["good", "needs-improvement", "poor"]}
+            },
+            "required": ["value", "target", "status"]
+          },
+          "cls": {
+            "type": "object", 
+            "properties": {
+              "value": {"type": "number"},
+              "target": {"type": "number", "maximum": 0.1},
+              "status": {"type": "string", "enum": ["good", "needs-improvement", "poor"]}
+            },
+            "required": ["value", "target", "status"]
+          },
+          "inp": {
+            "type": "object",
+            "properties": {
+              "value": {"type": "number"},
+              "target": {"type": "number", "maximum": 200},
+              "status": {"type": "string", "enum": ["good", "needs-improvement", "poor"]}
+            },
+            "required": ["value", "target", "status"]
+          }
+        },
+        "required": ["lcp", "cls", "inp"]
+      },
+      "bundle_analysis": {
+        "type": "object",
+        "properties": {
+          "total_js_size": {"type": "number"},
+          "total_css_size": {"type": "number"},
+          "largest_assets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {"type": "string"},
+                "size": {"type": "number"},
+                "type": {"type": "string"}
+              }
+            }
+          },
+          "unused_code": {"type": "number"},
+          "code_splitting_opportunities": {"type": "array", "items": {"type": "string"}}
+        }
+      },
+      "optimization_suggestions": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "category": {"type": "string", "enum": ["images", "fonts", "javascript", "css", "caching", "server"]},
+            "suggestion": {"type": "string"},
+            "impact": {"type": "string", "enum": ["high", "medium", "low"]},
+            "implementation_effort": {"type": "string", "enum": ["low", "medium", "high"]}
+          },
+          "required": ["category", "suggestion", "impact"]
+        }
+      }
+    },
+    "required": ["testing_tool", "test_conditions", "core_web_vitals", "bundle_analysis"]
+  },
+
+  "ci_cd_pipeline": {
+    "type": "object",
+    "properties": {
+      "platform": {"type": "string", "enum": ["github_actions", "gitlab_ci", "jenkins", "netlify"]},
+      "pipeline_file": {"type": "string"},
+      "stages": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {"type": "string"},
+            "dependencies": {"type": "array", "items": {"type": "string"}},
+            "commands": {"type": "array", "items": {"type": "string"}},
+            "artifacts": {"type": "array", "items": {"type": "string"}},
+            "timeout": {"type": "number"}
+          },
+          "required": ["name", "commands"]
+        }
+      },
+      "testing_stages": {
+        "type": "object",
+        "properties": {
+          "unit_tests": {"type": "boolean"},
+          "integration_tests": {"type": "boolean"},
+          "e2e_tests": {"type": "boolean"},
+          "accessibility_tests": {"type": "boolean"},
+          "performance_tests": {"type": "boolean"},
+          "security_scans": {"type": "boolean"}
+        }
+      },
+      "deployment": {
+        "type": "object",
+        "properties": {
+          "strategy": {"type": "string", "enum": ["direct", "blue_green", "canary"]},
+          "environments": {"type": "array", "items": {"type": "string"}},
+          "auto_deploy": {"type": "boolean"},
+          "rollback_enabled": {"type": "boolean"}
+        }
+      },
+      "notifications": {
+        "type": "object",
+        "properties": {
+          "slack_webhook": {"type": "string"},
+          "email_alerts": {"type": "boolean"},
+          "failure_only": {"type": "boolean"}
+        }
+      }
+    },
+    "required": ["platform", "pipeline_file", "stages", "testing_stages"]
+  },
+
+  "monitoring_setup": {
+    "type": "object",
+    "properties": {
+      "error_tracking": {
+        "type": "object",
+        "properties": {
+          "service": {"type": "string", "enum": ["sentry", "bugsnag", "rollbar", "custom"]},
+          "dsn": {"type": "string"},
+          "environment_filtering": {"type": "boolean"},
+          "release_tracking": {"type": "boolean"},
+          "performance_monitoring": {"type": "boolean"}
+        }
+      },
+      "uptime_monitoring": {
+        "type": "object",
+        "properties": {
+          "service": {"type": "string", "enum": ["pingdom", "uptime_robot", "statuspage", "custom"]},
+          "endpoints": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {"type": "string"},
+                "url": {"type": "string"},
+                "method": {"type": "string"},
+                "expected_status": {"type": "number"},
+                "check_interval": {"type": "number"}
+              },
+              "required": ["name", "url", "expected_status"]
+            }
+          },
+          "alert_thresholds": {
+            "type": "object",
+            "properties": {
+              "response_time": {"type": "number"},
+              "downtime_duration": {"type": "number"},
+              "failure_rate": {"type": "number"}
+            }
+          }
+        }
+      },
+      "performance_monitoring": {
+        "type": "object",
+        "properties": {
+          "real_user_monitoring": {"type": "boolean"},
+          "synthetic_monitoring": {"type": "boolean"},
+          "core_web_vitals_tracking": {"type": "boolean"},
+          "custom_metrics": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {"type": "string"},
+                "description": {"type": "string"},
+                "threshold": {"type": "number"}
+              }
+            }
+          }
+        }
+      },
+      "log_aggregation": {
+        "type": "object",
+        "properties": {
+          "service": {"type": "string"},
+          "retention_period": {"type": "string"},
+          "log_levels": {"type": "array", "items": {"type": "string"}},
+          "structured_logging": {"type": "boolean"}
+        }
+      }
+    },
+    "required": ["error_tracking", "uptime_monitoring", "performance_monitoring"]
+  },
+
+  "development_execution_pack": {
+    "type": "object",
+    "properties": {
+      "version": {
+        "type": "string",
+        "pattern": "^v\\d+\\.\\d+$",
+        "description": "DEP version (e.g., v1.0)"
+      },
+      "epic_completion": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "epic_id": {"type": "string", "pattern": "^E\\d+$"},
+            "title": {"type": "string"},
+            "status": {"type": "string", "enum": ["completed", "partially_completed", "not_started"]},
+            "completion_percentage": {"type": "number", "minimum": 0, "maximum": 100},
+            "deliverables": {"type": "array", "items": {"type": "string"}},
+            "blockers": {"type": "array", "items": {"type": "string"}}
+          },
+          "required": ["epic_id", "title", "status", "completion_percentage"]
+        }
+      },
+      "gates_validation": {
+        "type": "object",
+        "properties": {
+          "ui_ok": {"type": "boolean"},
+          "integrations_ok": {"type": "boolean"},
+          "analytics_ok": {"type": "boolean"},
+          "backend_ok": {"type": "boolean"},
+          "release_ok": {"type": "boolean"}
+        },
+        "required": ["ui_ok", "integrations_ok", "analytics_ok", "backend_ok", "release_ok"]
+      },
+      "technical_debt": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "area": {"type": "string"},
+            "description": {"type": "string"},
+            "priority": {"type": "string", "enum": ["high", "medium", "low"]},
+            "estimated_effort": {"type": "string"}
+          }
+        }
+      },
+      "production_readiness": {
+        "type": "object",
+        "properties": {
+          "core_web_vitals_passing": {"type": "boolean"},
+          "accessibility_compliant": {"type": "boolean"},
+          "security_scans_clean": {"type": "boolean"},
+          "monitoring_operational": {"type": "boolean"},
+          "documentation_complete": {"type": "boolean"}
+        }
+      },
+      "handoff_documentation": {
+        "type": "object",
+        "properties": {
+          "technical_architecture": {"type": "string"},
+          "deployment_guide": {"type": "string"},
+          "monitoring_runbook": {"type": "string"},
+          "troubleshooting_guide": {"type": "string"},
+          "api_documentation": {"type": "string"}
+        }
+      }
+    },
+    "required": ["version", "epic_completion", "gates_validation", "production_readiness"]
+  },
+
+  "security_validation": {
+    "type": "object",
+    "properties": {
+      "dependency_scan": {
+        "type": "object",
+        "properties": {
+          "tool": {"type": "string", "enum": ["npm_audit", "snyk", "dependabot"]},
+          "vulnerabilities": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "severity": {"type": "string", "enum": ["critical", "high", "medium", "low"]},
+                "package": {"type": "string"},
+                "cve": {"type": "string"},
+                "description": {"type": "string"},
+                "fix_available": {"type": "boolean"},
+                "status": {"type": "string", "enum": ["open", "fixed", "ignored"]}
+              },
+              "required": ["severity", "package", "description", "status"]
+            }
+          },
+          "scan_date": {"type": "string", "format": "date-time"}
+        }
+      },
+      "secret_scan": {
+        "type": "object",
+        "properties": {
+          "tool": {"type": "string"},
+          "secrets_found": {"type": "number"},
+          "secret_types": {"type": "array", "items": {"type": "string"}},
+          "all_secrets_resolved": {"type": "boolean"}
+        }
+      },
+      "security_headers": {
+        "type": "object",
+        "properties": {
+          "csp": {"type": "string"},
+          "hsts": {"type": "boolean"},
+          "x_frame_options": {"type": "string"},
+          "x_content_type_options": {"type": "boolean"},
+          "referrer_policy": {"type": "string"}
+        }
+      },
+      "https_enforcement": {"type": "boolean"},
+      "input_validation": {"type": "boolean"},
+      "output_sanitization": {"type": "boolean"}
+    },
+    "required": ["dependency_scan", "secret_scan", "security_headers", "https_enforcement"]
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "asset_id": "customer.d0.whatsapp.access",
+  "sequence": "CUSTOMER",
+  "template_category": "Utility",
+  "lang": "pt-PT",
+  "template_name": "mentoria_access_delivery",
+  "header": {
+    "type": "text",
+    "text": "🎉 Bem-vinda à Mentoria Seja Livre!"
+  },
+  "body": "Olá {{1}}!\n\nO teu acesso está pronto:\n\n🔑 *Trello Board:* {{2}}\n📧 *Email:* {{3}}\n\nPrimeiros passos:\n1️⃣ Aceita o convite do Trello\n2️⃣ Explora o Module 1.1\n3️⃣ Faz as atividades práticas\n\nEstou aqui para te apoiar em cada passo! 💪\n\nTens alguma dúvida para começar?",
+  "footer": {
+    "text": "Mentoria Seja Livre - Trabalhar melhor, não mais!"
+  },
+  "buttons": [
+    {
+      "type": "URL",
+      "text": "Aceder ao Programa",
+      "url": "{{4}}"
+    },
+    {
+      "type": "QUICK_REPLY", 
+      "text": "Tudo pronto! ✅"
+    },
+    {
+      "type": "QUICK_REPLY",
+      "text": "Tenho dúvidas"
+    }
+  ],
+  "variable_map": {
+    "{{1}}": "first_name",
+    "{{2}}": "trello_board_name",
+    "{{3}}": "customer_email",
+    "{{4}}": "trello_board_url_with_utm"
+  },
+  "trigger": {
+    "on": "purchase_success",
+    "offset": "+5 minutes",
+    "conditions": ["whatsapp_opt_in = true"]
+  },
+  "suppression": ["refund_success", "whatsapp_opt_out"],
+  "quiet_hours": {
+    "tz": "Europe/Lisbon",
+    "window": "09:00-18:00",
+    "skip_weekends": true
+  },
+  "measurement": {
+    "expected_events": ["whatsapp_delivered", "button_click", "quick_reply_response"],
+    "conversion_goal": "trello_access_within_24h"
+  },
+  "compliance": {
+    "template_category": "Utility",
+    "opt_in_required": true,
+    "business_initiated": true,
+    "transactional_purpose": "Program access delivery"
+  },
+  "owner": "WTL",
+  "status": "draft"
+}

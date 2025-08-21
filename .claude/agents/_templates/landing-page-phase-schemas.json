@@ -1,0 +1,631 @@
+{
+  "landing_page_strategy_v1": {
+    "metadata": {
+      "version": "1.0",
+      "created_date": "YYYY-MM-DD",
+      "landing_page_focus": "Single-page landing page conversion optimization",
+      "traffic_temperatures": ["cold", "warm", "hot"],
+      "primary_cta_governance": "One primary CTA style across entire LP"
+    },
+    "lp_section_narrative": {
+      "hero": {
+        "must_prove": "We understand your pain and promise a clear outcome",
+        "evidence_requirements": [
+          "Pain → Promise headline using Avatar language",
+          "Specific outcome subheading with timeframe/method",
+          "Trust strip with recognizable logos or credentials",
+          "Quantified result or transformation metric"
+        ],
+        "primary_cta": {
+          "label": "Action + Outcome format (e.g., 'Start My Transformation')",
+          "anchor": "#pricing",
+          "event_overlay": "[E:cta_click|source_section=hero, cta_id=cta_primary]"
+        },
+        "mobile_first_notes": [
+          "Keep headline ≤8 words for mobile readability",
+          "Subheading ≤20 words, scannable on small screens",
+          "CTA button minimum 44px touch target",
+          "Trust strip stackable for vertical mobile layout"
+        ]
+      },
+      "social_proof_strip": {
+        "must_prove": "Others like you succeeded with this solution",
+        "evidence_requirements": [
+          "Logo wall of recognizable clients/partners/certifications",
+          "Short aggregated statistic (e.g., '500+ successful transformations')",
+          "Optional: Brief client outcome snippet"
+        ],
+        "secondary_cta": {
+          "label": "See Results",
+          "anchor": "#case"
+        },
+        "mobile_first_notes": [
+          "Logo grid adapts to 2-3 columns on mobile",
+          "Statistics prominent and readable at small sizes",
+          "Swipeable logo carousel if needed for space"
+        ]
+      },
+      "problem_agitation": {
+        "must_prove": "We name the real obstacles you're facing",
+        "evidence_requirements": [
+          "2-3 pain point bullets using Avatar's exact language",
+          "Emotional validation without blame or shame",
+          "Connection to current state frustrations"
+        ],
+        "mobile_first_notes": [
+          "Bullets scannable with visual hierarchy",
+          "Emotional language resonates on personal device",
+          "Avoid overwhelming wall of text"
+        ]
+      },
+      "solution_offer_snapshot": {
+        "must_prove": "Our method directly solves your problems",
+        "evidence_requirements": [
+          "Framework graphic or visual method overview",
+          "Clear connection between problems and solutions",
+          "Outcome-focused positioning"
+        ],
+        "secondary_cta": {
+          "label": "See What You Get",
+          "anchor": "#deliverables"
+        },
+        "mobile_first_notes": [
+          "Framework visual scalable for mobile viewing",
+          "Clear visual hierarchy between problem/solution elements",
+          "Avoid complex diagrams that don't render well on small screens"
+        ]
+      },
+      "deliverables": {
+        "must_prove": "You receive tangible, valuable components",
+        "evidence_requirements": [
+          "Bulleted modules/components with benefit-focused descriptions",
+          "Time to outcome specification (e.g., '30-day implementation')",
+          "Connection to Jobs-to-be-Done outcomes"
+        ],
+        "primary_cta": {
+          "label": "Start Now",
+          "anchor": "#pricing",
+          "event_overlay": "[E:cta_click|source_section=deliverables, cta_id=cta_primary]"
+        },
+        "mobile_first_notes": [
+          "Deliverables list scannable with clear visual breaks",
+          "Benefits written in simple, mobile-readable language",
+          "Avoid overly detailed technical descriptions"
+        ]
+      },
+      "outcomes_transformations": {
+        "must_prove": "The after state is worth the investment",
+        "evidence_requirements": [
+          "Before/after transformation bullets",
+          "Quantified outcomes with specific metrics",
+          "Emotional and practical benefits"
+        ],
+        "primary_cta": {
+          "label": "Start My Transformation",
+          "anchor": "#pricing",
+          "event_overlay": "[E:cta_click|source_section=outcomes, cta_id=cta_primary]"
+        },
+        "mobile_first_notes": [
+          "Before/after format clear on vertical mobile layout",
+          "Numbers/percentages visually prominent",
+          "Emotional language connecting to personal transformation"
+        ]
+      },
+      "testimonials_mini_case": {
+        "must_prove": "Real people achieved these specific results",
+        "evidence_requirements": [
+          "2-4 testimonial quotes with specific outcomes",
+          "1 detailed mini case study with metrics",
+          "Names, titles/companies, photos when possible"
+        ],
+        "primary_cta": {
+          "label": "Get These Results",
+          "anchor": "#pricing",
+          "event_overlay": "[E:cta_click|source_section=testimonials, cta_id=cta_primary]"
+        },
+        "mobile_first_notes": [
+          "Testimonials formatted for mobile reading comfort",
+          "Photos and attribution visible on small screens",
+          "Case study scannable with highlighted metrics"
+        ]
+      },
+      "bonuses": {
+        "must_prove": "You receive additional value beyond the core offer",
+        "evidence_requirements": [
+          "Bonus component cards with individual value",
+          "Clear connection to core offer enhancement",
+          "Time-limited availability if authentic"
+        ],
+        "primary_cta": {
+          "label": "Claim All Bonuses",
+          "anchor": "#pricing",
+          "event_overlay": "[E:cta_click|source_section=bonuses, cta_id=cta_primary]"
+        },
+        "mobile_first_notes": [
+          "Bonus cards stackable on mobile",
+          "Individual values clear and readable",
+          "Avoid overwhelming bonus quantity"
+        ],
+        "optional": true
+      },
+      "risk_reversal": {
+        "must_prove": "It's safe to take action now",
+        "evidence_requirements": [
+          "Specific guarantee terms and conditions",
+          "Refund process clarity",
+          "Risk-free trial or money-back assurance"
+        ],
+        "primary_cta": {
+          "label": "Start Risk-Free",
+          "anchor": "#pricing",
+          "event_overlay": "[E:cta_click|source_section=guarantee, cta_id=cta_primary]"
+        },
+        "mobile_first_notes": [
+          "Guarantee terms readable without zooming",
+          "Simple, clear language avoiding legal jargon",
+          "Prominent guarantee badge or visual"
+        ]
+      },
+      "pricing_table": {
+        "must_prove": "Options are clear and value is obvious",
+        "evidence_requirements": [
+          "Tier cards with value stack for each option",
+          "Payment methods display (including MB WAY if relevant)",
+          "Clear value differentiation between tiers"
+        ],
+        "primary_cta": {
+          "label": "Pay Now",
+          "action": "checkout_start",
+          "event_overlay": "[E:checkout_start|pricing_tier=selected_tier, payment_method=selected_method]"
+        },
+        "mobile_first_notes": [
+          "Pricing cards stack vertically on mobile",
+          "Payment icons visible and trustworthy",
+          "CTA buttons large and easily tappable"
+        ]
+      },
+      "faq": {
+        "must_prove": "We address your remaining concerns",
+        "evidence_requirements": [
+          "6-10 Q&A pairs mapped from Avatar objections",
+          "Ordered by frequency and impact",
+          "Answers that reframe concerns positively"
+        ],
+        "primary_cta": {
+          "label": "Start Now",
+          "anchor": "#pricing",
+          "event_overlay": "[E:cta_click|source_section=faq, cta_id=cta_primary]"
+        },
+        "mobile_first_notes": [
+          "Collapsible FAQ format for mobile efficiency",
+          "Questions scannable at a glance",
+          "Answers concise but complete"
+        ]
+      },
+      "final_cta": {
+        "must_prove": "This is your last chance when you're convinced",
+        "evidence_requirements": [
+          "CTA with trust microcopy",
+          "Echo of main promise/transformation",
+          "Urgency element if authentic"
+        ],
+        "primary_cta": {
+          "label": "Start My [Transformation]",
+          "anchor": "#pricing",
+          "event_overlay": "[E:cta_click|source_section=final, cta_id=cta_primary]"
+        },
+        "mobile_first_notes": [
+          "Large, prominent CTA button",
+          "Trust elements visible without scrolling",
+          "Clear final value proposition"
+        ]
+      },
+      "footer": {
+        "must_prove": "We're legitimate and contactable",
+        "evidence_requirements": [
+          "Legal links (privacy, terms, refund policy)",
+          "Contact information",
+          "Company credentials if relevant"
+        ],
+        "mobile_first_notes": [
+          "Essential links only, avoid footer bloat",
+          "Contact information easily tappable",
+          "Legal links accessible but not prominent"
+        ]
+      }
+    },
+    "traffic_temperature_mapping": {
+      "cold_traffic": {
+        "visitor_characteristics": [
+          "First-time visitors with low brand awareness",
+          "Problem-aware but not solution-aware",
+          "Need education and trust-building before conversion",
+          "Higher skepticism, require proof and credibility"
+        ],
+        "conversion_requirements": [
+          "Extended proof sequence (testimonials, case studies, guarantees)",
+          "Educational content about problem/solution fit",
+          "Risk reversal and safety messaging",
+          "Social proof and credibility indicators"
+        ],
+        "lp_journey_path": "Hero → Social Proof → Problem → Solution → Testimonials → Risk Reversal → Pricing → FAQ → Final CTA",
+        "cta_examples": [
+          "Get Free Strategy Session",
+          "Download Complete Guide",
+          "Start Risk-Free Trial",
+          "See Proof of Results"
+        ],
+        "routing_anchors": ["#hero", "#proof", "#guarantee", "#pricing", "#faq"]
+      },
+      "warm_traffic": {
+        "visitor_characteristics": [
+          "Familiar with brand or referred by trusted source",
+          "Solution-aware, comparing options",
+          "Some trust established, need value differentiation",
+          "Ready for mid-funnel content and offers"
+        ],
+        "conversion_requirements": [
+          "Clear value differentiation and competitive advantages",
+          "Deliverables and outcome focus",
+          "Pricing transparency with value justification",
+          "Moderate proof requirements"
+        ],
+        "lp_journey_path": "Hero → Solution → Deliverables → Outcomes → Pricing → Brief FAQ → Final CTA",
+        "cta_examples": [
+          "Get My Custom Plan",
+          "Start My Program",
+          "Access The System",
+          "Begin Transformation"
+        ],
+        "routing_anchors": ["#hero", "#deliverables", "#pricing", "#faq"]
+      },
+      "hot_traffic": {
+        "visitor_characteristics": [
+          "High intent, ready to purchase or very close",
+          "Brand familiar, trust established",
+          "Need clear pricing and purchase process",
+          "Minimal friction tolerance"
+        ],
+        "conversion_requirements": [
+          "Direct path to pricing and purchase",
+          "Minimal content between arrival and CTA",
+          "Clear payment options and process",
+          "Immediate value reinforcement"
+        ],
+        "lp_journey_path": "Hero → Brief Value → Pricing → Purchase (minimal friction)",
+        "cta_examples": [
+          "Start Today",
+          "Get Instant Access",
+          "Buy Now",
+          "Claim Your Spot"
+        ],
+        "routing_anchors": ["#hero", "#pricing"]
+      }
+    },
+    "cta_governance_rules": {
+      "primary_cta_requirements": [
+        "Single style: One primary CTA design/color across entire LP",
+        "Consistent labels: Same action + outcome formula throughout",
+        "Clear hierarchy: Primary CTAs visually dominant over secondary",
+        "Strategic placement: After value demonstration, before objections",
+        "No competition: Secondary CTAs route to proof/education, not alternative offers"
+      ],
+      "approved_secondary_ctas": [
+        {
+          "label": "See Proof",
+          "anchor": "#proof",
+          "purpose": "builds credibility"
+        },
+        {
+          "label": "View Details",
+          "anchor": "#deliverables",
+          "purpose": "shows value"
+        },
+        {
+          "label": "Read Case Study",
+          "anchor": "#case",
+          "purpose": "provides evidence"
+        },
+        {
+          "label": "Check FAQ",
+          "anchor": "#faq",
+          "purpose": "handles objections"
+        }
+      ],
+      "prohibited_secondary_ctas": [
+        "Alternative pricing options",
+        "Different program offerings",
+        "Contact/consultation requests (unless primary offer)",
+        "Social media follows",
+        "Newsletter signups (unless part of conversion flow)"
+      ]
+    },
+    "tracking_plan_v1": {
+      "critical_events": {
+        "view_landing": {
+          "trigger": "Page load completion",
+          "critical_params": ["page_id", "traffic_source", "utm_campaign", "lead_id", "test_mode"],
+          "destinations": ["ga4"],
+          "consent_required": true,
+          "notes": "Include experiment_id/variant for A/B testing"
+        },
+        "cta_click": {
+          "trigger": "Any primary or secondary CTA click",
+          "critical_params": ["source_section", "cta_id", "cta_type", "anchor_target", "lead_id", "test_mode"],
+          "destinations": ["ga4"],
+          "consent_required": true,
+          "notes": "Distinguish primary vs secondary CTAs, track anchor destinations"
+        },
+        "lead_submit": {
+          "trigger": "Lead form successful submission",
+          "critical_params": ["form_location", "lead_id", "utm_source", "utm_medium", "utm_campaign", "test_mode"],
+          "destinations": ["ga4", "crm", "mailerlite"],
+          "consent_required": true,
+          "notes": "ONLY point where UTMs attach; generate lead_id if not exists"
+        },
+        "checkout_start": {
+          "trigger": "User initiates purchase flow",
+          "critical_params": ["pricing_tier", "lead_id", "payment_method_type", "test_mode"],
+          "destinations": ["ga4", "stripe"],
+          "consent_required": true,
+          "notes": "Track pricing tier selection and payment method preference"
+        },
+        "purchase_success": {
+          "trigger": "Payment confirmation webhook",
+          "critical_params": ["transaction_id", "value", "currency", "pricing_tier", "lead_id", "test_mode"],
+          "destinations": ["ga4", "stripe", "crm", "mailerlite"],
+          "consent_required": true,
+          "notes": "Server webhook is source of truth; include coupon_code if applicable"
+        }
+      },
+      "secondary_events": {
+        "scroll_depth": {
+          "trigger": "25%, 50%, 75%, 100% page scroll",
+          "critical_params": ["scroll_percentage", "page_section", "lead_id", "test_mode"],
+          "destinations": ["ga4"],
+          "consent_required": true
+        },
+        "section_view": {
+          "trigger": "Section enters viewport (intersection observer)",
+          "critical_params": ["section_name", "section_order", "time_to_section", "lead_id", "test_mode"],
+          "destinations": ["ga4"],
+          "consent_required": true
+        },
+        "video_play": {
+          "trigger": "Video testimonial or explainer play",
+          "critical_params": ["video_id", "section_location", "video_type", "lead_id", "test_mode"],
+          "destinations": ["ga4"],
+          "consent_required": true
+        },
+        "faq_expand": {
+          "trigger": "FAQ accordion item opened",
+          "critical_params": ["question_id", "question_text", "section_position", "lead_id", "test_mode"],
+          "destinations": ["ga4"],
+          "consent_required": true
+        }
+      },
+      "parameter_standards": {
+        "required_all_events": ["lead_id", "page_id", "test_mode"],
+        "attribution_parameters": ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"],
+        "conversion_parameters": ["source_section", "cta_id", "pricing_tier", "form_location"],
+        "naming_convention": "snake_case",
+        "pii_prohibition": ["email", "name", "phone", "address", "payment_details"],
+        "identity_method": "lead_id UUID only"
+      },
+      "consent_management": {
+        "default_state": {
+          "analytics_storage": "denied",
+          "ad_storage": "denied",
+          "functionality_storage": "granted",
+          "personalization_storage": "denied",
+          "security_storage": "granted"
+        },
+        "consent_categories": ["necessary", "analytics", "marketing"],
+        "data_retention": {
+          "analytics_data": "26 months",
+          "lead_data": "2 years after last interaction",
+          "purchase_data": "7 years for legal/tax requirements",
+          "consent_records": "3 years after consent withdrawal"
+        }
+      }
+    },
+    "technical_architecture": {
+      "tech_stack": {
+        "frontend": {
+          "framework": "Eleventy (11ty) v2.0+",
+          "build_tool": "Vite v4.0+",
+          "css": "Tailwind CSS v3.3+",
+          "javascript": "Vanilla JavaScript ES6+"
+        },
+        "analytics": {
+          "tag_manager": "Google Tag Manager",
+          "analytics": "GA4 with Enhanced Ecommerce",
+          "consent": "Consent Mode v2",
+          "custom_implementation": "dataLayer architecture"
+        },
+        "payments": {
+          "processor": "Stripe Payment Element",
+          "methods": ["card", "MB WAY"],
+          "integration": "Stripe Checkout (optional)",
+          "webhooks": "Server-side confirmation"
+        },
+        "email_crm": {
+          "email": "MailerLite API v2",
+          "crm": "Custom webhook/API integration",
+          "forms": "Serverless functions processing"
+        }
+      },
+      "repository_structure": {
+        "root_files": [
+          ".env.local.example",
+          ".env.staging",
+          ".env.production",
+          ".eleventy.js",
+          "vite.config.js",
+          "tailwind.config.js",
+          "netlify.toml",
+          "package.json"
+        ],
+        "src_structure": {
+          "pages": ["index.njk"],
+          "includes": ["layouts/", "components/", "partials/"],
+          "assets": ["css/", "js/", "images/"],
+          "data": ["pricing.json", "testimonials.json", "site.json"],
+          "functions": ["lead-submit.js", "stripe-webhook.js", "mailerlite-sync.js"]
+        }
+      },
+      "environment_variables": {
+        "core": ["NODE_ENV", "SITE_URL", "TEST_MODE"],
+        "analytics": ["GTM_ID", "GA4_MEASUREMENT_ID", "CONSENT_MODE_ENABLED"],
+        "payments": ["STRIPE_PUBLIC_KEY", "STRIPE_SECRET_KEY", "STRIPE_WEBHOOK_SECRET"],
+        "email_crm": ["MAILERLITE_API_KEY", "CRM_WEBHOOK_URL", "CRM_API_TOKEN"]
+      },
+      "performance_targets": {
+        "core_web_vitals": {
+          "LCP": "< 2.5s",
+          "FID": "< 100ms",
+          "CLS": "< 0.1"
+        },
+        "additional_metrics": {
+          "FCP": "< 1.8s",
+          "Speed_Index": "< 3.4s",
+          "Total_Blocking_Time": "< 200ms"
+        }
+      }
+    },
+    "lead_nurture_macro_map": {
+      "no_pay_branch": {
+        "entry_triggers": ["lead_submit", "free_resource_download"],
+        "automation_sequence": [
+          {
+            "step": 1,
+            "trigger": "immediate",
+            "action": "welcome_email_with_first_value",
+            "wait_time": "0 hours"
+          },
+          {
+            "step": 2,
+            "trigger": "time_based",
+            "action": "educational_content_email",
+            "wait_time": "24 hours"
+          },
+          {
+            "step": 3,
+            "trigger": "time_based",
+            "action": "social_proof_case_study_email",
+            "wait_time": "72 hours"
+          },
+          {
+            "step": 4,
+            "trigger": "time_based",
+            "action": "soft_offer_introduction_email",
+            "wait_time": "7 days"
+          },
+          {
+            "step": 5,
+            "trigger": "time_based",
+            "action": "objection_handling_email",
+            "wait_time": "14 days"
+          },
+          {
+            "step": 6,
+            "trigger": "time_based",
+            "action": "limited_time_offer_email",
+            "wait_time": "21 days"
+          }
+        ],
+        "exit_triggers": [
+          "purchase_success",
+          "unsubscribe",
+          "hard_bounce",
+          "inactive_90_days"
+        ]
+      },
+      "customer_branch": {
+        "entry_triggers": ["purchase_success"],
+        "automation_sequence": [
+          {
+            "step": 1,
+            "trigger": "purchase_confirmation",
+            "action": "immediate_access_email_with_credentials",
+            "wait_time": "0 hours"
+          },
+          {
+            "step": 2,
+            "trigger": "time_based",
+            "action": "onboarding_welcome_and_first_steps",
+            "wait_time": "1 hour"
+          },
+          {
+            "step": 3,
+            "trigger": "time_based",
+            "action": "implementation_guidance_email",
+            "wait_time": "3 days"
+          },
+          {
+            "step": 4,
+            "trigger": "time_based",
+            "action": "check_in_and_support_email",
+            "wait_time": "7 days"
+          },
+          {
+            "step": 5,
+            "trigger": "time_based",
+            "action": "success_tips_and_optimization",
+            "wait_time": "14 days"
+          },
+          {
+            "step": 6,
+            "trigger": "time_based",
+            "action": "feedback_request_and_testimonial_ask",
+            "wait_time": "30 days"
+          }
+        ],
+        "exit_triggers": [
+          "refund_processed",
+          "unsubscribe",
+          "upgrade_to_higher_tier",
+          "completed_program"
+        ]
+      }
+    },
+    "validation_checklists": {
+      "lp_section_narrative": [
+        "Every section has Must Prove → Evidence → Primary CTA structure",
+        "Mobile-first readability with fold-awareness considerations",
+        "Proof logic drives section sequence (remove doubt → increase desire)",
+        "Missing evidence flagged for PVC escalation or claim softening",
+        "Primary CTA consistency maintained across sections"
+      ],
+      "offer_cta_mapping": [
+        "Traffic temperature matrix complete (cold/warm/hot)",
+        "Exact CTA labels defined with LP anchor targets",
+        "One primary CTA style enforced across LP",
+        "Secondary CTAs support journey (case anchor, FAQ, etc.)",
+        "CTA governance prevents competing actions"
+      ],
+      "proof_evidence": [
+        "Every bold claim mapped to verifiable evidence",
+        "Testimonials, case metrics, logos, screenshots catalogued",
+        "Usage rights and permissions documented",
+        "Conservative phrasing for unsupported claims",
+        "Logo wall and social proof elements specified"
+      ],
+      "tracking_plan": [
+        "All primary CTAs produce events with critical parameters",
+        "snake_case naming convention enforced throughout",
+        "No PII in event parameters (lead_id only for identity)",
+        "UTMs only in links, attached at lead_submit if missing",
+        "Consent gating and test_mode handling documented",
+        "Destination mapping complete (GA4/CRM/MailerLite/Stripe)"
+      ],
+      "technical_architecture": [
+        "Stack specification complete (11ty + Vite + Tailwind)",
+        "Repo layout and environment variables defined",
+        "Data flow documented (lead, checkout, webhook, activation)",
+        "Consent gating and test_mode=true on staging noted",
+        "Integration endpoints and webhook handling specified"
+      ]
+    }
+  }
+}

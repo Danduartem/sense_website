@@ -1,0 +1,63 @@
+{
+  "asset_id": "nopay.d7.whatsapp.last_chance",
+  "sequence": "NO-PAY",
+  "template_category": "Marketing",
+  "lang": "pt-PT", 
+  "template_name": "final_opportunity_message",
+  "header": {
+    "type": "text",
+    "text": "⏰ Última oportunidade, {{1}}"
+  },
+  "body": "Nos últimos dias tentei mostrar-te como é possível:\n\n🎯 Trabalhar menos e faturar mais\n💪 Sair da mentalidade do esforço\n🚀 Ter a liberdade que mereces\n\nMas ainda não completaste o questionário.\n\n*A escolha é tua:*\n\n• Continuar como está (12+ horas, mesmos resultados)\n• Dar uma oportunidade à mudança\n\nO tempo vai passar de qualquer forma.\n\nDaqui a 1 ano vais estar livre... ou na mesma situação.\n\nSe quiseres tentar, é agora.",
+  "footer": {
+    "text": "Tu mereces mais. Acredita nisso."
+  },
+  "buttons": [
+    {
+      "type": "URL", 
+      "text": "SIM, quero mudar",
+      "url": "{{2}}"
+    },
+    {
+      "type": "QUICK_REPLY",
+      "text": "Tenho dúvidas"
+    },
+    {
+      "type": "QUICK_REPLY",
+      "text": "Não é para mim"
+    }
+  ],
+  "variable_map": {
+    "{{1}}": "first_name",
+    "{{2}}": "questionnaire_url_with_utm_whatsapp_final"
+  },
+  "trigger": {
+    "on": "lead_submit",
+    "offset": "+7 days",
+    "conditions": [
+      "whatsapp_opt_in = true", 
+      "NOT questionnaire_complete(7d)",
+      "NOT purchase_success(7d)",
+      "email_sequence_completed = true"
+    ]
+  },
+  "suppression": ["questionnaire_complete", "unsubscribe", "purchase_success", "whatsapp_opt_out"],
+  "quiet_hours": {
+    "tz": "Europe/Lisbon",
+    "window": "09:00-18:00",
+    "skip_weekends": true
+  },
+  "measurement": {
+    "expected_events": ["whatsapp_delivered", "button_click", "questionnaire_click_whatsapp_final", "final_conversion_attempt"],
+    "conversion_goal": "final_questionnaire_completion"
+  },
+  "compliance": {
+    "template_category": "Marketing",
+    "opt_in_required": true,
+    "business_initiated": false,
+    "promotional_purpose": "Final conversion attempt with urgency",
+    "approval_status": "pending_review"
+  },
+  "owner": "WTL",
+  "status": "draft"
+}

@@ -1,0 +1,37 @@
+{
+  "asset_id": "nopay.d5.email.case",
+  "sequence": "NO-PAY",
+  "lang": "pt-PT",
+  "subject": {
+    "A": "Como a Rita passou de 65h/semana para 35h (e aumentou a faturação)",
+    "B": "Case study: de exausta a empresária de sucesso"
+  },
+  "preheader": "A transformação completa em 12 semanas...",
+  "body_md": "Olá {{first_name}},\n\nQuero contar-te a história da Rita (nome alterado por privacidade).\n\n**ANTES:**\n→ Proprietária de uma loja de roupas em Lisboa  \n→ Trabalhava 65 horas por semana  \n→ Sentia-se culpada quando não estava \"a produzir\"  \n→ Tinha medo de delegar (\"ninguém faz como eu\")  \n→ Não conseguia subir os preços com medo de perder clientes\n\n**O MOMENTO DE VIRAGEM:**\n\nRita chegou até mim exausta. Disse-me: \"Sinto que sou escrava do meu próprio negócio. Trabalho mais que os meus funcionários e ganho menos por hora que eles.\"\n\nSoa familiar?\n\n**A TRANSFORMAÇÃO:**\n\n**Semanas 1-4: Mentalidade Sem Esforço**  \nTrabalhamos as crenças limitantes. Rita descobriu que \"trabalhar muito\" não significava \"trabalhar bem\".\n\n**Semanas 5-8: Sistemas de Liderança**  \nImplementamos frameworks de delegação. Rita aprendeu a liderar em vez de microgerir.\n\n**Semanas 9-12: Otimização e Preços**  \nSistemas escaláveis e reposicionamento premium. Rita aumentou os preços em 40% e manteve 95% dos clientes.\n\n**RESULTADOS (3 meses depois):**\n→ Trabalha 35 horas por semana  \n→ Faturação 60% superior  \n→ Viajou 2 vezes (primeira vez em 3 anos)  \n→ Equipa funciona autonomamente  \n→ \"Finalmente sinto-me livre\"\n\n**O que fez a diferença?**\n\nNão foi sorte. Foram **sistemas inteligentes + mentalidade sem esforço**.\n\nOs mesmos que ensino na Mentoria Seja Livre.\n\nSe a Rita conseguiu, tu também consegues.\n\n**Queres descobrir como?**\n\nO primeiro passo é completares o questionário para percebermos a tua situação específica:\n\n[**Quero a minha transformação como a Rita →**]({{questionnaire_url}}?utm_source=email&utm_medium=automation&utm_campaign=nopay&utm_content=d5_case)\n\nDepois falamos sobre como criar a tua própria história de sucesso.\n\nUm abraço,  \n{{mentor_name}}  \nMentoria Seja Livre\n\nP.S. - A Rita disse-me recentemente: \"Devia ter feito isto há 2 anos. Imagina onde estaria agora...\" Não cometas o mesmo erro.",
+  "primary_cta": {
+    "label": "Quero a minha transformação como a Rita",
+    "url": "{{questionnaire_url}}?utm_source=email&utm_medium=automation&utm_campaign=nopay&utm_content=d5_case"
+  },
+  "secondary_cta": {
+    "label": "Quero falar sobre o meu caso",
+    "url": "https://wa.me/{{whatsapp_number}}?text=Olá, li o case study da Rita e quero discutir a minha situação"
+  },
+  "merge_fields": ["first_name", "questionnaire_url", "mentor_name", "whatsapp_number"],
+  "trigger": {
+    "on": "lead_submit",
+    "offset": "+5 days",
+    "conditions": ["NOT questionnaire_complete(5d)", "NOT purchase_success(5d)"]
+  },
+  "suppression": ["questionnaire_complete", "unsubscribe", "purchase_success"],
+  "quiet_hours": {
+    "tz": "Europe/Lisbon",
+    "window": "09:00-18:00",
+    "skip_weekends": false
+  },
+  "measurement": {
+    "landing_expect": ["email_click", "questionnaire_click", "case_study_engagement"],
+    "note": "Track case study effectiveness for social proof"
+  },
+  "owner": "ECL",
+  "status": "draft"
+}

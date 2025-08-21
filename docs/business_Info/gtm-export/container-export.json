@@ -1,0 +1,750 @@
+{
+  "exportFormatVersion": 2,
+  "exportTime": "2025-01-15 10:30:00 UTC",
+  "containerVersion": {
+    "path": "accounts/123456789/containers/12345678/versions/1",
+    "accountId": "123456789",
+    "containerId": "12345678",
+    "containerVersionId": "1",
+    "name": "GTM v1.0 — Mentoria Seja Livre Landing Page",
+    "description": "Complete tracking implementation for landing page conversion flow with Amanda avatar qualification and LGPD compliance",
+    "container": {
+      "path": "accounts/123456789/containers/12345678",
+      "accountId": "123456789",
+      "containerId": "12345678",
+      "name": "Mentoria Seja Livre - Landing Page",
+      "publicId": "GTM-XXXXXXX",
+      "usageContext": ["WEB"],
+      "fingerprint": "1234567890",
+      "tagManagerUrl": "https://tagmanager.google.com/"
+    },
+    "variable": [
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "variableId": "1",
+        "name": "DLV - Lead ID",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "template",
+            "key": "name",
+            "value": "lead_id"
+          }
+        ],
+        "fingerprint": "1234567890",
+        "formatValue": {}
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "variableId": "2",
+        "name": "DLV - User ID",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "template",
+            "key": "name",
+            "value": "user_id"
+          }
+        ],
+        "fingerprint": "1234567890",
+        "formatValue": {}
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "variableId": "3",
+        "name": "DLV - Test Mode",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "template",
+            "key": "name",
+            "value": "test_mode"
+          }
+        ],
+        "fingerprint": "1234567890",
+        "formatValue": {}
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "variableId": "4",
+        "name": "DLV - Amanda Match Score",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "template",
+            "key": "name",
+            "value": "amanda_match_score"
+          }
+        ],
+        "fingerprint": "1234567890",
+        "formatValue": {}
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "variableId": "5",
+        "name": "DLV - Source Section",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "template",
+            "key": "name",
+            "value": "source_section"
+          }
+        ],
+        "fingerprint": "1234567890",
+        "formatValue": {}
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "variableId": "6",
+        "name": "DLV - CTA ID",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "template",
+            "key": "name",
+            "value": "cta_id"
+          }
+        ],
+        "fingerprint": "1234567890",
+        "formatValue": {}
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "variableId": "7",
+        "name": "DLV - Traffic Source",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "template",
+            "key": "name",
+            "value": "traffic_source"
+          }
+        ],
+        "fingerprint": "1234567890",
+        "formatValue": {}
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "variableId": "8",
+        "name": "DLV - Business Type",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "template",
+            "key": "name",
+            "value": "qualification_inputs.business_type"
+          }
+        ],
+        "fingerprint": "1234567890",
+        "formatValue": {}
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "variableId": "9",
+        "name": "DLV - User Email",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "template",
+            "key": "name",
+            "value": "user_email"
+          }
+        ],
+        "fingerprint": "1234567890",
+        "formatValue": {}
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "variableId": "10",
+        "name": "GA4 Configuration ID",
+        "type": "c",
+        "parameter": [
+          {
+            "type": "template",
+            "key": "value",
+            "value": "G-XXXXXXXXX"
+          }
+        ],
+        "fingerprint": "1234567890",
+        "formatValue": {}
+      }
+    ],
+    "trigger": [
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "triggerId": "1",
+        "name": "Modal Open - All Sections",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "template",
+                "key": "arg0",
+                "value": "{{Event}}"
+              },
+              {
+                "type": "template",
+                "key": "arg1",
+                "value": "modal_open"
+              }
+            ]
+          },
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "template",
+                "key": "arg0",
+                "value": "{{DLV - Test Mode}}"
+              },
+              {
+                "type": "template",
+                "key": "arg1",
+                "value": "false"
+              }
+            ]
+          }
+        ],
+        "fingerprint": "1234567890"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "triggerId": "2",
+        "name": "Lead Form Submit - Conversion",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "template",
+                "key": "arg0",
+                "value": "{{Event}}"
+              },
+              {
+                "type": "template",
+                "key": "arg1",
+                "value": "lead_form_submit"
+              }
+            ]
+          },
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "template",
+                "key": "arg0",
+                "value": "{{DLV - Test Mode}}"
+              },
+              {
+                "type": "template",
+                "key": "arg1",
+                "value": "false"
+              }
+            ]
+          }
+        ],
+        "fingerprint": "1234567890"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "triggerId": "3",
+        "name": "CTA Click - All Buttons",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "template",
+                "key": "arg0",
+                "value": "{{Event}}"
+              },
+              {
+                "type": "template",
+                "key": "arg1",
+                "value": "cta_click"
+              }
+            ]
+          }
+        ],
+        "fingerprint": "1234567890"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "triggerId": "4",
+        "name": "High Amanda Score - CRM Priority",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "template",
+                "key": "arg0",
+                "value": "{{Event}}"
+              },
+              {
+                "type": "template",
+                "key": "arg1",
+                "value": "lead_form_submit"
+              }
+            ]
+          },
+          {
+            "type": "GREATER_THAN",
+            "parameter": [
+              {
+                "type": "template",
+                "key": "arg0",
+                "value": "{{DLV - Amanda Match Score}}"
+              },
+              {
+                "type": "template",
+                "key": "arg1",
+                "value": "79"
+              }
+            ]
+          }
+        ],
+        "fingerprint": "1234567890"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "triggerId": "5",
+        "name": "All Custom Events - Segment Mirror",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "MATCH_REGEX",
+            "parameter": [
+              {
+                "type": "template",
+                "key": "arg0",
+                "value": "{{Event}}"
+              },
+              {
+                "type": "template",
+                "key": "arg1",
+                "value": "(modal_open|lead_form_submit|cta_click|section_view|testimonial_interaction|questionnaire_.*|calendar_booking_complete)"
+              }
+            ]
+          },
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "template",
+                "key": "arg0",
+                "value": "{{DLV - Test Mode}}"
+              },
+              {
+                "type": "template",
+                "key": "arg1",
+                "value": "false"
+              }
+            ]
+          }
+        ],
+        "fingerprint": "1234567890"
+      }
+    ],
+    "tag": [
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "tagId": "1",
+        "name": "GA4 Configuration",
+        "type": "gaawe",
+        "parameter": [
+          {
+            "type": "template",
+            "key": "measurementIdOverride",
+            "value": "{{GA4 Configuration ID}}"
+          },
+          {
+            "type": "boolean",
+            "key": "sendPageView",
+            "value": "true"
+          },
+          {
+            "type": "list",
+            "key": "customParameters",
+            "list": [
+              {
+                "type": "map",
+                "map": [
+                  {
+                    "type": "template",
+                    "key": "name",
+                    "value": "amanda_match_score"
+                  },
+                  {
+                    "type": "template",
+                    "key": "value",
+                    "value": "{{DLV - Amanda Match Score}}"
+                  }
+                ]
+              },
+              {
+                "type": "map",
+                "map": [
+                  {
+                    "type": "template",
+                    "key": "name",
+                    "value": "source_section"
+                  },
+                  {
+                    "type": "template",
+                    "key": "value",
+                    "value": "{{DLV - Source Section}}"
+                  }
+                ]
+              },
+              {
+                "type": "map",
+                "map": [
+                  {
+                    "type": "template",
+                    "key": "name",
+                    "value": "traffic_source"
+                  },
+                  {
+                    "type": "template",
+                    "key": "value",
+                    "value": "{{DLV - Traffic Source}}"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "fingerprint": "1234567890",
+        "firingTriggerId": ["2147479553"],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "tagId": "2",
+        "name": "GA4 Event - Modal Open",
+        "type": "gaawe",
+        "parameter": [
+          {
+            "type": "template",
+            "key": "measurementIdOverride",
+            "value": "{{GA4 Configuration ID}}"
+          },
+          {
+            "type": "template",
+            "key": "eventName",
+            "value": "modal_open"
+          },
+          {
+            "type": "list",
+            "key": "eventParameters",
+            "list": [
+              {
+                "type": "map",
+                "map": [
+                  {
+                    "type": "template",
+                    "key": "name",
+                    "value": "source_section"
+                  },
+                  {
+                    "type": "template",
+                    "key": "value",
+                    "value": "{{DLV - Source Section}}"
+                  }
+                ]
+              },
+              {
+                "type": "map",
+                "map": [
+                  {
+                    "type": "template",
+                    "key": "name",
+                    "value": "cta_id"
+                  },
+                  {
+                    "type": "template",
+                    "key": "value",
+                    "value": "{{DLV - CTA ID}}"
+                  }
+                ]
+              },
+              {
+                "type": "map",
+                "map": [
+                  {
+                    "type": "template",
+                    "key": "name",
+                    "value": "lead_id"
+                  },
+                  {
+                    "type": "template",
+                    "key": "value",
+                    "value": "{{DLV - Lead ID}}"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "fingerprint": "1234567890",
+        "firingTriggerId": ["1"],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "tagId": "3",
+        "name": "GA4 Event - Lead Form Submit (Conversion)",
+        "type": "gaawe",
+        "parameter": [
+          {
+            "type": "template",
+            "key": "measurementIdOverride",
+            "value": "{{GA4 Configuration ID}}"
+          },
+          {
+            "type": "template",
+            "key": "eventName",
+            "value": "lead_form_submit"
+          },
+          {
+            "type": "list",
+            "key": "eventParameters",
+            "list": [
+              {
+                "type": "map",
+                "map": [
+                  {
+                    "type": "template",
+                    "key": "name",
+                    "value": "amanda_match_score"
+                  },
+                  {
+                    "type": "template",
+                    "key": "value",
+                    "value": "{{DLV - Amanda Match Score}}"
+                  }
+                ]
+              },
+              {
+                "type": "map",
+                "map": [
+                  {
+                    "type": "template",
+                    "key": "name",
+                    "value": "source_section"
+                  },
+                  {
+                    "type": "template",
+                    "key": "value",
+                    "value": "{{DLV - Source Section}}"
+                  }
+                ]
+              },
+              {
+                "type": "map",
+                "map": [
+                  {
+                    "type": "template",
+                    "key": "name",
+                    "value": "business_type"
+                  },
+                  {
+                    "type": "template",
+                    "key": "value",
+                    "value": "{{DLV - Business Type}}"
+                  }
+                ]
+              },
+              {
+                "type": "map",
+                "map": [
+                  {
+                    "type": "template",
+                    "key": "name",
+                    "value": "value"
+                  },
+                  {
+                    "type": "template",
+                    "key": "value",
+                    "value": "1"
+                  }
+                ]
+              },
+              {
+                "type": "map",
+                "map": [
+                  {
+                    "type": "template",
+                    "key": "name",
+                    "value": "currency"
+                  },
+                  {
+                    "type": "template",
+                    "key": "value",
+                    "value": "BRL"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "fingerprint": "1234567890",
+        "firingTriggerId": ["2"],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "tagId": "4",
+        "name": "Segment - Event Mirror",
+        "type": "html",
+        "parameter": [
+          {
+            "type": "template",
+            "key": "html",
+            "value": "<script>\n  var eventData = {\n    event: {{Event}},\n    properties: {\n      amanda_match_score: {{DLV - Amanda Match Score}},\n      source_section: {{DLV - Source Section}},\n      business_type: {{DLV - Business Type}},\n      cta_id: {{DLV - CTA ID}},\n      lead_id: {{DLV - Lead ID}},\n      traffic_source: {{DLV - Traffic Source}}\n    },\n    context: {\n      page: {\n        title: {{Page Title}},\n        url: {{Page URL}},\n        path: {{Page Path}}\n      },\n      user: {\n        id: {{DLV - User ID}},\n        lead_id: {{DLV - Lead ID}}\n      }\n    }\n  };\n\n  // Remove null/undefined properties\n  Object.keys(eventData.properties).forEach(key => {\n    if (eventData.properties[key] === null || eventData.properties[key] === undefined || eventData.properties[key] === '') {\n      delete eventData.properties[key];\n    }\n  });\n\n  if (typeof analytics !== 'undefined') {\n    analytics.track({{Event}}, eventData.properties, eventData.context);\n  }\n</script>"
+          }
+        ],
+        "fingerprint": "1234567890",
+        "firingTriggerId": ["5"],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "tagId": "5",
+        "name": "CRM Sync - High Priority Leads",
+        "type": "html",
+        "parameter": [
+          {
+            "type": "template",
+            "key": "html",
+            "value": "<script>\n  var leadData = {\n    lead_id: {{DLV - Lead ID}},\n    amanda_match_score: {{DLV - Amanda Match Score}},\n    email: {{DLV - User Email}},\n    business_type: {{DLV - Business Type}},\n    source_section: {{DLV - Source Section}},\n    priority: 'high',\n    timestamp: new Date().toISOString()\n  };\n\n  fetch('/.netlify/functions/crm-sync', {\n    method: 'POST',\n    headers: {\n      'Content-Type': 'application/json'\n    },\n    body: JSON.stringify(leadData)\n  }).catch(function(error) {\n    console.error('CRM sync error:', error);\n  });\n</script>"
+          }
+        ],
+        "fingerprint": "1234567890",
+        "firingTriggerId": ["4"],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "tagId": "6",
+        "name": "MailerLite - Contact Creation",
+        "type": "html",
+        "parameter": [
+          {
+            "type": "template",
+            "key": "html",
+            "value": "<script>\n  var contactData = {\n    email: {{DLV - User Email}},\n    lead_id: {{DLV - Lead ID}},\n    amanda_match_score: {{DLV - Amanda Match Score}},\n    business_type: {{DLV - Business Type}},\n    source_section: {{DLV - Source Section}},\n    traffic_source: {{DLV - Traffic Source}}\n  };\n\n  fetch('/.netlify/functions/mailerlite-sync', {\n    method: 'POST',\n    headers: {\n      'Content-Type': 'application/json'\n    },\n    body: JSON.stringify(contactData)\n  }).catch(function(error) {\n    console.error('MailerLite sync error:', error);\n  });\n</script>"
+          }
+        ],
+        "fingerprint": "1234567890",
+        "firingTriggerId": ["2"],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      }
+    ],
+    "builtInVariable": [
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "type": "PAGE_URL",
+        "name": "Page URL"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "type": "PAGE_HOSTNAME",
+        "name": "Page Hostname"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "type": "PAGE_PATH",
+        "name": "Page Path"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "type": "PAGE_TITLE",
+        "name": "Page Title"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "type": "REFERRER",
+        "name": "Referrer"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "type": "EVENT",
+        "name": "Event"
+      }
+    ],
+    "folder": [
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "folderId": "1",
+        "name": "GA4 Events",
+        "fingerprint": "1234567890"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "folderId": "2",
+        "name": "Segment Mirror",
+        "fingerprint": "1234567890"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "folderId": "3",
+        "name": "CRM Integration",
+        "fingerprint": "1234567890"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "folderId": "4",
+        "name": "MailerLite Sync",
+        "fingerprint": "1234567890"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "folderId": "5",
+        "name": "Utilities",
+        "fingerprint": "1234567890"
+      }
+    ],
+    "fingerprint": "1234567890",
+    "tagManagerUrl": "https://tagmanager.google.com/"
+  }
+}

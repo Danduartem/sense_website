@@ -1,0 +1,36 @@
+{
+  "sequence_entry_conditions": {
+    "NO-PAY": {
+      "description": "Lead nurture sequence for prospects who submitted lead form but have not purchased",
+      "entry_event": "lead_form_submit",
+      "entry_conditions": [
+        "lead_form_submit.completed = true",
+        "NOT purchase_success(within: 20m)",
+        "amanda_match_score >= 60"
+      ],
+      "delay_before_first_message": "20 minutes",
+      "qualification_requirements": {
+        "minimum_amanda_score": 60,
+        "required_fields": ["email", "name", "business_type", "work_hours_daily"],
+        "exclusions": ["test_mode = true", "unsubscribe = true"]
+      },
+      "notes": "Triggered immediately after landing page form submission, delayed 20min to allow for immediate questionnaire completion"
+    },
+    "CUSTOMER": {
+      "description": "Onboarding and support sequence for paying customers",
+      "entry_event": "purchase_success",
+      "entry_conditions": [
+        "purchase_success.completed = true",
+        "payment_status = confirmed",
+        "NOT refund_initiated(within: 24h)"
+      ],
+      "delay_before_first_message": "immediate",
+      "qualification_requirements": {
+        "payment_verified": true,
+        "user_id_assigned": true,
+        "trello_access_pending": true
+      },
+      "notes": "Triggered immediately upon payment confirmation to provide access details"
+    }
+  }
+}

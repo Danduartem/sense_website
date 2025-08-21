@@ -1,0 +1,80 @@
+{
+  "sequence_id": "NO-PAY",
+  "description": "Lead nurture sequence for prospects who submitted landing page form but have not purchased",
+  "target_avatar": "Amanda - The Exhausted Achiever",
+  "sequence_goal": "Convert qualified leads to questionnaire completion and sales consultation",
+  "entry": {
+    "trigger_event": "lead_form_submit",
+    "conditions": [
+      "lead_form_submit.completed = true",
+      "NOT purchase_success(within: 20m)",
+      "amanda_match_score >= 60"
+    ],
+    "qualification_gate": "minimum_amanda_score_60"
+  },
+  "exit": [
+    "purchase_success",
+    "questionnaire_complete", 
+    "unsubscribe",
+    "email_bounce_hard",
+    "sequence_completion"
+  ],
+  "steps": [
+    {
+      "step_id": "1",
+      "offset": "+20 minutes",
+      "asset_ref": "nopay.d0p20m.email.nudge",
+      "description": "Nudge email if questionnaire not completed within 20min",
+      "conditions": ["NOT questionnaire_click(20m)"],
+      "primary_goal": "questionnaire_completion"
+    },
+    {
+      "step_id": "2", 
+      "offset": "+1 day",
+      "asset_ref": "nopay.d1.email.value",
+      "description": "Value delivery - mindset transformation case study",
+      "conditions": ["NOT questionnaire_complete(1d)", "NOT purchase_success(1d)"],
+      "primary_goal": "value_demonstration"
+    },
+    {
+      "step_id": "3",
+      "offset": "+3 days", 
+      "asset_ref": "nopay.d3.email.objections",
+      "description": "Objection handling - address top 3 Amanda concerns",
+      "conditions": ["NOT questionnaire_complete(3d)", "NOT purchase_success(3d)"],
+      "primary_goal": "objection_resolution"
+    },
+    {
+      "step_id": "4",
+      "offset": "+5 days",
+      "asset_ref": "nopay.d5.email.case",
+      "description": "Case study - detailed transformation story",
+      "conditions": ["NOT questionnaire_complete(5d)", "NOT purchase_success(5d)"],
+      "primary_goal": "social_proof_conversion"
+    },
+    {
+      "step_id": "5",
+      "offset": "+7 days",
+      "asset_ref": "nopay.d7.email.last_call",
+      "description": "Final urgency - last chance to engage",
+      "conditions": ["NOT questionnaire_complete(7d)", "NOT purchase_success(7d)"],
+      "primary_goal": "final_conversion_attempt"
+    }
+  ],
+  "measurement": {
+    "primary_kpi": "questionnaire_completion_rate",
+    "secondary_kpis": [
+      "email_open_rate",
+      "email_click_rate", 
+      "whatsapp_engagement_rate",
+      "sales_consultation_booking_rate"
+    ],
+    "success_threshold": {
+      "questionnaire_completion": ">30%",
+      "email_engagement": ">25%",
+      "sequence_completion": ">80%"
+    }
+  },
+  "owner": "TJM",
+  "status": "configured"
+}

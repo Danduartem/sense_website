@@ -1,0 +1,284 @@
+{
+  "wireframe_page_spec": {
+    "type": "object",
+    "required": ["page", "goal", "primary_kpi", "must_prove", "primary_cta", "modules", "breakpoints"],
+    "properties": {
+      "page": {
+        "type": "string",
+        "description": "Page template identifier (e.g., 'service_detail', 'pricing')"
+      },
+      "goal": {
+        "type": "string", 
+        "description": "Primary purpose of this page in one clear sentence"
+      },
+      "primary_kpi": {
+        "type": "string",
+        "description": "Main conversion metric this page should drive"
+      },
+      "must_prove": {
+        "type": "array",
+        "items": {"type": "string"},
+        "minItems": 3,
+        "maxItems": 3,
+        "description": "Top 3 credibility requirements this page must establish"
+      },
+      "primary_cta": {
+        "type": "string",
+        "description": "Single most important action users should take"
+      },
+      "modules": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["id", "priority", "content_type"],
+          "properties": {
+            "id": {"type": "string"},
+            "priority": {
+              "type": "integer",
+              "enum": [1, 2, 3],
+              "description": "1=above-fold, 2=primary-scroll, 3=secondary"
+            },
+            "content_type": {"type": "string"},
+            "cta_included": {"type": "boolean"},
+            "copy_slots": {
+              "type": "array", 
+              "items": {"type": "string"}
+            }
+          }
+        }
+      },
+      "breakpoints": {
+        "type": "array",
+        "items": {
+          "type": "integer",
+          "enum": [375, 744, 1280]
+        }
+      }
+    }
+  },
+  
+  "measurement_overlay": {
+    "type": "object",
+    "required": ["element", "overlay"],
+    "properties": {
+      "element": {
+        "type": "string",
+        "description": "Descriptive name of the interactive element"
+      },
+      "overlay": {
+        "type": "string",
+        "pattern": "^\\[E:[a-z_]+\\|.*\\]$",
+        "description": "Event overlay in format [E:event_name|param1=value1,param2=value2]"
+      },
+      "notes": {
+        "type": "string",
+        "description": "Additional context or special requirements"
+      }
+    }
+  },
+  
+  "ice_candidate": {
+    "type": "object",
+    "required": ["module", "page", "impact", "confidence", "effort", "ice", "decision"],
+    "properties": {
+      "module": {
+        "type": "string",
+        "description": "Module name being evaluated for hi-fi treatment"
+      },
+      "page": {
+        "type": "string",
+        "description": "Page template where module appears"
+      },
+      "impact": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 5,
+        "description": "Business/conversion impact (1-5)"
+      },
+      "confidence": {
+        "type": "integer", 
+        "minimum": 1,
+        "maximum": 5,
+        "description": "Design certainty and user research backing (1-5)"
+      },
+      "effort": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 5, 
+        "description": "Design and development complexity (1-5)"
+      },
+      "ice": {
+        "type": "number",
+        "description": "Calculated ICE score: (Impact × Confidence) / Effort"
+      },
+      "decision": {
+        "type": "string",
+        "enum": ["hi_fi", "wireframe_only"],
+        "description": "Design treatment decision based on ICE threshold"
+      },
+      "rationale": {
+        "type": "string",
+        "description": "Justification for the ICE scoring and decision"
+      }
+    }
+  },
+  
+  "prototype_flow": {
+    "type": "object",
+    "required": ["name", "path", "entry_points", "conversion_events"],
+    "properties": {
+      "name": {
+        "type": "string",
+        "description": "Descriptive flow identifier"
+      },
+      "path": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Sequence of pages in the user flow"
+      },
+      "entry_points": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Where users can enter this flow"
+      },
+      "conversion_events": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Key measurement points in this flow"
+      },
+      "success_criteria": {
+        "type": "string",
+        "description": "How to measure successful completion"
+      },
+      "notes": {
+        "type": "string",
+        "description": "Special prototype requirements or edge cases"
+      }
+    }
+  },
+  
+  "component_spec": {
+    "type": "object", 
+    "required": ["component", "tokens", "states", "accessibility"],
+    "properties": {
+      "component": {
+        "type": "string",
+        "description": "Component name and identifier"
+      },
+      "category": {
+        "type": "string",
+        "description": "Component category (buttons, forms, navigation, etc.)"
+      },
+      "tokens": {
+        "type": "object",
+        "description": "Design token references for this component"
+      },
+      "states": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["default", "hover", "focus", "active", "disabled", "error", "success"]
+        },
+        "description": "Interactive states that must be defined"
+      },
+      "accessibility": {
+        "type": "object",
+        "required": ["contrast_ratio", "focus_visible"],
+        "properties": {
+          "contrast_ratio": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+:\\d+$",
+            "description": "Verified contrast ratio (e.g., '4.52:1')"
+          },
+          "focus_visible": {"type": "boolean"},
+          "aria_labels": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "keyboard_navigation": {"type": "string"}
+        }
+      },
+      "responsive": {
+        "type": "object",
+        "properties": {
+          "mobile": {"type": "string"},
+          "tablet": {"type": "string"}, 
+          "desktop": {"type": "string"}
+        }
+      },
+      "implementation_notes": {
+        "type": "string",
+        "description": "Technical requirements and guidance for developers"
+      }
+    }
+  },
+  
+  "design_tokens": {
+    "type": "object",
+    "properties": {
+      "color": {
+        "type": "object",
+        "properties": {
+          "primary": {
+            "type": "object",
+            "properties": {
+              "50": {"type": "object", "properties": {"value": {"type": "string"}}},
+              "100": {"type": "object", "properties": {"value": {"type": "string"}}},
+              "500": {"type": "object", "properties": {"value": {"type": "string"}}},
+              "600": {"type": "object", "properties": {"value": {"type": "string"}}},
+              "700": {"type": "object", "properties": {"value": {"type": "string"}}},
+              "900": {"type": "object", "properties": {"value": {"type": "string"}}}
+            }
+          },
+          "neutral": {
+            "type": "object",
+            "properties": {
+              "50": {"type": "object", "properties": {"value": {"type": "string"}}},
+              "200": {"type": "object", "properties": {"value": {"type": "string"}}},
+              "500": {"type": "object", "properties": {"value": {"type": "string"}}},
+              "700": {"type": "object", "properties": {"value": {"type": "string"}}},
+              "900": {"type": "object", "properties": {"value": {"type": "string"}}}
+            }
+          }
+        }
+      },
+      "typography": {
+        "type": "object",
+        "properties": {
+          "font": {
+            "type": "object",
+            "properties": {
+              "primary": {"type": "object", "properties": {"value": {"type": "string"}}},
+              "heading": {"type": "object", "properties": {"value": {"type": "string"}}}
+            }
+          },
+          "size": {
+            "type": "object",
+            "properties": {
+              "xs": {"type": "object", "properties": {"value": {"type": "string"}}},
+              "sm": {"type": "object", "properties": {"value": {"type": "string"}}},
+              "base": {"type": "object", "properties": {"value": {"type": "string"}}},
+              "lg": {"type": "object", "properties": {"value": {"type": "string"}}},
+              "xl": {"type": "object", "properties": {"value": {"type": "string"}}},
+              "2xl": {"type": "object", "properties": {"value": {"type": "string"}}},
+              "3xl": {"type": "object", "properties": {"value": {"type": "string"}}}
+            }
+          }
+        }
+      },
+      "spacing": {
+        "type": "object",
+        "properties": {
+          "1": {"type": "object", "properties": {"value": {"type": "string"}}},
+          "2": {"type": "object", "properties": {"value": {"type": "string"}}},
+          "3": {"type": "object", "properties": {"value": {"type": "string"}}},
+          "4": {"type": "object", "properties": {"value": {"type": "string"}}},
+          "6": {"type": "object", "properties": {"value": {"type": "string"}}},
+          "8": {"type": "object", "properties": {"value": {"type": "string"}}},
+          "12": {"type": "object", "properties": {"value": {"type": "string"}}},
+          "16": {"type": "object", "properties": {"value": {"type": "string"}}}
+        }
+      }
+    }
+  }
+}

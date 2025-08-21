@@ -1,0 +1,37 @@
+{
+  "asset_id": "nopay.d0p20m.email.nudge",
+  "sequence": "NO-PAY",
+  "lang": "pt-PT",
+  "subject": {
+    "A": "{{first_name}}, confirma se recebeste o teu acesso?",
+    "B": "Algo correu mal com o teu pedido, {{first_name}}?"
+  },
+  "preheader": "O teu questionário está à tua espera...",
+  "body_md": "Olá {{first_name}},\n\nReparei que solicitaste informações sobre a Mentoria Seja Livre há cerca de 20 minutos, mas ainda não respondeste ao questionário que te enviámos.\n\nSei que és uma empreendedora ocupada - trabalhas muitas horas por dia e o tempo é escasso. Mas se realmente queres transformar a forma como trabalhas e final ter a liberdade que mereces, este questionário é o primeiro passo.\n\n**São apenas 3 minutos que podem mudar completamente o teu negócio.**\n\nLembra-te: continuares a fazer o mesmo vai dar-te os mesmos resultados. Se queres trabalhar menos e faturar mais, precisas de começar por algum lado.\n\n[**Responder ao questionário agora →**]({{questionnaire_url}}?utm_source=email&utm_medium=automation&utm_campaign=nopay&utm_content=d0p20m_nudge)\n\nSe tens alguma dúvida ou dificuldade, responde a este email ou contacta-me diretamente no WhatsApp: {{whatsapp_number}}\n\nUm abraço,  \n{{mentor_name}}  \nMentoria Seja Livre\n\nP.S. - Não percas esta oportunidade. Vagas limitadas para garantir atenção personalizada a cada participante.",
+  "primary_cta": {
+    "label": "Responder ao questionário agora",
+    "url": "{{questionnaire_url}}?utm_source=email&utm_medium=automation&utm_campaign=nopay&utm_content=d0p20m_nudge"
+  },
+  "secondary_cta": {
+    "label": "Contactar no WhatsApp",
+    "url": "https://wa.me/{{whatsapp_number}}?text=Olá, recebi o email sobre o questionário da Mentoria Seja Livre"
+  },
+  "merge_fields": ["first_name", "questionnaire_url", "mentor_name", "whatsapp_number"],
+  "trigger": {
+    "on": "lead_submit",
+    "offset": "+20 minutes",
+    "conditions": ["NOT questionnaire_click(20m)"]
+  },
+  "suppression": ["questionnaire_complete", "unsubscribe"],
+  "quiet_hours": {
+    "tz": "Europe/Lisbon",
+    "window": "09:00-18:00",
+    "skip_weekends": false
+  },
+  "measurement": {
+    "landing_expect": ["email_click", "questionnaire_click"],
+    "note": "UTMs only in links, events captured on landing per v1B"
+  },
+  "owner": "ECL",
+  "status": "draft"
+}

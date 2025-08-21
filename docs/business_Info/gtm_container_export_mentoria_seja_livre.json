@@ -1,0 +1,833 @@
+{
+  "exportFormatVersion": 2,
+  "exportTime": "2025-08-20T12:00:00.000Z",
+  "containerVersion": {
+    "path": "accounts/123456789/containers/12345678/versions/1",
+    "accountId": "123456789",
+    "containerId": "12345678",
+    "containerVersionId": "1",
+    "name": "Mentoria Seja Livre - GTM v1.0",
+    "description": "Complete tracking implementation for Amanda avatar with cross-platform integration",
+    "container": {
+      "path": "accounts/123456789/containers/12345678",
+      "accountId": "123456789",
+      "containerId": "12345678",
+      "name": "Mentoria Seja Livre",
+      "publicId": "GTM-PROD456",
+      "usageContext": ["WEB"]
+    },
+    "tag": [
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "tagId": "1",
+        "name": "GA4 - Configuration",
+        "type": "gaawe",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "measurementId",
+            "value": "{{Const - GA4 Measurement ID}}"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "enableConsentMode",
+            "value": "true"
+          },
+          {
+            "type": "LIST",
+            "key": "customParameters",
+            "list": [
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "custom_map.amanda_match_score"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "1"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "custom_map.transformation_stage"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "2"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "custom_map.traffic_source"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "3"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "firingTriggerId": ["2"],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "tagId": "2",
+        "name": "GA4 - Lead Form Submit",
+        "type": "gaawe",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "measurementId",
+            "value": "{{Const - GA4 Measurement ID}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "eventName",
+            "value": "lead_form_submit"
+          },
+          {
+            "type": "LIST",
+            "key": "eventParameters",
+            "list": [
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "amanda_match_score"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - Amanda Match Score}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "amanda_score_tier"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - Amanda Score Tier}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "source_section"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - Source Section}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "lead_id"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - Lead ID}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "form_completion_time"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - Form Completion Time}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "business_type"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - Business Type}}"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "firingTriggerId": ["3"],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "tagId": "3",
+        "name": "GA4 - Modal Open",
+        "type": "gaawe",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "measurementId",
+            "value": "{{Const - GA4 Measurement ID}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "eventName",
+            "value": "modal_open"
+          },
+          {
+            "type": "LIST",
+            "key": "eventParameters",
+            "list": [
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "source_section"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - Source Section}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "cta_id"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - CTA ID}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "traffic_temperature"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DLV - Traffic Temperature}}"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "firingTriggerId": ["4"],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "tagId": "4",
+        "name": "Segment - All Events",
+        "type": "html",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n(function() {\n  // Only fire if Segment is loaded and consent is granted\n  if (typeof analytics === 'undefined' || !analytics) {\n    console.warn('Segment analytics not loaded');\n    return;\n  }\n\n  var eventData = {\n    event: {{Event}},\n    properties: {\n      amanda_match_score: {{DLV - Amanda Match Score}} || null,\n      source_section: {{DLV - Source Section}} || null,\n      cta_id: {{DLV - CTA ID}} || null,\n      traffic_temperature: {{DLV - Traffic Temperature}} || null,\n      lead_id: {{DLV - Lead ID}} || null,\n      user_id: {{DLV - User ID}} || null,\n      test_mode: {{DLV - Test Mode}} || false,\n      page_path: {{Page Path}},\n      page_title: {{Page Title}}\n    },\n    context: {\n      page: {\n        title: {{Page Title}},\n        url: {{Page URL}},\n        path: {{Page Path}}\n      },\n      user: {\n        lead_id: {{DLV - Lead ID}},\n        user_id: {{DLV - User ID}}\n      }\n    }\n  };\n\n  // Remove null properties\n  Object.keys(eventData.properties).forEach(key => {\n    if (eventData.properties[key] === null || eventData.properties[key] === undefined) {\n      delete eventData.properties[key];\n    }\n  });\n\n  // Identify user if user_id exists\n  if (eventData.properties.user_id) {\n    analytics.identify(eventData.properties.user_id, {\n      lead_id: eventData.properties.lead_id,\n      amanda_match_score: eventData.properties.amanda_match_score\n    });\n  }\n\n  // Track the event\n  analytics.track({{Event}}, eventData.properties, eventData.context);\n})();\n</script>"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "supportDocumentWrite",
+            "value": "false"
+          }
+        ],
+        "firingTriggerId": ["5"],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "tagId": "5",
+        "name": "CRM Webhook - Lead Submit",
+        "type": "html",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n(function() {\n  // CRM webhook integration for lead submissions\n  if ({{Event}} !== 'lead_form_submit') return;\n\n  var leadData = {\n    external_id: {{DLV - Lead ID}},\n    email: {{DLV - User Email}},\n    name: {{DLV - User Name}},\n    phone: {{DLV - User Phone}},\n    source: 'landing_page_modal',\n    amanda_match_score: {{DLV - Amanda Match Score}},\n    custom_fields: {\n      business_type: {{DLV - Business Type}},\n      monthly_revenue: {{DLV - Monthly Revenue}},\n      work_hours_daily: {{DLV - Work Hours Daily}},\n      main_struggle: {{DLV - Main Struggle}},\n      source_section: {{DLV - Source Section}},\n      cta_id: {{DLV - CTA ID}}\n    },\n    tags: [\n      'landing_page_lead',\n      'amanda_score_' + ({{DLV - Amanda Match Score}} >= 80 ? 'high' : ({{DLV - Amanda Match Score}} >= 60 ? 'medium' : 'low')),\n      'source_' + {{DLV - Source Section}}\n    ]\n  };\n\n  // Send to CRM webhook\n  fetch('/.netlify/functions/crm-webhook', {\n    method: 'POST',\n    headers: {\n      'Content-Type': 'application/json'\n    },\n    body: JSON.stringify(leadData)\n  }).catch(function(error) {\n    console.error('CRM webhook failed:', error);\n  });\n})();\n</script>"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "supportDocumentWrite",
+            "value": "false"
+          }
+        ],
+        "firingTriggerId": ["3"],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "tagId": "6",
+        "name": "MailerLite - Lead Submit",
+        "type": "html",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n(function() {\n  // MailerLite integration for lead submissions\n  if ({{Event}} !== 'lead_form_submit') return;\n\n  var contactData = {\n    email: {{DLV - User Email}},\n    name: {{DLV - User Name}},\n    lead_id: {{DLV - Lead ID}},\n    amanda_match_score: {{DLV - Amanda Match Score}},\n    business_type: {{DLV - Business Type}},\n    source_section: {{DLV - Source Section}},\n    subscription_date: new Date().toISOString()\n  };\n\n  // Send to MailerLite webhook\n  fetch('/.netlify/functions/mailerlite-sync', {\n    method: 'POST',\n    headers: {\n      'Content-Type': 'application/json'\n    },\n    body: JSON.stringify(contactData)\n  }).catch(function(error) {\n    console.error('MailerLite sync failed:', error);\n  });\n})();\n</script>"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "supportDocumentWrite",
+            "value": "false"
+          }
+        ],
+        "firingTriggerId": ["3"],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      }
+    ],
+    "trigger": [
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "triggerId": "1",
+        "name": "All Pages",
+        "type": "PAGE_VIEW",
+        "filter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{DLV - Test Mode}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "false"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "triggerId": "2",
+        "name": "Page View - Production Only",
+        "type": "PAGE_VIEW",
+        "filter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{DLV - Test Mode}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "false"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "triggerId": "3",
+        "name": "CE - Lead Form Submit",
+        "type": "CUSTOM_EVENT",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "eventName",
+            "value": "lead_form_submit"
+          }
+        ],
+        "filter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{DLV - Test Mode}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "false"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "triggerId": "4",
+        "name": "CE - Modal Open",
+        "type": "CUSTOM_EVENT",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "eventName",
+            "value": "modal_open"
+          }
+        ],
+        "filter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{DLV - Test Mode}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "false"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "triggerId": "5",
+        "name": "CE - All Tracking Events",
+        "type": "CUSTOM_EVENT",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "eventName",
+            "value": ".*"
+          }
+        ],
+        "filter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{DLV - Test Mode}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "false"
+              }
+            ]
+          },
+          {
+            "type": "MATCH_REGEX",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{Event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "(modal_open|lead_form_submit|modal_abandon|questionnaire_complete|calendar_booking_complete|section_view|cta_click)"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "variable": [
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "variableId": "1",
+        "name": "Const - GA4 Measurement ID",
+        "type": "c",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "value",
+            "value": "G-XXXXXXXXX"
+          }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "variableId": "2",
+        "name": "DLV - Event",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "event"
+          }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "variableId": "3",
+        "name": "DLV - Lead ID",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "lead_id"
+          }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "variableId": "4",
+        "name": "DLV - User ID",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "user_id"
+          }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "variableId": "5",
+        "name": "DLV - Amanda Match Score",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "amanda_match_score"
+          }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "variableId": "6",
+        "name": "DLV - Amanda Score Tier",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "amanda_score_tier"
+          }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "variableId": "7",
+        "name": "DLV - Source Section",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "source_section"
+          }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "variableId": "8",
+        "name": "DLV - CTA ID",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "cta_id"
+          }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "variableId": "9",
+        "name": "DLV - Traffic Temperature",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "traffic_temperature"
+          }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "variableId": "10",
+        "name": "DLV - Test Mode",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "test_mode"
+          }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "variableId": "11",
+        "name": "DLV - User Email",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "user_email"
+          }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "variableId": "12",
+        "name": "DLV - User Name",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "user_name"
+          }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "variableId": "13",
+        "name": "DLV - User Phone",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "user_phone"
+          }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "variableId": "14",
+        "name": "DLV - Business Type",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "qualification_inputs.business_type"
+          }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "variableId": "15",
+        "name": "DLV - Monthly Revenue",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "qualification_inputs.monthly_revenue"
+          }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "variableId": "16",
+        "name": "DLV - Work Hours Daily",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "qualification_inputs.work_hours_daily"
+          }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "variableId": "17",
+        "name": "DLV - Main Struggle",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "qualification_inputs.main_struggle"
+          }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "variableId": "18",
+        "name": "DLV - Form Completion Time",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "form_completion_time"
+          }
+        ]
+      }
+    ],
+    "folder": [
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "folderId": "1",
+        "name": "GA4 Events",
+        "notes": "All Google Analytics 4 event tags for Mentoria Seja Livre tracking"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "folderId": "2",
+        "name": "Cross-Platform Sync",
+        "notes": "Tags for syncing data to Segment, CRM, and MailerLite"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "folderId": "3",
+        "name": "DataLayer Variables",
+        "notes": "All DataLayer variable extractions for event parameters"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "folderId": "4",
+        "name": "Event Triggers",
+        "notes": "Custom event triggers with test mode filtering"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "folderId": "5",
+        "name": "Constants",
+        "notes": "Configuration constants for measurement IDs and API keys"
+      }
+    ],
+    "builtInVariable": [
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "type": "PAGE_URL",
+        "name": "Page URL"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "type": "PAGE_HOSTNAME",
+        "name": "Page Hostname"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "type": "PAGE_PATH",
+        "name": "Page Path"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "type": "PAGE_TITLE",
+        "name": "Page Title"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "type": "REFERRER",
+        "name": "Referrer"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "12345678",
+        "type": "EVENT",
+        "name": "Event"
+      }
+    ]
+  }
+}

@@ -1,0 +1,5 @@
+docs/
+.claude/
+*.md
+README.md
+CLAUDE.md

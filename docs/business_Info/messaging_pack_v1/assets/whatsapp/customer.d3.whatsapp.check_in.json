@@ -1,0 +1,58 @@
+{
+  "asset_id": "customer.d3.whatsapp.check_in", 
+  "sequence": "CUSTOMER",
+  "template_category": "Utility",
+  "lang": "pt-PT",
+  "template_name": "program_progress_checkin",
+  "header": {
+    "type": "text",
+    "text": "📊 Check-in: Como vai a tua transformação?"
+  },
+  "body": "Olá {{1}}! 👋\n\nJá passaram 3 dias desde que começaste na mentoria.\n\n*Progresso até agora:*\n✅ Module 1.1 - Mentalidade: {{2}}\n📋 Atividades práticas: {{3}}\n💡 Implementações: {{4}}\n\n*Como te sentes?*\n• Tudo a correr bem?\n• Surgiu alguma resistência?\n• Precisas de esclarecimentos?\n\nLembra-te: não há perguntas estúpidas! 🧠\n\nConta-me como posso ajudar-te melhor.",
+  "footer": {
+    "text": "Estou aqui para o teu sucesso!"
+  },
+  "buttons": [
+    {
+      "type": "QUICK_REPLY",
+      "text": "Tudo bem! 😊"
+    },
+    {
+      "type": "QUICK_REPLY", 
+      "text": "Tenho dúvidas"
+    },
+    {
+      "type": "QUICK_REPLY",
+      "text": "Preciso de ajuda"
+    }
+  ],
+  "variable_map": {
+    "{{1}}": "first_name",
+    "{{2}}": "module_1_1_status",
+    "{{3}}": "activities_completion_status", 
+    "{{4}}": "implementation_attempts"
+  },
+  "trigger": {
+    "on": "purchase_success",
+    "offset": "+3 days",
+    "conditions": ["whatsapp_opt_in = true", "NOT refund_success(3d)"]
+  },
+  "suppression": ["refund_success", "whatsapp_opt_out", "high_whatsapp_activity_24h"],
+  "quiet_hours": {
+    "tz": "Europe/Lisbon", 
+    "window": "09:00-18:00",
+    "skip_weekends": true
+  },
+  "measurement": {
+    "expected_events": ["whatsapp_delivered", "quick_reply_response", "conversation_initiated"],
+    "conversion_goal": "progress_feedback_received"
+  },
+  "compliance": {
+    "template_category": "Utility",
+    "opt_in_required": true,
+    "business_initiated": true,
+    "transactional_purpose": "Program progress support"
+  },
+  "owner": "WTL",
+  "status": "draft"
+}

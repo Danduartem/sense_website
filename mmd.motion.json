@@ -1,0 +1,207 @@
+{
+  "motion_philosophy": {
+    "approach": "Subtle and purposeful - supports reading, never distracts from conversion goals",
+    "feminine_energy": "Soft, flowing motions that feel organic not mechanical - like breath and nature rhythms",
+    "performance": "No CLS, GPU-accelerated transforms/opacity only, maintain <16ms frame budget",
+    "psychological_foundation": "Motion builds trust through predictability and enhances perceived value through refinement"
+  },
+  "entrance_animations": {
+    "hero_content": {
+      "trigger": "on_page_load",
+      "effect": "animate-slide-up",
+      "delay": "150ms",
+      "duration": "500ms",
+      "easing": "cubic-bezier(0.16, 1, 0.3, 1)",
+      "stagger_sequence": {
+        "h1_headline": "delay-0",
+        "h2_subtitle": "delay-150", 
+        "body_text": "delay-300",
+        "cta_button": "delay-450",
+        "trust_strip": "delay-600"
+      },
+      "implementation": "Add 'motion-entrance' class to each element with appropriate delay"
+    },
+    "amanda_card": {
+      "trigger": "on_page_load",
+      "effect": "animate-scale-in",
+      "delay": "800ms",
+      "duration": "400ms",
+      "easing": "cubic-bezier(0.16, 1, 0.3, 1)",
+      "special_effects": {
+        "floating_breath": "animate-bounce-subtle after initial entrance",
+        "backdrop_filter": "backdrop-blur-sm opacity transition during entrance"
+      },
+      "implementation": "Combined scale-in entrance followed by subtle breathing animation"
+    }
+  },
+  "interaction_states": {
+    "cta_button": {
+      "idle": "bg-burgundy-700 text-white shadow-strong transform-gpu transition-all duration-300",
+      "hover": "hover:bg-burgundy-800 hover:scale-105 hover:shadow-xl",
+      "focus": "focus:outline-none focus-visible:ring-4 focus-visible:ring-burgundy-200 focus-visible:ring-offset-2 focus-visible:scale-105",
+      "active": "active:bg-burgundy-900 active:scale-100 active:shadow-strong",
+      "loading": "opacity-80 cursor-not-allowed animate-pulse",
+      "magnetic_effect": {
+        "on_hover_approach": "before:absolute before:inset-0 before:bg-burgundy-600 before:opacity-0 before:transition-opacity before:duration-200 hover:before:opacity-10",
+        "ripple_on_click": "relative overflow-hidden"
+      }
+    },
+    "trust_elements": {
+      "hover_reveal": "hover:text-burgundy-600 transition-colors duration-200",
+      "testimonial_highlight": "hover:bg-burgundy-50 hover:border-burgundy-200 transition-all duration-300",
+      "proof_emphasis": "hover:transform hover:scale-102 transition-transform duration-200"
+    },
+    "amanda_card_interactions": {
+      "idle": "bg-white rounded-3xl shadow-strong backdrop-blur-sm",
+      "hover": "hover:shadow-xl hover:scale-102 transition-all duration-300",
+      "breathing_animation": "animate-bounce-subtle",
+      "avatar_glow": "hover:ring-4 hover:ring-burgundy-100 hover:ring-opacity-50 transition-all duration-300"
+    }
+  },
+  "scroll_behaviors": {
+    "parallax_elements": {
+      "hero_background_gradient": "transform: translateY(-scrollY * 0.2px) - very subtle",
+      "amanda_card": "transform: translateY(-scrollY * 0.1px) - minimal floating effect"
+    },
+    "fade_on_scroll": {
+      "trust_strip": "Fade out as user scrolls down to focus on core message",
+      "secondary_elements": "Progressive disclosure - fade in trust elements as user shows interest"
+    },
+    "scroll_indicators": {
+      "not_needed": "Hero is designed to be immediately actionable without scroll indication"
+    },
+    "scroll_performance": {
+      "use_intersection_observer": "Only animate elements when visible",
+      "debounce_scroll": "Throttle scroll listeners to 16ms intervals"
+    }
+  },
+  "reduced_motion_fallbacks": {
+    "media_query": "@media (prefers-reduced-motion: reduce)",
+    "fallback_classes": {
+      "entrance_animations": "motion-reduce:animate-none motion-reduce:opacity-100",
+      "hover_effects": "motion-reduce:hover:scale-100 motion-reduce:hover:transform-none",
+      "transitions": "motion-reduce:transition-none",
+      "floating_animations": "motion-reduce:animate-none"
+    },
+    "focus_management": {
+      "preserve_focus_rings": "Always maintain focus-visible rings for keyboard navigation",
+      "static_emphasis": "Use color/opacity changes instead of transforms for emphasis",
+      "accessible_cta": "Maintain button prominence through color contrast, not motion"
+    }
+  },
+  "performance_optimizations": {
+    "gpu_acceleration": {
+      "transforms_only": "transform: translateY(), scale(), opacity - never layout properties",
+      "will_change_usage": "will-change: transform on hover/focus, remove after interaction",
+      "composite_layers": "Use transform3d(0,0,0) for complex animations to force GPU layer"
+    },
+    "animation_cleanup": {
+      "remove_will_change": "Remove will-change property after animations complete",
+      "intersection_observer": "Only animate visible elements to save resources",
+      "memory_management": "Clear animation timers and observers on page unload"
+    },
+    "css_optimization": {
+      "use_custom_properties": "CSS variables for timing and easing functions",
+      "combine_transforms": "Single transform declaration with multiple functions",
+      "hardware_acceleration": "transform3d for GPU optimization"
+    }
+  },
+  "conversion_psychology": {
+    "cta_magnetism": {
+      "visual_weight": "Scale and shadow increase draws eye naturally to conversion point",
+      "color_psychology": "Burgundy creates urgency while maintaining sophistication",
+      "motion_timing": "Delayed entrance makes CTA feel like natural conclusion to story"
+    },
+    "trust_building": {
+      "smooth_reveals": "Gradual entrance animations build confidence in professionalism",
+      "consistent_timing": "Predictable motion patterns create sense of reliability",
+      "amanda_credibility": "Floating card animation suggests premium, established expertise"
+    },
+    "reading_flow": {
+      "z_pattern_support": "Staggered animations guide eye through optimal reading sequence",
+      "headline_dominance": "H1 appears first to establish primary value proposition",
+      "cta_emphasis": "Button animation timing ensures it appears after value is established"
+    }
+  },
+  "detailed_animation_specifications": {
+    "entrance_keyframes": {
+      "slide_up_refined": {
+        "from": {
+          "transform": "translateY(24px)",
+          "opacity": "0"
+        },
+        "to": {
+          "transform": "translateY(0)",
+          "opacity": "1"
+        }
+      },
+      "scale_in_elegant": {
+        "from": {
+          "transform": "scale(0.96)",
+          "opacity": "0"
+        },
+        "to": {
+          "transform": "scale(1)",
+          "opacity": "1"
+        }
+      },
+      "breathing_subtle": {
+        "0%, 100%": {
+          "transform": "translateY(0px)"
+        },
+        "50%": {
+          "transform": "translateY(-2px)"
+        }
+      }
+    },
+    "interaction_timings": {
+      "button_hover": "300ms cubic-bezier(0.16, 1, 0.3, 1)",
+      "card_hover": "300ms ease-out",
+      "focus_appearance": "200ms ease-out",
+      "color_transitions": "200ms ease-in-out"
+    }
+  },
+  "implementation_notes": {
+    "css_architecture": {
+      "utility_classes": "Extend Tailwind with custom animation utilities",
+      "component_classes": "Create reusable motion components for consistency",
+      "progressive_enhancement": "Base experience works without animations, enhanced with motion"
+    },
+    "javascript_requirements": {
+      "intersection_observer": "For entrance animations on scroll into view",
+      "prefers_reduced_motion": "Check and respect user motion preferences",
+      "performance_monitoring": "Track animation frame rates in development"
+    },
+    "accessibility_testing": {
+      "keyboard_navigation": "Test all interactive states work without mouse",
+      "screen_reader_compatibility": "Ensure animations don't interfere with assistive technology",
+      "seizure_prevention": "No rapid flashing or high-contrast oscillations"
+    },
+    "brand_alignment": {
+      "feminine_energy": "All motions flow like breath - organic, not mechanical",
+      "professional_trust": "Refined timing and easing suggest premium experience",
+      "conversion_optimization": "Every motion supports the goal of form completion"
+    }
+  },
+  "css_implementation_example": {
+    "custom_properties": {
+      "--motion-duration-fast": "200ms",
+      "--motion-duration-base": "300ms", 
+      "--motion-duration-slow": "500ms",
+      "--motion-ease-entrance": "cubic-bezier(0.16, 1, 0.3, 1)",
+      "--motion-ease-interaction": "cubic-bezier(0.4, 0, 0.2, 1)"
+    },
+    "utility_extensions": {
+      ".motion-entrance": {
+        "animation": "slideUpRefined var(--motion-duration-slow) var(--motion-ease-entrance) both"
+      },
+      ".motion-breathing": {
+        "animation": "breathingSubtle 3s ease-in-out infinite"
+      },
+      ".motion-magnetic-cta": {
+        "transition": "all var(--motion-duration-base) var(--motion-ease-interaction)",
+        "will-change": "transform, box-shadow"
+      }
+    }
+  }
+}

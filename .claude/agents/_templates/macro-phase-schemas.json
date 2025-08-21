@@ -1,0 +1,398 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Macro Strategy Output Schemas",
+  "description": "Standardized schemas for Macro Strategy orchestrator agent system outputs",
+  
+  "pages_overview_row": {
+    "type": "object",
+    "properties": {
+      "page": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$",
+        "description": "Page type identifier in snake_case"
+      },
+      "purpose": {
+        "type": "string",
+        "description": "Primary goal of this page"
+      },
+      "primary_actions": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$"
+        },
+        "description": "Main CTAs visitor should take (snake_case)",
+        "maxItems": 2
+      },
+      "must_prove": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "What this page must demonstrate",
+        "minItems": 2
+      },
+      "evidence": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Specific proof elements needed",
+        "minItems": 2
+      },
+      "assumptions": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Any gaps marked clearly"
+      }
+    },
+    "required": ["page", "purpose", "primary_actions", "must_prove", "evidence"]
+  },
+
+  "template_narrative_section": {
+    "type": "object",
+    "properties": {
+      "template": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$",
+        "description": "Page type identifier"
+      },
+      "section": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$",
+        "description": "Section identifier (snake_case)"
+      },
+      "must_prove": {
+        "type": "string",
+        "description": "What this section must demonstrate"
+      },
+      "evidence": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Specific proof elements required"
+      },
+      "primary_cta": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$",
+        "description": "Main action in this section"
+      },
+      "secondary_cta": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$",
+        "description": "Optional supporting action"
+      },
+      "avatar_focus": {
+        "type": "string",
+        "description": "Which avatar emotions/triggers to address"
+      },
+      "notes": {
+        "type": "string",
+        "description": "Implementation guidance"
+      }
+    },
+    "required": ["template", "section", "must_prove", "evidence", "primary_cta"]
+  },
+
+  "offer_cta_mapping_row": {
+    "type": "object",
+    "properties": {
+      "journey_stage": {
+        "type": "string",
+        "enum": ["cold", "warm", "hot"],
+        "description": "Customer temperature stage"
+      },
+      "page_type": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$",
+        "description": "From SIANL page taxonomy"
+      },
+      "primary_offer": {
+        "type": "string",
+        "description": "Main value proposition"
+      },
+      "primary_cta": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$",
+        "description": "Primary action button (snake_case)"
+      },
+      "secondary_cta": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$",
+        "description": "Supporting action (optional, snake_case)"
+      },
+      "placement": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Where CTAs appear on page"
+      },
+      "value_prop": {
+        "type": "string",
+        "description": "Benefit-focused messaging"
+      },
+      "risk_reversal": {
+        "type": "string",
+        "description": "Guarantee or risk reduction"
+      },
+      "urgency_element": {
+        "type": "string",
+        "description": "Scarcity or time sensitivity"
+      }
+    },
+    "required": ["journey_stage", "page_type", "primary_offer", "primary_cta"]
+  },
+
+  "nurture_step": {
+    "type": "object",
+    "properties": {
+      "branch": {
+        "type": "string",
+        "enum": ["no_pay", "customer"],
+        "description": "Nurture branch type"
+      },
+      "sequence": {
+        "type": "string",
+        "description": "Sequence name (educational, credibility, objection, onboarding, value, expansion)"
+      },
+      "step_number": {
+        "type": "integer",
+        "minimum": 1,
+        "description": "Sequential order within sequence"
+      },
+      "offset": {
+        "type": "string",
+        "pattern": "^(day_|week_|month_)\\d+$",
+        "description": "Time delay (day_1, day_3, week_2, month_1)"
+      },
+      "purpose": {
+        "type": "string",
+        "description": "What this step accomplishes"
+      },
+      "trigger": {
+        "type": "string",
+        "description": "What initiates this step"
+      },
+      "condition_check": {
+        "type": "string",
+        "description": "Optional conditional logic"
+      },
+      "content_theme": {
+        "type": "string",
+        "description": "High-level content category"
+      },
+      "expected_action": {
+        "type": "string",
+        "description": "What recipient should do"
+      },
+      "success_metric": {
+        "type": "string",
+        "description": "How success is measured"
+      },
+      "exit_conditions": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "What ends this sequence"
+      }
+    },
+    "required": ["branch", "sequence", "step_number", "offset", "purpose", "trigger", "content_theme", "exit_conditions"]
+  },
+
+  "event_dictionary_row": {
+    "type": "object",
+    "properties": {
+      "action": {
+        "type": "string",
+        "description": "Human-readable action description"
+      },
+      "event": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$",
+        "description": "Event name in snake_case"
+      },
+      "critical_params": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$"
+        },
+        "description": "Always required parameters (snake_case)"
+      },
+      "optional_params": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$"
+        },
+        "description": "Context-dependent parameters (snake_case)"
+      },
+      "destinations": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Which platforms receive this event"
+      },
+      "business_value": {
+        "type": "string",
+        "description": "Why this event matters for business"
+      }
+    },
+    "required": ["action", "event", "critical_params", "destinations", "business_value"]
+  },
+
+  "parameter_dictionary_row": {
+    "type": "object",
+    "properties": {
+      "param": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$",
+        "description": "Parameter name in snake_case"
+      },
+      "type": {
+        "type": "string",
+        "enum": ["string", "integer", "boolean", "enum", "timestamp"],
+        "description": "Data type of parameter"
+      },
+      "allowed": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Allowed values for enum types"
+      },
+      "example": {
+        "type": "string",
+        "description": "Example value"
+      },
+      "description": {
+        "type": "string",
+        "description": "What this parameter represents"
+      },
+      "privacy_classification": {
+        "type": "string",
+        "enum": ["public", "behavioral", "no_pii"],
+        "description": "Privacy level classification"
+      }
+    },
+    "required": ["param", "type", "example", "description", "privacy_classification"]
+  },
+
+  "gtm_trigger_spec": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string",
+        "description": "GTM trigger name"
+      },
+      "type": {
+        "type": "string",
+        "enum": ["form_submit", "click", "page_view", "scroll_depth", "timer", "custom_event"],
+        "description": "GTM trigger type"
+      },
+      "selector": {
+        "type": "string",
+        "description": "CSS selector or element identifier"
+      },
+      "fires_event": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$",
+        "description": "Event name this trigger fires (snake_case)"
+      },
+      "params": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$"
+        },
+        "description": "Parameters to include (snake_case)"
+      },
+      "conditions": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Additional trigger conditions"
+      }
+    },
+    "required": ["name", "type", "fires_event", "params"]
+  },
+
+  "architecture_component": {
+    "type": "object",
+    "properties": {
+      "component": {
+        "type": "string",
+        "enum": ["serverless_function", "webhook_handler", "api_integration", "data_storage", "gtm_container"],
+        "description": "Type of technical component"
+      },
+      "name": {
+        "type": "string",
+        "description": "Specific component name"
+      },
+      "env_vars": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Required environment variables"
+      },
+      "writes_to": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Which systems this component updates"
+      },
+      "reads_from": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Which systems this component reads from"
+      },
+      "notes": {
+        "type": "string",
+        "description": "Implementation notes or special considerations"
+      }
+    },
+    "required": ["component", "name", "notes"]
+  },
+
+  "identity_policy": {
+    "type": "object",
+    "properties": {
+      "lead_id": {
+        "type": "object",
+        "properties": {
+          "generate": {"type": "string"},
+          "persist": {"type": "string"},
+          "propagate": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        },
+        "required": ["generate", "persist", "propagate"]
+      },
+      "user_id": {
+        "type": "object",
+        "properties": {
+          "map_on": {"type": "string"}
+        },
+        "required": ["map_on"]
+      },
+      "utm_capture": {
+        "type": "object",
+        "properties": {
+          "send_on": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        },
+        "required": ["send_on"]
+      },
+      "consent": {
+        "type": "object",
+        "properties": {
+          "param": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$"
+          },
+          "rule": {"type": "string"}
+        },
+        "required": ["param", "rule"]
+      },
+      "test_mode": {
+        "type": "object",
+        "properties": {
+          "staging": {"type": "boolean"},
+          "production": {"type": "boolean"}
+        },
+        "required": ["staging", "production"]
+      }
+    },
+    "required": ["lead_id", "user_id", "utm_capture", "consent", "test_mode"]
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "asset_id": "customer.d7.email.week1_checkin",
+  "sequence": "CUSTOMER",
+  "lang": "pt-PT",
+  "subject": {
+    "A": "{{first_name}}, como foi a primeira semana de transformação?",
+    "B": "Check-in semanal: estás no caminho certo?"
+  },
+  "preheader": "Vamos avaliar o teu progresso e ajustar a estratégia...",
+  "body_md": "Olá {{first_name}},\n\nJá passou uma semana desde que começaste a Mentoria Seja Livre!\n\n**Como te sentes?**\n\nPara algumas participantes, a primeira semana é reveladora. Para outras, é desafiante.\n\nAmbas as experiências são válidas.\n\n## 📊 CHECKPOINT SEMANAL\n\nVamos fazer um checkpoint honesto. Na primeira semana, conseguiste:\n\n**Module 1.1 - Mentalidade Sem Esforço:**\n□ Ler todo o conteúdo  \n□ Fazer as atividades práticas  \n□ Identificar as tuas crenças limitantes  \n□ Começar a implementar mudanças\n\n**Apoio e Comunidade:**\n□ Conectar comigo no WhatsApp  \n□ Fazer perguntas quando surgem dúvidas  \n□ Partilhar descobertas ou resistências\n\n**Aplicação Prática:**\n□ Implementar pelo menos 1 mudança no negócio  \n□ Observar reações (tuas e da equipa)  \n□ Documentar resultados\n\n## 🎯 ONDE DEVES ESTAR\n\n**Se fizeste tudo:** Fantástico! Estás preparada para o Module 1.4: Liderança\n\n**Se fizeste 70-80%:** Muito bom! Continua e não te pressiones\n\n**Se fizeste menos de 50%:** Precisamos de conversar\n\n## ⚠️ SE ESTÁS ATRASADA\n\nSem dramas. Sem julgamentos.\n\nMas precisamos de perceber porquê:\n\n- **Falta de tempo?** Vamos otimizar o teu horário de estudo\n- **Conteúdo confuso?** Vou explicar de forma mais clara\n- **Resistências internas?** Vamos trabalhar isso juntas\n- **Dificuldades técnicas?** Resolvo isso hoje mesmo\n\n**O importante é não abandonares.**\n\nJá vi dezenas de empreendedoras transformarem completamente as suas vidas. Muitas começaram devagar.\n\nO que importa é continuares.\n\n## 📞 QUERO SABER DE TI\n\nResponde-me com sinceridade:\n\n1. **Numa escala de 1-10, como classificas a tua primeira semana?**\n\n2. **Qual foi a tua maior descoberta?**\n\n3. **Qual foi a tua maior dificuldade?**\n\n4. **O que precisas de mim para ter mais sucesso na próxima semana?**\n\n[**Enviar feedback no WhatsApp →**](https://wa.me/{{whatsapp_number}}?text=Olá {{mentor_name}}! Feedback da primeira semana: 1) Classificação: /10 2) Maior descoberta: 3) Maior dificuldade: 4) Preciso de:)\n\nOu responde por email. Como preferires.\n\n## 🔥 PRÓXIMA SEMANA: LIDERANÇA\n\nSe estás em dia com o Module 1.1, na próxima semana vamos trabalhar:\n\n- **Delegação eficaz** (sem microgestão)\n- **Reuniões 1:1** que realmente funcionam\n- **Como construir uma equipa autónoma**\n- **Sistemas de feedback** que aceleram resultados\n\nÉ aqui que muitas empreendedoras têm o \"click\".\n\nÉ aqui que percebes que podes liderar sem controlar tudo.\n\n## 💪 LEMBRA-TE\n\n**Tu decidiste investir na tua transformação.**\n\nNão foi barato. Não foi fácil.\n\nMas foi a decisão certa.\n\nAgora tens duas opções:\n\n1. **Aproveitar ao máximo** e transformar a tua vida em 12 semanas\n2. **Fazer pela metade** e continuar como antes\n\nSei que vais escolher a primeira.\n\n**Porque tu mereces mais.**\n\nMereces trabalhar menos, ganhar mais e sentir-te livre.\n\nE eu vou fazer tudo para que isso aconteça.\n\nVamos continuar!\n\nUm abraço,  \n{{mentor_name}}  \nMentoria Seja Livre\n\nP.S. - Se não responderes a este email em 48h, vou assumir que precisas de ajuda e vou contactar-te. Às vezes, precisamos de um empurrãozinho. 😉",
+  "primary_cta": {
+    "label": "Enviar feedback no WhatsApp",
+    "url": "https://wa.me/{{whatsapp_number}}?text=Olá {{mentor_name}}! Feedback da primeira semana:"
+  },
+  "secondary_cta": {
+    "label": "Continuar no programa",
+    "url": "{{trello_board_url}}?utm_source=email&utm_medium=automation&utm_campaign=customer&utm_content=d7_checkin"
+  },
+  "merge_fields": ["first_name", "mentor_name", "whatsapp_number", "trello_board_url"],
+  "trigger": {
+    "on": "purchase_success",
+    "offset": "+7 days"
+  },
+  "suppression": ["refund_success"],
+  "quiet_hours": {
+    "tz": "Europe/Lisbon",
+    "window": "09:00-18:00",
+    "skip_weekends": false
+  },
+  "measurement": {
+    "landing_expect": ["feedback_response", "progress_assessment", "support_request"],
+    "note": "Track weekly progress and identify support needs"
+  },
+  "owner": "ECL",
+  "status": "draft"
+}

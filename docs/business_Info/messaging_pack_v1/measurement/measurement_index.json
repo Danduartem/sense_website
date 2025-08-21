@@ -1,0 +1,247 @@
+{
+  "measurement_index": {
+    "description": "Complete measurement mapping for all messaging assets, aligned with Define v1B event dictionary",
+    "email_assets": [
+      {
+        "asset_id": "nopay.d0p20m.email.nudge",
+        "primary_url": "{{questionnaire_url}}",
+        "utm_parameters": {
+          "utm_source": "email",
+          "utm_medium": "automation",
+          "utm_campaign": "nopay", 
+          "utm_content": "d0p20m_nudge"
+        },
+        "expected_events": [
+          "email_open",
+          "email_click", 
+          "questionnaire_click",
+          "questionnaire_start"
+        ],
+        "conversion_events": ["questionnaire_complete"],
+        "measurement_notes": "Nudge effectiveness for questionnaire completion within 20min window"
+      },
+      {
+        "asset_id": "nopay.d1.email.value",
+        "primary_url": "{{questionnaire_url}}",
+        "utm_parameters": {
+          "utm_source": "email",
+          "utm_medium": "automation",
+          "utm_campaign": "nopay",
+          "utm_content": "d1_value"
+        },
+        "expected_events": [
+          "email_open",
+          "email_click",
+          "questionnaire_click", 
+          "value_content_engagement"
+        ],
+        "conversion_events": ["questionnaire_complete"],
+        "measurement_notes": "Value demonstration effectiveness and mindset content resonance"
+      },
+      {
+        "asset_id": "nopay.d3.email.objections", 
+        "primary_url": "{{questionnaire_url}}",
+        "utm_parameters": {
+          "utm_source": "email",
+          "utm_medium": "automation",
+          "utm_campaign": "nopay",
+          "utm_content": "d3_objections"
+        },
+        "expected_events": [
+          "email_open",
+          "email_click",
+          "questionnaire_click",
+          "objection_content_engagement"
+        ],
+        "conversion_events": ["questionnaire_complete"],
+        "measurement_notes": "Objection handling effectiveness for Amanda-specific concerns"
+      },
+      {
+        "asset_id": "nopay.d5.email.case",
+        "primary_url": "{{questionnaire_url}}",
+        "utm_parameters": {
+          "utm_source": "email",
+          "utm_medium": "automation", 
+          "utm_campaign": "nopay",
+          "utm_content": "d5_case"
+        },
+        "expected_events": [
+          "email_open",
+          "email_click",
+          "questionnaire_click",
+          "case_study_engagement"
+        ],
+        "conversion_events": ["questionnaire_complete"],
+        "measurement_notes": "Social proof and case study effectiveness for conversion"
+      },
+      {
+        "asset_id": "nopay.d7.email.last_call",
+        "primary_url": "{{questionnaire_url}}",
+        "utm_parameters": {
+          "utm_source": "email",
+          "utm_medium": "automation",
+          "utm_campaign": "nopay", 
+          "utm_content": "d7_last_call"
+        },
+        "expected_events": [
+          "email_open",
+          "email_click",
+          "questionnaire_click",
+          "urgency_response"
+        ],
+        "conversion_events": ["questionnaire_complete"],
+        "measurement_notes": "Final urgency effectiveness and sequence completion impact"
+      },
+      {
+        "asset_id": "customer.d0.email.welcome",
+        "primary_url": "{{trello_board_url}}",
+        "utm_parameters": {
+          "utm_source": "email",
+          "utm_medium": "automation",
+          "utm_campaign": "customer",
+          "utm_content": "d0_welcome"
+        },
+        "expected_events": [
+          "email_open",
+          "email_click",
+          "trello_access",
+          "whatsapp_connect"
+        ],
+        "conversion_events": ["program_activation"],
+        "measurement_notes": "Onboarding activation and initial engagement measurement"
+      },
+      {
+        "asset_id": "customer.d1.email.onboarding",
+        "primary_url": "{{trello_board_url}}",
+        "utm_parameters": {
+          "utm_source": "email", 
+          "utm_medium": "automation",
+          "utm_campaign": "customer",
+          "utm_content": "d1_onboarding"
+        },
+        "expected_events": [
+          "email_open",
+          "email_click",
+          "trello_engagement",
+          "module_content_access"
+        ],
+        "conversion_events": ["module_1_1_start"],
+        "measurement_notes": "Early program engagement and Module 1.1 activation"
+      },
+      {
+        "asset_id": "customer.d7.email.week1_checkin",
+        "primary_url": "WhatsApp feedback link",
+        "utm_parameters": {
+          "utm_source": "email",
+          "utm_medium": "automation",
+          "utm_campaign": "customer",
+          "utm_content": "d7_checkin"
+        },
+        "expected_events": [
+          "email_open",
+          "email_click", 
+          "whatsapp_feedback",
+          "progress_assessment"
+        ],
+        "conversion_events": ["week_1_completion"],
+        "measurement_notes": "Week 1 progress assessment and support needs identification"
+      }
+    ],
+    "whatsapp_assets": [
+      {
+        "asset_id": "customer.d0.whatsapp.access",
+        "message_type": "Utility",
+        "expected_events": [
+          "whatsapp_message_sent",
+          "whatsapp_message_delivered",
+          "whatsapp_message_read",
+          "trello_access_from_whatsapp"
+        ],
+        "conversion_events": ["program_activation"],
+        "measurement_notes": "WhatsApp access delivery effectiveness"
+      },
+      {
+        "asset_id": "customer.d3.whatsapp.check_in",
+        "message_type": "Utility", 
+        "expected_events": [
+          "whatsapp_message_sent",
+          "whatsapp_message_delivered",
+          "whatsapp_message_read",
+          "whatsapp_response_received"
+        ],
+        "conversion_events": ["progress_update_received"],
+        "measurement_notes": "Mid-program check-in and support engagement"
+      }
+    ],
+    "measurement_kpis": {
+      "NO-PAY_sequence": {
+        "primary_kpi": "questionnaire_completion_rate",
+        "calculation": "(questionnaire_complete_events / lead_form_submit_events) * 100",
+        "target_threshold": ">30%",
+        "secondary_kpis": [
+          "email_open_rate_by_step",
+          "email_click_rate_by_step", 
+          "sequence_completion_rate",
+          "time_to_questionnaire_completion"
+        ]
+      },
+      "CUSTOMER_sequence": {
+        "primary_kpi": "program_activation_rate",
+        "calculation": "(program_activation_events / purchase_success_events) * 100", 
+        "target_threshold": ">90%",
+        "secondary_kpis": [
+          "trello_access_within_24h",
+          "module_1_1_start_within_week",
+          "whatsapp_connection_rate",
+          "week_1_progress_completion"
+        ]
+      }
+    },
+    "attribution_mapping": {
+      "lead_journey": [
+        "instagram_content_view",
+        "landing_page_visit",
+        "modal_open", 
+        "lead_form_submit",
+        "questionnaire_click",
+        "questionnaire_complete",
+        "calendar_booking_complete",
+        "purchase_success"
+      ],
+      "customer_journey": [
+        "purchase_success",
+        "welcome_email_open",
+        "trello_access",
+        "module_content_access",
+        "progress_milestone_achieve"
+      ],
+      "cross_channel_tracking": {
+        "email_to_whatsapp": "track_via_utm_parameters_in_whatsapp_urls",
+        "whatsapp_to_trello": "track_via_user_id_session_linking",
+        "email_to_calendar": "track_via_utm_parameters_in_calendar_links"
+      }
+    },
+    "data_destinations": {
+      "google_analytics_4": {
+        "events_sent": "all_email_clicks_and_conversions",
+        "custom_dimensions": ["amanda_match_score", "sequence_step", "asset_id"],
+        "conversion_events": ["questionnaire_complete", "program_activation"]
+      },
+      "segment_cdp": {
+        "events_sent": "all_events_complete_customer_profile",
+        "identity_resolution": "lead_id_to_user_id_mapping",
+        "audience_building": "amanda_score_segments_and_engagement_levels"
+      },
+      "custom_crm": {
+        "events_sent": "lead_scoring_and_sales_team_alerts",
+        "lead_scoring_inputs": ["email_engagement", "questionnaire_progress", "amanda_match_score"],
+        "automation_triggers": ["drop_off_alerts", "sales_team_notifications"]
+      },
+      "mailerlite": {
+        "events_sent": "engagement_tracking_and_segmentation",
+        "segmentation_criteria": ["sequence_step", "engagement_level", "conversion_status"],
+        "automation_triggers": ["sequence_progression", "re_engagement_workflows"]
+      }
+    }
+  }
+}

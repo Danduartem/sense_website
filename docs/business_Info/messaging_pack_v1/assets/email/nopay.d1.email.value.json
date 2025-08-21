@@ -1,0 +1,37 @@
+{
+  "asset_id": "nopay.d1.email.value",
+  "sequence": "NO-PAY",
+  "lang": "pt-PT",
+  "subject": {
+    "A": "O segredo para trabalhar 40h e ganhar como se trabalhasses 60h",
+    "B": "{{first_name}}, a diferença entre esforço e resultado"
+  },
+  "preheader": "O que ninguém te conta sobre eficiência...",
+  "body_md": "Olá {{first_name}},\n\nQuero partilhar contigo algo que aprendi depois de anos a trabalhar 12+ horas por dia sem ver os resultados que merecia.\n\n**A diferença entre as empreendedoras que trabalham muito e as que trabalham bem.**\n\nA Amanda (nome fictício) era proprietária de uma clínica. Trabalhava desde as 7h até às 22h, todos os dias. Sentia-se culpada sempre que não estava \"a fazer algo produtivo\".\n\nSoa familiar?\n\nO problema não era a falta de esforço. Era a **mentalidade do esforço**.\n\nEla acreditava que:\n✗ Mais horas = mais dinheiro  \n✗ Descansar = ser preguiçosa  \n✗ Delegar = perder controle  \n✗ Subir preços = perder clientes\n\n**Depois da transformação na mentalidade:**\n✓ Trabalha 40h por semana  \n✓ Fatura mais que antes  \n✓ Tem tempo para viajar 3x por ano  \n✓ Sente-se verdadeiramente livre\n\n**A chave? Sistemas inteligentes + mentalidade sem esforço.**\n\nNão é sobre trabalhar mais. É sobre trabalhar melhor.\n\nSe queres descobrir como aplicar isto no teu negócio, o primeiro passo é completares o questionário que te enviámos:\n\n[**Quero descobrir como trabalhar melhor →**]({{questionnaire_url}}?utm_source=email&utm_medium=automation&utm_campaign=nopay&utm_content=d1_value)\n\nVai demorar 3 minutos e vai ajudar-me a perceber exatamente como te posso ajudar.\n\nUm abraço,  \n{{mentor_name}}  \nMentoria Seja Livre\n\nP.S. - A mentalidade que te trouxe até aqui não é a mesma que te vai levar onde queres chegar. Às vezes, precisamos de ajuda para ver o que não conseguimos ver sozinhas.",
+  "primary_cta": {
+    "label": "Quero descobrir como trabalhar melhor",
+    "url": "{{questionnaire_url}}?utm_source=email&utm_medium=automation&utm_campaign=nopay&utm_content=d1_value"
+  },
+  "secondary_cta": {
+    "label": "Quero falar diretamente",
+    "url": "https://wa.me/{{whatsapp_number}}?text=Olá, li o email sobre trabalhar melhor e quero saber mais"
+  },
+  "merge_fields": ["first_name", "questionnaire_url", "mentor_name", "whatsapp_number"],
+  "trigger": {
+    "on": "lead_submit",
+    "offset": "+1 day",
+    "conditions": ["NOT questionnaire_complete(1d)", "NOT purchase_success(1d)"]
+  },
+  "suppression": ["questionnaire_complete", "unsubscribe", "purchase_success"],
+  "quiet_hours": {
+    "tz": "Europe/Lisbon",
+    "window": "09:00-18:00",
+    "skip_weekends": false
+  },
+  "measurement": {
+    "landing_expect": ["email_click", "questionnaire_click", "value_resonance"],
+    "note": "Track engagement with mindset content"
+  },
+  "owner": "ECL",
+  "status": "draft"
+}

@@ -1,0 +1,506 @@
+{
+  "section_spec": {
+    "type": "object",
+    "required": ["section_id", "user_story", "primary_kpi", "elements", "events", "consent_requirements"],
+    "properties": {
+      "section_id": {
+        "type": "string",
+        "pattern": "^[a-z_]+\\.[a-z_]+$",
+        "description": "Page and section identifier (e.g., 'service_detail.hero', 'pricing.comparison')"
+      },
+      "user_story": {
+        "type": "string",
+        "maxLength": 100,
+        "description": "Brief user story describing the section's purpose"
+      },
+      "primary_kpi": {
+        "type": "string",
+        "enum": ["cta_click", "lead_submit", "checkout_start", "purchase_success", "section_view", "video_start"],
+        "description": "Main conversion or engagement metric for this section"
+      },
+      "elements": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["name", "selector"],
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Human-readable element name"
+            },
+            "selector": {
+              "type": "string",
+              "pattern": "^\\[data-[a-z-]+",
+              "description": "CSS selector using data attributes (e.g., '[data-cta=\"primary\"]')"
+            }
+          }
+        }
+      },
+      "events": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["event", "trigger", "payload", "destinations"],
+          "properties": {
+            "event": {
+              "type": "string",
+              "pattern": "^[a-z_]+$",
+              "description": "Event name in snake_case"
+            },
+            "trigger": {
+              "type": "string",
+              "enum": ["click", "element visibility", "form submission", "page view", "custom event"],
+              "description": "GTM trigger type for this event"
+            },
+            "payload": {
+              "type": "object",
+              "description": "Event parameters object with snake_case keys"
+            },
+            "destinations": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["ga4", "crm", "mailerlite", "stripe", "facebook_pixel"]
+              },
+              "description": "Target destinations for this event"
+            }
+          }
+        }
+      },
+      "consent_requirements": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["analytics_storage", "marketing_storage", "functionality_storage"]
+        },
+        "description": "Required consent types for events in this section"
+      },
+      "notes": {
+        "type": "string",
+        "description": "Additional implementation or business context notes"
+      }
+    }
+  },
+
+  "gtm_variable": {
+    "type": "object",
+    "required": ["name", "type", "configuration"],
+    "properties": {
+      "name": {
+        "type": "string",
+        "pattern": "^(dlv\\.|const\\.|lookup\\.|util\\.)[a-z_]+$",
+        "description": "Variable name following naming convention (dlv.*, const.*, lookup.*, util.*)"
+      },
+      "type": {
+        "type": "string",
+        "enum": ["Data Layer Variable", "Constant", "Custom JavaScript", "Lookup Table", "Built-In Variable"],
+        "description": "GTM variable type"
+      },
+      "configuration": {
+        "type": "object",
+        "description": "Variable-specific configuration object"
+      },
+      "default_value": {
+        "type": "string",
+        "description": "Default value when data unavailable"
+      },
+      "notes": {
+        "type": "string",
+        "description": "Implementation notes and usage context"
+      }
+    }
+  },
+
+  "gtm_trigger": {
+    "type": "object",
+    "required": ["name", "type", "conditions"],
+    "properties": {
+      "name": {
+        "type": "string",
+        "pattern": "^T — [A-Za-z ]+ — [a-z_]+$",
+        "description": "Trigger name following convention 'T — {Type} — {event_name}'"
+      },
+      "type": {
+        "type": "string",
+        "enum": ["Custom Event", "Click - All Elements", "Element Visibility", "Page View", "Form Submission"],
+        "description": "GTM trigger type"
+      },
+      "conditions": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["variable", "operator", "value"],
+          "properties": {
+            "variable": {"type": "string"},
+            "operator": {
+              "type": "string",
+              "enum": ["equals", "does not equal", "contains", "does not contain", "starts with", "ends with", "matches RegEx", "is greater than", "is less than"]
+            },
+            "value": {"type": "string"}
+          }
+        },
+        "description": "Trigger firing conditions"
+      },
+      "notes": {
+        "type": "string",
+        "description": "Trigger logic and firing context"
+      }
+    }
+  },
+
+  "gtm_tag": {
+    "type": "object",
+    "required": ["name", "type", "configuration", "firing_triggers"],
+    "properties": {
+      "name": {
+        "type": "string",
+        "pattern": "^[A-Z0-9]+ — [a-z_]+$",
+        "description": "Tag name following convention '{Destination} — {event_name}'"
+      },
+      "type": {
+        "type": "string",
+        "enum": ["Google Analytics: GA4 Event", "Google Analytics: GA4 Configuration", "Custom HTML", "Custom Image"],
+        "description": "GTM tag type"
+      },
+      "configuration": {
+        "type": "object",
+        "description": "Tag-specific configuration settings"
+      },
+      "firing_triggers": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "List of trigger names that fire this tag"
+      },
+      "consent_settings": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["consent_type", "consent_status"],
+          "properties": {
+            "consent_type": {
+              "type": "string",
+              "enum": ["Analytics Storage", "Marketing Storage", "Functionality Storage"]
+            },
+            "consent_status": {
+              "type": "string",
+              "enum": ["required", "not_required"]
+            }
+          }
+        },
+        "description": "Consent requirements for this tag"
+      },
+      "notes": {
+        "type": "string",
+        "description": "Tag purpose and implementation notes"
+      }
+    }
+  },
+
+  "data_layer_event": {
+    "type": "object",
+    "required": ["event", "lead_id", "test_mode", "timestamp"],
+    "properties": {
+      "event": {
+        "type": "string",
+        "pattern": "^[a-z_]+$",
+        "description": "Event name in snake_case"
+      },
+      "lead_id": {
+        "type": "string",
+        "description": "Persistent user identifier"
+      },
+      "user_id": {
+        "type": "string",
+        "default": "anonymous",
+        "description": "Post-authentication user identifier"
+      },
+      "page_id": {
+        "type": "string",
+        "description": "Current page template identifier"
+      },
+      "test_mode": {
+        "type": "boolean",
+        "description": "Environment flag - true for staging/development"
+      },
+      "timestamp": {
+        "type": "string",
+        "format": "date-time",
+        "description": "ISO timestamp of event occurrence"
+      },
+      "consent_state": {
+        "type": "object",
+        "properties": {
+          "analytics": {"type": "boolean"},
+          "marketing": {"type": "boolean"},
+          "functional": {"type": "boolean"}
+        },
+        "description": "Current consent state for all categories"
+      }
+    },
+    "additionalProperties": true
+  },
+
+  "webhook_event": {
+    "type": "object",
+    "required": ["event_id", "event_type", "processed_at", "integrations"],
+    "properties": {
+      "event_id": {
+        "type": "string",
+        "description": "Unique webhook event identifier"
+      },
+      "event_type": {
+        "type": "string",
+        "enum": ["payment_intent.succeeded", "payment_intent.payment_failed", "invoice.payment_succeeded", "customer.created"],
+        "description": "Webhook event type from source system"
+      },
+      "source_data": {
+        "type": "object",
+        "description": "Original webhook payload data"
+      },
+      "processed_at": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Server processing timestamp"
+      },
+      "integrations": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["destination", "status"],
+          "properties": {
+            "destination": {
+              "type": "string",
+              "enum": ["ga4", "crm", "mailerlite"]
+            },
+            "status": {
+              "type": "string",
+              "enum": ["success", "failed", "pending", "skipped"]
+            },
+            "details": {"type": "object"},
+            "error": {"type": "string"}
+          }
+        },
+        "description": "Integration processing results"
+      },
+      "idempotency_key": {
+        "type": "string",
+        "description": "Key for duplicate detection and replay protection"
+      }
+    }
+  },
+
+  "consent_scenario": {
+    "type": "object",
+    "required": ["name", "consent_state", "expected_behavior"],
+    "properties": {
+      "name": {
+        "type": "string",
+        "description": "Human-readable scenario name"
+      },
+      "consent_state": {
+        "type": "object",
+        "required": ["analytics_storage", "marketing_storage", "functionality_storage"],
+        "properties": {
+          "analytics_storage": {
+            "type": "string",
+            "enum": ["granted", "denied"]
+          },
+          "marketing_storage": {
+            "type": "string", 
+            "enum": ["granted", "denied"]
+          },
+          "functionality_storage": {
+            "type": "string",
+            "enum": ["granted", "denied"]
+          }
+        },
+        "description": "Consent state for each category"
+      },
+      "expected_behavior": {
+        "type": "object",
+        "properties": {
+          "ga4_events": {
+            "type": "string",
+            "enum": ["should_fire", "should_not_fire"]
+          },
+          "marketing_pixels": {
+            "type": "string",
+            "enum": ["should_fire", "should_not_fire"]
+          },
+          "crm_integration": {
+            "type": "string",
+            "enum": ["should_fire", "should_not_fire"]
+          },
+          "mailerlite_sync": {
+            "type": "string",
+            "enum": ["should_fire", "should_not_fire"]
+          }
+        },
+        "description": "Expected tag firing behavior for each destination"
+      }
+    }
+  },
+
+  "qa_evidence_item": {
+    "type": "object",
+    "required": ["flow", "step", "event_name", "validation_status"],
+    "properties": {
+      "flow": {
+        "type": "string",
+        "description": "User flow being tested (e.g., 'Cold Traffic to Purchase')"
+      },
+      "step": {
+        "type": "integer",
+        "minimum": 1,
+        "description": "Step number in the flow"
+      },
+      "action": {
+        "type": "string",
+        "description": "User action performed (e.g., 'click CTA', 'submit form')"
+      },
+      "event_name": {
+        "type": "string",
+        "pattern": "^[a-z_]+$",
+        "description": "Expected event name in snake_case"
+      },
+      "validation_status": {
+        "type": "string",
+        "enum": ["pass", "fail", "warning"],
+        "description": "Validation result status"
+      },
+      "parameters_validated": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "List of parameters that were validated"
+      },
+      "evidence_artifacts": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["type", "file_path"],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["screenshot", "tag_assistant_export", "ga4_debugview_log", "console_log"]
+            },
+            "file_path": {"type": "string"},
+            "description": {"type": "string"}
+          }
+        },
+        "description": "Supporting evidence files"
+      },
+      "issues_found": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["severity", "description"],
+          "properties": {
+            "severity": {
+              "type": "string",
+              "enum": ["critical", "high", "medium", "low"]
+            },
+            "description": {"type": "string"},
+            "remediation": {"type": "string"}
+          }
+        },
+        "description": "Issues identified during validation"
+      },
+      "consent_state": {
+        "type": "string",
+        "enum": ["all_granted", "analytics_denied", "marketing_denied", "all_denied"],
+        "description": "Consent state during testing"
+      },
+      "test_timestamp": {
+        "type": "string",
+        "format": "date-time",
+        "description": "When this validation was performed"
+      }
+    }
+  },
+
+  "crm_integration_spec": {
+    "type": "object",
+    "required": ["event_trigger", "endpoint", "field_mapping", "lifecycle_stage"],
+    "properties": {
+      "event_trigger": {
+        "type": "string",
+        "pattern": "^[a-z_]+$",
+        "description": "Data layer event that triggers CRM integration"
+      },
+      "endpoint": {
+        "type": "string",
+        "enum": ["POST /contacts", "PUT /contacts/{id}", "POST /contacts/{id}/tags"],
+        "description": "CRM API endpoint for this integration"
+      },
+      "field_mapping": {
+        "type": "object",
+        "patternProperties": {
+          "^[a-z_]+$": {
+            "type": "string",
+            "description": "Maps data layer parameter to CRM field"
+          }
+        },
+        "description": "Parameter to CRM field mappings"
+      },
+      "lifecycle_stage": {
+        "type": "string",
+        "enum": ["lead", "customer", "opportunity"],
+        "description": "CRM lifecycle stage for this integration"
+      },
+      "tags": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "Tags to apply in CRM system"
+      },
+      "retry_policy": {
+        "type": "object",
+        "properties": {
+          "max_attempts": {"type": "integer", "minimum": 1, "maximum": 5},
+          "backoff_seconds": {"type": "integer", "minimum": 1, "maximum": 300},
+          "timeout_seconds": {"type": "integer", "minimum": 5, "maximum": 30}
+        },
+        "description": "Error handling and retry configuration"
+      }
+    }
+  },
+
+  "environment_config": {
+    "type": "object",
+    "required": ["environment", "gtm_container_id", "ga4_measurement_id"],
+    "properties": {
+      "environment": {
+        "type": "string",
+        "enum": ["development", "staging", "production"],
+        "description": "Deployment environment"
+      },
+      "gtm_container_id": {
+        "type": "string",
+        "pattern": "^GTM-[A-Z0-9]+$",
+        "description": "Google Tag Manager container ID"
+      },
+      "ga4_measurement_id": {
+        "type": "string",
+        "pattern": "^G-[A-Z0-9]{10}$",
+        "description": "GA4 property measurement ID"
+      },
+      "api_endpoints": {
+        "type": "object",
+        "properties": {
+          "crm_base_url": {"type": "string", "format": "uri"},
+          "mailerlite_api_url": {"type": "string", "format": "uri"},
+          "webhook_base_url": {"type": "string", "format": "uri"}
+        },
+        "description": "Environment-specific API endpoints"
+      },
+      "feature_flags": {
+        "type": "object",
+        "properties": {
+          "server_side_tracking": {"type": "boolean"},
+          "enhanced_measurement": {"type": "boolean"},
+          "debug_mode": {"type": "boolean"}
+        },
+        "description": "Environment-specific feature toggles"
+      }
+    }
+  }
+}
